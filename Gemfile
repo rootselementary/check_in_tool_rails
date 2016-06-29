@@ -13,6 +13,9 @@ gem 'mini_magick'
 gem 'fog'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'sidekiq'
+gem 'coveralls', require: false
+gem 'editorconfig'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
