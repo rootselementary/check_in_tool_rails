@@ -1,3 +1,5 @@
+ruby '2.3.1'
+
 source "https://rubygems.org"
 gem 'rails', '4.2.5.1'
 gem 'devise'
@@ -10,6 +12,7 @@ gem 'jquery-rails'
 gem 'figaro'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'fog-core', github: 'fog/fog-core', tag: 'v1.40.1'
 gem 'fog'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'sidekiq'
