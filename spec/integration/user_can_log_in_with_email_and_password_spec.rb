@@ -5,12 +5,13 @@ class LoginPage
 
   def visit_page
     visit '/'
+    click_on 'Login'
     self
   end
 
   def login(user)
-    fill_in 'email', with: user.email
-    fill_in 'password', with: 'password'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'password'
     click_on 'Log In'
   end
 end
@@ -23,8 +24,8 @@ RSpec.feature 'User can login' do
 
     login_page.visit_page.login(user)
 
-    expect(response.status).to eq(200)
-    expect(current_path).to eq(user_path)
-    expect(page).to have_content("Welcome, #{user.name}.")
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("Welcome, #{user.name}")
+    expect(page).to have_content("Signed in successfully.")
   end
 end
