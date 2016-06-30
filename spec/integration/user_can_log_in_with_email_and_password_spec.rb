@@ -15,7 +15,7 @@ class LoginPage
   end
 end
 
-RSpec.feature 'Navigating through workpapers' do
+RSpec.feature 'User can login' do
   let(:user) { create(:user) }
   let(:login_page) { LoginPage.new }
 
