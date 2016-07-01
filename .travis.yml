@@ -1,17 +1,12 @@
 language: ruby
-deploy:
-  - heroku
 rvm:
   - 2.3.1
 services:
-  - postgresql
-before_script:
-  - bundle exec rake db:setup
-  - bundle exec rake assets:precompile
-  - sleep 5
+- postgresql
 script:
   - bundle install
-  - bundle exec rake --trace
+  - bundle exec rake db:setup
+  - bundle exec rake
 cache: bundler
 after_success:
   - coveralls
