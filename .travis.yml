@@ -9,7 +9,6 @@ env:
   global:
     - DISPLAY=:99.0
 before_script:
-  - sh -e /etc/init.d/xvfb start
   - bundle exec rake db:setup
   - bundle exec rake assets:precompile
   - sleep 5
