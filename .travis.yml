@@ -1,10 +1,21 @@
 language: ruby
+deploy:
+  - heroku
 rvm:
-  - 2.2.2
+  - 2.3.1
 services:
-- postgresql
+  - postgresql
+env:
+  global:
+    - DISPLAY=:99.0
+before_script:
+  - sh -e /etc/init.d/xvfb start
+  - bundle exec rake db:setup
+  - bundle exec rake assets:precompile
+  - sleep 5
 script:
   - bundle install
-  - bundle exec rake db:setup
-  - bundle exec rake
+  - bundle exec rake --trace
 cache: bundler
+after_success:
+  - coveralls
