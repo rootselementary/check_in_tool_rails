@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :role do
-    name "MyString"
+    name "student"
   end
+
   factory :user do
     sequence(:name) { |n| "JJ Letest#{n}" }
     sequence(:email) { |n| "letest#{n}@example.com" }
@@ -11,6 +12,7 @@ FactoryGirl.define do
   factory :grove do
     name "Grove 1"
   end
+
   factory :school do
     name "Roots Elementary"
   end
