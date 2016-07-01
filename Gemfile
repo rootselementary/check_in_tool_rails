@@ -24,6 +24,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
+  gem 'launchy'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'factory_girl_rails', '~> 4.0'

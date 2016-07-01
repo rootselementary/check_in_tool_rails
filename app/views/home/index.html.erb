@@ -1,7 +1,0 @@
-<% if current_user %>
-  <h1>Welcome, <%= current_user.name %></h1>
-
-<% else %>
-  <h1>Welcome, New User</h1>
-  <%= link_to "Login", new_user_session_path %>
-<% end %>
