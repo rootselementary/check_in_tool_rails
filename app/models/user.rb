@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
          :validatable#, :omniauthable
   belongs_to :school
   belongs_to :grove
+  belongs_to :role
 end
