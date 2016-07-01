@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630172700) do
+ActiveRecord::Schema.define(version: 20160701193220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,12 @@ ActiveRecord::Schema.define(version: 20160630172700) do
   end
 
   add_index "groves", ["school_id"], name: "index_groves_on_school_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "schools", force: :cascade do |t|
     t.string   "name"
@@ -47,14 +53,17 @@ ActiveRecord::Schema.define(version: 20160630172700) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.integer  "role_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["grove_id"], name: "index_users_on_grove_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["school_id"], name: "index_users_on_school_id", using: :btree
 
   add_foreign_key "groves", "schools"
   add_foreign_key "users", "groves"
+  add_foreign_key "users", "roles"
   add_foreign_key "users", "schools"
 end

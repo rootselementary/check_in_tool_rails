@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :role do
+    name "MyString"
+  end
   factory :user do
     sequence(:name) { |n| "JJ Letest#{n}" }
     sequence(:email) { |n| "letest#{n}@example.com" }
