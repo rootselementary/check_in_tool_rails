@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :trackable,
-         :validatable#, :omniauthable
+  :validatable#, :omniauthable
   belongs_to :school
   belongs_to :grove
 end
