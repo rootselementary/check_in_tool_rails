@@ -16,3 +16,4 @@
 /config/application.yml
 # Ignore test coverage files from SimpleCov
 /coverage
+check_in_tool.iml
