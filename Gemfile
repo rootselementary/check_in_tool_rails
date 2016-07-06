@@ -18,6 +18,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'sidekiq'
 gem 'coveralls', require: false
 gem 'editorconfig'
+gem 'omniauth-google-oauth2'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

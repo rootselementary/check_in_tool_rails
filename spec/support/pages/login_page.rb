@@ -13,5 +13,11 @@ module Pages
       fill_in 'Password', with: password
       click_on 'Log in'
     end
+
+    def visit_google_login
+      visit '/'
+      click_on 'Sign in with Google'
+      self
+    end
   end
 end
