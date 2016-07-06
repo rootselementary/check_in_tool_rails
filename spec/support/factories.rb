@@ -20,7 +20,6 @@ FactoryGirl.define do
 
         trait :admin do
           after(:build) do |user|
-            puts user.type
             role = create(:role, name: 'admin')
             user.roles << role
           end
