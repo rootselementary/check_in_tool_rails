@@ -18,11 +18,11 @@ FactoryGirl.define do
       sequence(:name) { |n| "JJ Leteach#{n}" }
       sequence(:email) { |n| "leteach#{n}@example.com" }
 
-        trait :admin do
-          after(:build) do |user|
-            role = create(:role, name: 'admin')
-            user.roles << role
-          end
+      trait :admin do
+        after(:build) do |user|
+          role = create(:role, name: 'admin')
+          user.roles << role
+        end
       end
     end
 
