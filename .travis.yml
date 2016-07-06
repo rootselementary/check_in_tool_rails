@@ -12,3 +12,7 @@ script:
 cache: bundler
 after_success:
   - coveralls
+deploy:
+  provider: heroku
+  api_key:
+    secure: ENV["heroku_auth_token"]
