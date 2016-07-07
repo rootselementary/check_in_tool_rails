@@ -1,1 +1,12 @@
 <%= link_to("New Grove", new_admin_grove_path) %>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% @groves.each do |grove| %>
+    <tr>
+      <td><%= grove.name %></td>
+    </tr>
+  <% end %>
+</table>

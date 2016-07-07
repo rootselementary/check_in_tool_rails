@@ -3,6 +3,7 @@ class Admin::GrovesController < ApplicationController
 
   def index
     authorize(:grove, :index?)
+    respond_with @groves = current_user.groves
   end
 
   def new

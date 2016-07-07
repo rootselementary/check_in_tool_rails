@@ -10,4 +10,15 @@ class Teacher < User
   def admin?
     roles.where(name: Role::ROLES[:admin]).any?
   end
+
+  def groves
+    if admin?
+      Grove.where(school: school)
+    else
+      # even though we have the grove association
+      # its better to always return the same type
+      # in this case an ActiveRecord::Relation
+      Grove.where(id: grove_id)
+    end
+  end
 end
