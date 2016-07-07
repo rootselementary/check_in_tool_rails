@@ -1,7 +1,6 @@
 <h1>Create A New Grove</h1>
 
-<%= form_for(@grove, url: admin_groves_path) do |f|%>
-  <%= f.label(:name) %>
-  <%= f.text_field(:name) %>
-  <%= f.submit("Save") %>
+<%= simple_form_for([:admin, @grove], html: { class: 'inline' }) do |form| %>
+  <%= form.input :name %>
+  <%= form.submit "Save" %>
 <% end %>
