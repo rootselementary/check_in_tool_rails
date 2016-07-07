@@ -1,32 +1,17 @@
-class Admin::GrovesController < ApplicationController
-  respond_to :html
-
-  def index
-    authorize(:grove, :index?)
-    respond_with @groves = current_user.groves
-  end
-
-  def new
-    @grove = Grove.new
-    authorize(@grove)
-    respond_with @grove
-  end
-
-  def create
-    @grove = Grove.new(grove_params)
-    authorize(@grove)
-    if @grove.save
-      flash[:notice] = "Grove Saved"
-      respond_with @grove, location: admin_groves_path
-    else
-      flash[:notice] = @grove.errors.full_messages.to_sentence
-      respond_with @grove
-    end
-  end
+class Admin::GrovesController < Admin::ResourceController
 
   protected
 
-  def grove_params
-    params.require(:grove).permit(:name)
+  def collection
+    current_user.groves
   end
+
+  def whitelist
+    [:name]
+  end
+
+  def after_save_path_for(resource)
+    admin_groves_path
+  end
+
 end
