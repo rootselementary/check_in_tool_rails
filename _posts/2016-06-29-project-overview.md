@@ -7,6 +7,8 @@ categories: posts
 ---
 ## The Project
 
+Rebuild a student tracking application for Roots Elementary School. The app will allow students to check into classes via a scan code on their Ipads. Teachers will be able to monitor and list activities for the students participate in during free time.
+
 ## Introducing The Team
 
 __Roots Elementary:__
