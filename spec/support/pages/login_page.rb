@@ -2,8 +2,10 @@ require_relative '../pages/page'
 module Pages
   class LoginPage < Page
 
+    PATH = "/"
+
     def visit_page
-      visit '/'
+      visit "/"
       click_on 'Login'
       self
     end

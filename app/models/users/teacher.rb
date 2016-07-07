@@ -6,4 +6,8 @@ class Teacher < User
   def after_sign_in_path
     admin_dashboard_path
   end
+
+  def admin?
+    roles.where(name: Role::ROLES[:admin]).any?
+  end
 end
