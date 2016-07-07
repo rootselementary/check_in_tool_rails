@@ -1,61 +1,75 @@
-class Admin::ResourceController < ApplicationController
-  respond_to :html
+module Admin
+  class ResourceController < ApplicationController
+    respond_to :html
 
-  before_action :authorize_collection, only: [:index]
-  before_action :authorize_resource, only: [:new, :show, :delete, :edit, :create, :update]
+    before_action :authorize_collection, only: [:index]
+    before_action :build_and_authorize_resource, only: [:create, :update]
+    before_action :authorize_resource, only: [:new, :show, :delete, :edit]
 
-  def index
-    @collection = collection
-    respond_with @collection
-  end
+    helper_method :resource, :collection
+    attr_accessor :resource
 
-  def new
-    respond_with resource
-  end
-
-  def create
-    resource.update_attributes(permitted_params)
-    if resource.save
-      flash[:notice] = "#{resource_class} Saved"
-      redirect_to after_save_path_for(resource)
-    else
-      flash.now[:notice] = resource.errors.full_messages.to_sentence
-      render :new
+    def index
+      respond_with collection
     end
-  end
 
-  protected
+    def new
+      respond_with resource
+    end
 
-  def after_save_path_for(resource)
-    root_path
-  end
+    def create
+      if resource.save
+        flash[:notice] = "#{resource_class} Saved"
+        redirect_to after_save_path_for(resource)
+      else
+        flash.now[:notice] = resource.errors.full_messages.to_sentence
+        respond_with resource
+      end
+    end
 
-  def collection
-    resource_class.all
-  end
+    protected
 
-  def resource_class
-    controller_name.classify.constantize
-  end
+    def after_save_path_for(resource)
+      root_path
+    end
 
-  def resource_as_sym
-    Grove.to_s.downcase.to_sym
-  end
+    def collection
+      resource_class.all
+    end
 
-  def resource
-    @resource = resource_class.new
-  end
+    def resource_class
+      controller_name.classify.constantize
+    end
+
+    def resource_as_sym
+      Grove.to_s.downcase.to_sym
+    end
+
+    def build_resource(as_new=true)
+      if as_new
+        @resource = resource_class.new
+      else
+        @resource = resource_class.new(permitted_params)
+      end
+    end
+
+    def build_and_authorize_resource
+      build_resource(false)
+      authorize(resource)
+    end
 
 
-  def authorize_collection
-    authorize(resource_as_sym, :index?)
-  end
+    def authorize_collection
+      authorize(resource_as_sym, :index?)
+    end
 
-  def authorize_resource
-    authorize(resource)
-  end
+    def authorize_resource
+      build_resource
+      authorize(resource)
+    end
 
-  def permitted_params
-    params.require(resource_as_sym).permit(whitelist)
+    def permitted_params
+      params.require(resource_as_sym).permit(whitelist)
+    end
   end
 end
