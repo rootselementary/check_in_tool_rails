@@ -5,7 +5,8 @@ class Admin::ResourceController < ApplicationController
   before_action :authorize_resource, only: [:new, :show, :delete, :edit, :create, :update]
 
   def index
-    respond_with collection
+    @collection = collection
+    respond_with @collection
   end
 
   def new
@@ -13,12 +14,13 @@ class Admin::ResourceController < ApplicationController
   end
 
   def create
+    resource.update_attributes(permitted_params)
     if resource.save
       flash[:notice] = "#{resource_class} Saved"
-      respond_with resource, location: after_save_path_for(resource)
+      redirect_to after_save_path_for(resource)
     else
-      flash[:notice] = resource.errors.full_messages.to_sentence
-      respond_with resource
+      flash.now[:notice] = resource.errors.full_messages.to_sentence
+      render :new
     end
   end
 
@@ -41,8 +43,9 @@ class Admin::ResourceController < ApplicationController
   end
 
   def resource
-    @resource = resource_class.new(permitted_params)
+    @resource = resource_class.new
   end
+
 
   def authorize_collection
     authorize(resource_as_sym, :index?)

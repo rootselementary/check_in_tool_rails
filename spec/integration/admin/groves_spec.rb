@@ -34,6 +34,7 @@ RSpec.feature 'Adding new groves to the application' do
 
     describe 'creating a new grove' do
       before {visit_new_grove_page }
+
       it 'allows creation of a new grove' do
         expect {
           grove_admin_page.create_new_grove("Aspen")
