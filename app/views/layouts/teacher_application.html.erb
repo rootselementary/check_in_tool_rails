@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CheckInTool</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type="button" data-toggle='collapse' data-target='#navbar-collapse-1'>
+          <span class="sr-only"> Toggle navigation</span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= image_tag "roots-logo.png", style:"width:190px;height:auto", class:"navbar-brand", alt:"roots logo" %>
+        <p class="navbar-text">
+          Welcome, <%= current_user.email %>.
+        </p>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right" style="margin-top:9px">
+          <li><%=link_to "Grove Playlist", "#" %></li>
+          <li><%=link_to "Grove Monitor", "#" %></li>
+          <li><%= link_to "Log out", destroy_user_session_path, method: 'delete' %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <% flash.each do |type, message| %>
+    <%= content_tag :div, sanitize(message), class: "alert alert_#{type}" %>
+  <% end %>
+<%= yield %>
+
+</body>
+</html>
