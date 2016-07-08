@@ -1,10 +1,12 @@
-<%= simple_form_for([:admin, resource], html: { class: 'inline' }) do |form| %>
-  <% if form.error_notification %>
-    <div class="alert alert-error fade in">
-      <a href="#" class="close" data-dismiss="alert">&times;</a>
-      <%= form.error_notification %>
-    </div>
+<div class="grove-form text-center">
+  <%= simple_form_for([:admin, resource], html: { class: 'inline' }) do |form| %>
+    <% if form.error_notification %>
+      <div class="alert alert-error fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <%= form.error_notification %>
+      </div>
+    <% end %>
+    <%= form.input :name %>
+    <%= form.submit "Save", class: "btn btn-primary" %>
   <% end %>
-  <%= form.input :name %>
-  <%= form.submit "Save" %>
-<% end %>
+</div>
