@@ -9,4 +9,8 @@ class GrovePolicy < ApplicationPolicy
   alias_method :update?, :index?
   alias_method :edit?, :index?
 
+
+  def destroy?
+    show?
+  end
 end

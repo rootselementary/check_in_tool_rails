@@ -6,5 +6,16 @@ module Pages
       visit '/admin/groves'
       self
     end
+
+    def go_to_show_page(id)
+      visit "/admin/groves/#{id}"
+      self
+    end
+
+    def delete_grove(id)
+      within("#grove-#{id}") do
+        click_on('delete')
+      end
+    end
   end
 end

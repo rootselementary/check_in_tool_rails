@@ -67,6 +67,8 @@ module Admin
 
     def destroy
       resource.destroy
+      flash[:notice] = "#{resource_class} Deleted"
+      redirect_to after_save_path_for(resource)
     end
 
     def show

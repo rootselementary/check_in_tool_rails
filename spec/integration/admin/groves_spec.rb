@@ -98,8 +98,16 @@ RSpec.feature 'showing groves in the application' do
     describe 'showing a grove' do
       it 'allows user to see a grove show page' do
         expect(grove_index_page.visit_page).to have_content(grove.name)
-        grove_index_page.click_on(grove.name)
+        grove_index_page.go_to_show_page(grove.id)
         expect(current_path).to eq("/admin/groves/#{grove.id}")
+      end
+    end
+
+    describe 'deleting a grove' do
+      it 'allows user to delete a grove' do
+        expect(grove_index_page.visit_page).to have_content(grove.name)
+        grove_index_page.go_to_show_page(grove.id).delete_grove(grove.id)
+        expect(grove_index_page.visit_page).to_not have_content(grove.name)
       end
     end
   end
