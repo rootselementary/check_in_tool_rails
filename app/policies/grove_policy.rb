@@ -4,11 +4,9 @@ class GrovePolicy < ApplicationPolicy
     user.admin?
   end
 
-  def new?
-    index?
-  end
+  alias_method :new?, :index?
+  alias_method :create?, :index?
+  alias_method :update?, :index?
+  alias_method :edit?, :index?
 
-  def create?
-    index?
-  end
 end

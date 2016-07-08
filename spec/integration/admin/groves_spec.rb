@@ -1,7 +1,7 @@
 require 'rails_helper'
 include Pages::Authentication
 
-RSpec.feature 'Adding new groves to the application' do
+RSpec.feature 'Managing Groves' do
   let(:school) { create(:school) }
   let(:dashboard_page) { Pages::DashboardPage.new }
   let(:grove_admin_page) { Pages::GroveAdminPage.new }
@@ -50,6 +50,18 @@ RSpec.feature 'Adding new groves to the application' do
 
         expect(grove_admin_page).to have_content("Name has already been taken")
       end
+    end
+
+    describe 'updating a grove' do
+      before { create(:grove, name: "Aspen", school: school) }
+
+      it 'updates the grove attributes' do
+        dashboard_page.click_on("Manage Groves")
+        expect {
+          grove_admin_page.update_grove_name("Aspen", "Fir")
+        }.to change { Grove.where(name: "Fir").count }.from(0).to(1)
+      end
+
     end
 
   end
