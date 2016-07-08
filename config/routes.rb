@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
 
   get '/compass', controller: 'compass', action: 'show', as: :compass
+  get '/logout', controller: 'compass', action: 'logout', as: :logout
 end

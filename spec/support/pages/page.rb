@@ -1,3 +1,5 @@
-class Pages::Page
-  include Capybara::DSL
+module Pages
+  class Page
+    include Capybara::DSL
+  end
 end

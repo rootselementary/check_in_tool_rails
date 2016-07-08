@@ -8,7 +8,8 @@ RSpec.feature 'User can logout' do
     scenario "logged in user can logout" do
       login(user)
       expect(current_path).to eq(compass_path)
-      click_on 'Log out'
+
+      logout
       expect(current_path).to eq(root_path)
       expect(page).to have_content('Signed out successfully.')
     end
