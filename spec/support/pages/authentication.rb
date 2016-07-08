@@ -6,5 +6,10 @@ module Pages
       login_page.visit_page.login(user, password)
     end
 
+    def logout
+      logout_page = Pages::LogoutPage.new
+      logout_page.visit_page.logout
+    end
+
   end
 end

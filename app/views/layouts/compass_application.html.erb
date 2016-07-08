@@ -7,11 +7,15 @@
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1"></head>
 <body>
-  <%= render "shared/navbar" if user_signed_in? %>
+  <nav>
+    <% if user_signed_in? %>
+      Welcome, <%= current_user.email %>. Not you?
+    <% end %>
+  </nav>
   <% flash.each do |type, message| %>
     <%= content_tag :div, sanitize(message), class: "alert alert_#{type}" %>
   <% end %>
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
