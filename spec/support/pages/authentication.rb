@@ -11,5 +11,10 @@ module Pages
       login_page.visit_google_login
     end
 
+    def logout
+      logout_page = Pages::LogoutPage.new
+      logout_page.visit_page.logout
+    end
+
   end
 end
