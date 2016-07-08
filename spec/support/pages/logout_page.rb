@@ -2,7 +2,7 @@ require_relative '../pages/page'
 module Pages
   class LogoutPage < Page
     def visit_page
-      visit '/users/logout'
+      visit '/logout'
       self
     end
 
