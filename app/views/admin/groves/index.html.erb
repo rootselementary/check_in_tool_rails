@@ -5,11 +5,11 @@
     <th>Name</th>
     <th>Actions</th>
   </tr>
-  <% collection.each do |grove| %>
+  <% collection.each do |resource| %>
     <tr>
-      <td><%= grove.name %></td>
+      <td><%= link_to resource.name, admin_grove_path(resource.id) %></td>
       <td>
-        <%= link_to "Edit", edit_admin_grove_path(grove) %>
+        <%= link_to "Edit", edit_admin_grove_path(resource) %>
       </td>
     </tr>
   <% end %>

@@ -23,7 +23,7 @@ module Admin
 
     before_action :authorize_collection, only: [:index]
     before_action :build_and_authorize_resource, only: [:create, :update]
-    before_action :authorize_resource, only: [:edit, :show, :delete]
+    before_action :authorize_resource, only: [:edit, :show, :destroy]
 
     helper_method :resource, :collection
     attr_reader :resource
@@ -66,6 +66,11 @@ module Admin
     end
 
     def destroy
+      resource.destroy
+    end
+
+    def show
+      respond_with resource
     end
 
     protected
@@ -74,12 +79,12 @@ module Admin
       root_path
     end
 
-    def collection
-      resource_class.all
-    end
-
     def resource_class
       controller_name.classify.constantize
+    end
+
+    def collection
+      resource_class.all
     end
 
     def resource_as_sym

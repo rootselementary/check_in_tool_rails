@@ -28,7 +28,6 @@ RSpec.feature 'Managing Groves' do
       other_school = create(:school)
       create(:grove, name: "Aspen", school: school)
       create(:grove, name: "Cherry", school: other_school)
-      dashboard_page.click_on("Manage Groves")
       expect(dashboard_page).to_not have_content("Cherry")
     end
 
@@ -83,5 +82,25 @@ RSpec.feature 'Managing Groves' do
   def visit_new_grove_page
     dashboard_page.click_on("Manage Groves")
     grove_admin_page.click_on "New Grove"
+  end
+end
+
+RSpec.feature 'showing groves in the application' do
+  let(:school) { create(:school) }
+  let(:grove_index_page) { Pages::GroveIndexPage.new }
+
+  describe 'as a teacher with an administrative role' do
+    let(:grove) { create(:grove, name: "Aspen", school_id: school.id) }
+    let(:administrator) { create(:teacher, :admin, school: school, grove_id: grove.id) }
+
+    before { login(administrator) }
+
+    describe 'showing a grove' do
+      it 'allows user to see a grove show page' do
+        expect(grove_index_page.visit_page).to have_content(grove.name)
+        grove_index_page.click_on(grove.name)
+        expect(current_path).to eq("/admin/groves/#{grove.id}")
+      end
+    end
   end
 end
