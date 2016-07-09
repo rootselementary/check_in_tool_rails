@@ -1,0 +1,16 @@
+<%= link_to "New #{resource_class}", send("new_admin_#{resource_as_sym}_path") %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  <% collection.each do |resource| %>
+    <tr>
+      <td><%= link_to resource.name, send("admin_#{resource_as_sym}_path", resource) %></td>
+      <td>
+        <%= link_to "Edit", send("edit_admin_#{resource_as_sym}_path", resource) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
