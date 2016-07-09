@@ -25,7 +25,7 @@ module Admin
     before_action :build_and_authorize_resource, only: [:create, :update]
     before_action :authorize_resource, only: [:edit, :show, :destroy]
 
-    helper_method :resource, :collection
+    helper_method :resource, :collection, :resource_as_sym, :resource_class
     attr_reader :resource
 
     def index
