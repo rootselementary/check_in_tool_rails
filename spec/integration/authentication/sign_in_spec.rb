@@ -79,8 +79,6 @@ RSpec.feature 'User can login' do
         expect(current_path).to eq(compass_path)
 
         expect(page).to have_content(student.email)
-        expect(page).to have_content("Not you?")
-
       end
 
     after do
@@ -128,8 +126,6 @@ RSpec.feature 'User can login' do
         expect(current_path).to eq(admin_dashboard_path)
 
         expect(page).to have_content(teacher.email)
-        expect(page).to have_content("Not you?")
-
       end
 
     after do
