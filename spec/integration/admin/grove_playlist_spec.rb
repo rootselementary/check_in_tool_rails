@@ -1,7 +1,7 @@
 require 'rails_helper'
 include Pages::Authentication
 
-RSpec.feature 'Grove Monitor' do
+RSpec.feature 'Grove Playlist Manager' do
   let(:teacher) { create(:teacher) }
   let(:dashboard_page) { Pages::DashboardPage.new }
 
@@ -9,8 +9,8 @@ RSpec.feature 'Grove Monitor' do
     before { login(teacher) }
 
     it 'can be reached from the main dashboard' do
-      dashboard_page.click_on("Grove Monitor")
-      expect(current_path).to eq(admin_grove_monitor_path)
+      dashboard_page.click_on("Grove Playlist Manager")
+      expect(current_path).to eq(admin_grove_playlist_path)
     end
   end
 
