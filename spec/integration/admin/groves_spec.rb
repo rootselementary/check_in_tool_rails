@@ -74,6 +74,12 @@ RSpec.feature 'Managing Groves' do
       expect(dashboard_page).not_to have_content("Manage Groves")
     end
 
+    it 'shows navigation links' do
+      expect(dashboard_page).to have_content("Teacher Dashboard")
+      expect(dashboard_page).to have_content("Grove Monitor")
+      expect(dashboard_page).to have_content("Grove Playlist Manager")
+    end
+
     it 'does not allow access' do
       expect{ dashboard_page.visit('/admin/groves') }.to raise_error(Pundit::NotAuthorizedError)
     end
