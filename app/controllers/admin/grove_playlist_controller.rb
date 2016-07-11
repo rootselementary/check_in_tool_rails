@@ -1,5 +1,5 @@
 class Admin::GrovePlaylistController < ApplicationController
   def show
-    authorize(:admin_grove_playlist, :show?)
+    authorize(:teacher, :show?)
   end
 end
