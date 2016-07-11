@@ -40,6 +40,7 @@ RSpec.feature 'User can login' do
     scenario "Teacher outside Roots org can not log in" do
       login_with_google(teacher)
 
+      expect(current_path).to equal(root_path)
       expect(page).to have_content("Google account must be within the Roots Elementary Organization.")
       expect(page).to have_content("Sign in with Google")
     end

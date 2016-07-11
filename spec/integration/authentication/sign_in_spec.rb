@@ -39,4 +39,103 @@ RSpec.feature 'User can login' do
     end
   end
 
+  describe "as a google student within the Roots org" do
+    let(:student) { create :student }
+
+    before do
+      OmniAuth.config.test_mode = true
+
+      OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+        provider: "Google",
+        uid: "11111111",
+        info: {
+          name: student.name,
+          email: student.email,
+          first_name: "JJ",
+          last_name: "Letest",
+          image: ""
+        },
+        credentials: {
+          token: "token",
+          refresh_token: "another_token",
+          expires_at: 1354920555,
+          expires: true
+        },
+        extra: {
+          id_token: 1000.times.map { "string" }.join, # this huge chunk is used to test for CookieOverflow exception
+          raw_info: OmniAuth::AuthHash.new(
+            email: "test@example.com",
+            email_verified:"true",
+            kind:"plus#personOpenIdConnect",
+            name:"Test Person",
+          )
+        }
+      })
+    end
+
+      scenario "Student within Roots org with correct credentials logs in" do
+        login_with_google(student)
+
+        expect(current_path).to eq(compass_path)
+
+        expect(page).to have_content(student.email)
+        expect(page).to have_content("Not you?")
+
+      end
+
+    after do
+      OmniAuth.config.test_mode = false
+    end
+  end
+
+  describe "as a google teacher within the Roots org" do
+    let(:teacher) { create :teacher }
+
+    before do
+      OmniAuth.config.test_mode = true
+
+      OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+        provider: "Google",
+        uid: "11111111",
+        info: {
+          name: teacher.name,
+          email: teacher.email,
+          first_name: "JJ",
+          last_name: "Letest",
+          image: ""
+        },
+        credentials: {
+          token: "token",
+          refresh_token: "another_token",
+          expires_at: 1354920555,
+          expires: true
+        },
+        extra: {
+          id_token: 1000.times.map { "string" }.join, # this huge chunk is used to test for CookieOverflow exception
+          raw_info: OmniAuth::AuthHash.new(
+            email: "test@example.com",
+            email_verified:"true",
+            kind:"plus#personOpenIdConnect",
+            name:"Test Person",
+          )
+        }
+      })
+    end
+
+      scenario "Teacher within Roots org with correct credentials logs in" do
+        login_with_google(teacher)
+
+        expect(current_path).to eq(admin_dashboard_path)
+
+        expect(page).to have_content(teacher.email)
+        expect(page).to have_content("Not you?")
+
+      end
+
+    after do
+      OmniAuth.config.test_mode = false
+    end
+  end
+
+
 end

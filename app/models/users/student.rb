@@ -4,4 +4,8 @@ class Student < User
   def after_sign_in_path
     compass_path
   end
+
+  def self.is_student?(data)
+    Student.where(email: data["email"]).first
+  end
 end

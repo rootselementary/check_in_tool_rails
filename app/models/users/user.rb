@@ -7,18 +7,13 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(access_token)
     data = access_token.info
-
     if within_roots?(data)
-      user = User.where(email: data["email"]).first
-      unless user
-        user = User.create(name: data["name"],
-                           email: data["email"],
-                           password: Devise.friendly_token[0,20]
-                           )
+      if Teacher.is_teacher?(data)
+        user = Teacher.where(email: data["email"]).first
+      elsif Student.is_student?(data)
+        user = Student.where(email: data["email"]).first
       end
       user
-    else
-      user = User.new
     end
   end
 

@@ -16,7 +16,7 @@ FactoryGirl.define do
     factory :teacher, class: Teacher do
       type "Teacher"
       sequence(:name) { |n| "JJ Leteach#{n}" }
-      sequence(:email) { |n| "leteach#{n}@example.com" }
+      sequence(:email) { |n| "leteach#{n}@rootselementary.org" }
 
       trait :admin do
         after(:build) do |user|
@@ -29,7 +29,7 @@ FactoryGirl.define do
     factory :student, class: Student do
       type "Student"
       sequence(:name) { |n| "JJ Letest#{n}" }
-      sequence(:email) { |n| "letest#{n}@example.com" }
+      sequence(:email) { |n| "letest#{n}@rootselementary.org" }
     end
 
   end

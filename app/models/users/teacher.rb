@@ -21,4 +21,9 @@ class Teacher < User
       Grove.where(id: grove_id)
     end
   end
+
+  def self.is_teacher?(data)
+    # binding.pry
+    Teacher.where(email: data["email"]).first
+  end
 end

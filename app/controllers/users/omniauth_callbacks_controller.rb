@@ -1,9 +1,12 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  include Pundit
   after_action :verify_authorized, except: [:new, :create, :destroy, :google_oauth2]
+
 
   def google_oauth2
     @user = User.from_omniauth(request.env["omniauth.auth"])
-    
+
+    raise Pundit::NotAuthorizedError unless @user
     if @user.persisted?
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Google"
       sign_in_and_redirect @user, event: :authentication
@@ -11,6 +14,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = "Google account must be within the Roots Elementary Organization."
       redirect_to root_path
     end
+  end
+
+  def after_sign_in_path_for(resource)
+    resource.after_sign_in_path
   end
 
   # GET|POST /resource/auth/twitter
