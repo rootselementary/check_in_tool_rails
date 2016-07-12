@@ -1,0 +1,11 @@
+<%= link_to("All #{resource_class}s", send("admin_#{resource_as_sym}s_path")) if current_user.admin? %>
+
+<table>
+
+  <tr>
+    <% form_attributes.each do |attr| %>
+      <td><%= resource.send(attr) %></td>
+    <% end %>
+    <td id='grove-<%= resource.id %>'><%= button_to 'delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete' %></td>
+  </tr>
+</table>

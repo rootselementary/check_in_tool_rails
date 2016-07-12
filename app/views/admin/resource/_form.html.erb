@@ -5,6 +5,8 @@
       <%= form.error_notification %>
     </div>
   <% end %>
-  <%= form.input :name %>
+  <% form_attributes.each do |attr| %>
+    <%= form.input attr %>
+  <% end %>
   <%= form.submit "Save" %>
 <% end %>
