@@ -1,7 +1,7 @@
 module Admin
   # ResourceController is the base class for handling administrative resources. The intent is to reduce the amount of
- # boilerplate and views that need to be created for standard crud tasks that are generally quite similar. The class
- # provides several hooks and options to allow overrides when necessary.
+  # boilerplate and views that need to be created for standard crud tasks that are generally quite similar. The class
+  # provides several hooks and options to allow overrides when necessary.
   #
   # == Hooks
   #
