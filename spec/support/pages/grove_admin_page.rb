@@ -8,10 +8,7 @@ module Pages
     end
 
     def view_grove(name)
-      within("tr", text: name) do
-        click_on "View"
-      end
-      self
+      view_resource(name)
     end
 
     def go_to_show_page(id)
@@ -20,9 +17,7 @@ module Pages
     end
 
     def delete_grove(id)
-      within("#grove-#{id}") do
-        click_on('delete')
-      end
+      delete(:grove, id)
     end
 
     def create_new_grove(name="Ponderosa")
