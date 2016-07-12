@@ -2,6 +2,10 @@ class Admin::GrovesController < Admin::ResourceController
 
   protected
 
+  def form_attributes
+    [:name]
+  end
+
   def collection
     current_user.groves
   end
