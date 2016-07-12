@@ -25,7 +25,8 @@ module Admin
     before_action :build_and_authorize_resource, only: [:create, :update]
     before_action :authorize_resource, only: [:edit, :show, :destroy]
 
-    helper_method :resource, :collection, :resource_as_sym, :resource_class
+    helper_method :resource, :collection, :resource_as_sym, :resource_class,
+                  :form_attributes, :collection_attributes
     attr_reader :resource
 
     def index
@@ -81,6 +82,14 @@ module Admin
       root_path
     end
 
+    def form_attributes
+      []
+    end
+
+    def collection_attributes
+      form_attributes
+    end
+
     def resource_class
       controller_name.classify.constantize
     end
@@ -90,7 +99,7 @@ module Admin
     end
 
     def resource_as_sym
-      Grove.to_s.downcase.to_sym
+      resource_class.to_s.downcase.to_sym
     end
 
     def build_resource
