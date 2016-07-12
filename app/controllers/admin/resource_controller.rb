@@ -68,8 +68,8 @@ module Admin
     respond_to :html
 
     before_action :authorize_collection, only: [:index]
-    before_action :build_and_authorize_resource, only: [:create, :update]
-    before_action :authorize_resource, only: [:edit, :show, :destroy]
+    before_action :build_and_authorize_resource, only: [:create]
+    before_action :authorize_resource, only: [:edit, :show, :destroy, :update]
 
     helper_method :resource, :collection, :resource_as_sym, :resource_class,
                   :form_attributes, :collection_attributes
@@ -91,7 +91,7 @@ module Admin
     end
 
     def update
-      if resource.save
+      if resource.update_attributes(permitted_params)
         flash[:notice] = "#{resource_class} Saved"
         redirect_to after_save_path_for(resource)
       else
@@ -101,6 +101,7 @@ module Admin
     end
 
     def create
+      yield resource if block_given?
       if resource.save
         flash[:notice] = "#{resource_class} Saved"
         redirect_to after_save_path_for(resource)

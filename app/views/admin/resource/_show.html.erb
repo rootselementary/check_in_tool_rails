@@ -6,6 +6,6 @@
     <% form_attributes.each do |attr| %>
       <td><%= resource.send(attr) %></td>
     <% end %>
-    <td id='grove-<%= resource.id %>'><%= button_to 'delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete' %></td>
+    <td id="<%= resource_as_sym %>-<%= resource.id %>"><%= button_to 'delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete' %></td>
   </tr>
 </table>
