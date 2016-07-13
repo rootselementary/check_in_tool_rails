@@ -36,6 +36,11 @@ FactoryGirl.define do
 
   factory :grove do
     name "Grove 1"
+    factory :grove_with_students do
+      after(:create) do |grove|
+        create_list(:student, 2, grove: grove)
+      end
+    end
   end
 
   factory :school do

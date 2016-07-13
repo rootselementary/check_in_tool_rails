@@ -2,10 +2,10 @@ require 'rails_helper'
 include Pages::Authentication
 
 RSpec.feature 'Grove Playlist Manager' do
-  let(:grove) { create(:grove) }
+  let(:grove) { create(:grove_with_students) }
   let(:teacher) { create(:teacher, grove: grove) }
-  let(:student) { grove.students << create(:student) }
-  let(:student2) { grove.students << create(:student) }
+  let(:student) { grove.students.first }
+  let(:student2) { grove.students.last }
   let(:dashboard_page) { Pages::DashboardPage.new }
   let(:grove_playlist_page) { Pages::GrovePlaylistPage.new }
 
@@ -22,5 +22,14 @@ RSpec.feature 'Grove Playlist Manager' do
       expect(grove_playlist_page).to have_content(student.name)
       expect(grove_playlist_page).to have_content(student2.name)
     end
+
+    scenario "teacher can search for a specific student" do
+      grove_playlist_page.visit_page.search_for(student.name)
+
+      expect(current_path).to eq(admin_grove_playlist_manager_path)
+      expect(grove_playlist_page).to have_content(student.name)
+      expect(grove_playlist_page).not_to have_content(student2.name)
+    end
   end
+
 end

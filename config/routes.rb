@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     get '/grove-monitor', controller: 'grove_monitor', action: 'show', as: :grove_monitor
     get '/grove-playlist-manager', controller: 'students', action: 'index', as: :grove_playlist_manager
     resources :groves
+    resources :students, only: [] do
+      resource :playlist, only: [:show]
+    end
   end
 
   get '/compass', controller: 'compass', action: 'show', as: :compass
