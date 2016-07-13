@@ -1,6 +1,17 @@
-class Admin::StudentsController < ApplicationController
-  def index
-    authorize(:teacher, :index?)
-    @students = current_user.grove.students
+module Admin
+  class StudentsController < ResourceController
+    protected
+
+    def collection_attributes
+      [:name]
+    end
+
+    def whitelist
+      collection_attributes + [:grove_id]
+    end
+
+    def collection
+      Student.where(grove: current_user.grove)
+    end
   end
 end

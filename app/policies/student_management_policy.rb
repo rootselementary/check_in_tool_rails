@@ -1,4 +1,4 @@
-class TeacherPolicy < ApplicationPolicy
+class StudentManagementPolicy < ApplicationPolicy
   def index?
     user.present? && user.is_a?(Teacher)
   end
