@@ -1,19 +1,21 @@
 language: ruby
 rvm:
-  - 2.3.1
+- 2.3.1
 services:
-  - postgresql
+- postgresql
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+- psql -c 'create database travis_ci_test;' -U postgres
 script:
-  - bundle install
-  - bundle exec rake db:setup
-  - bundle exec rake
+- bundle install
+- bundle exec rake db:setup
+- bundle exec rake
 cache: bundler
 after_success:
-  - coveralls
+- coveralls
 deploy:
   provider: heroku
   api_key:
-    secure: ENV["heroku_auth_token"]
+    secure: ixyifm3nUzv6NekSjbtOA+De8JeXpKTmXsf40jMqyo0EkOlz/xb8xoRUHm0+FjqbRvyvka9+63ydCanFfZYGXeL5VQLKSYxBaWTk/nW/Qnz9nzOnV5/TQaLzQcYNUbXWOT4Di/Bcp7XxeAuL+mTAIzhascEB1NbUMfnbxS6F0038yEFils3p2HWpo5Y1oS+dHMmBBBGt1dU2LvJ6Q7udUkpcfybphUZTUp2/mmThMi+HUqXNDPIJAUIEyMgvCRJot/W++70L+7WnwCKLuT1O+j6dWbgysGeXu3Sb0oyz+DC3OkhDyq+X6mlS4z74FgSMc1xJdMIaKOLRmKAQhKghkffW4w+3OMxNcGrQ41G9GUlPMX1MKHMRHVw9nnEdXpov/6BYeqOOZk2lp2tbUCOlfM/ZHAM4YxERd1YkBTFDMs1Tt5j841UeIpjpIh8P2E6Sn3ZSe6i44WPm3GhqiGX8BuXiPU86PKlIL8vBqhV3JQnUklBxasX3LGq4cMwjvM4HgMV0v+3fVuUpeSfS6TRT++/3ZGaq5bDXUkXm7krL/ZItR3SYQKUX+cvA0Knxuc71WaE20e7VcfghAVw+9XMwGKr0xLBUMFCQtN1E0jcCd4aZ8Vzw+n6yHsXjVcVW1ydWeZDQvJyYCgaRCIm7vipV1QLGkAbvXdZbjZcV7xaT/x8=
   app: roots-elementary-rails
+  on:
+    repo: rootselementary/check_in_tool_rails
