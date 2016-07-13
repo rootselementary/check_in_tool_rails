@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    if within_roots?(data)
+    if within_roots?(access_token)
       if Teacher.is_teacher?(data)
         user = Teacher.where(email: data["email"]).first
         user = check_or_create_token(user, access_token)
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   def self.within_roots?(data)
-    data["email"].include?("rootselementary.org")
+    data["extra"]["id_info"]["hd"] == "rootselementary.org"
   end
 
   def self.check_or_create_token(user, access_token)

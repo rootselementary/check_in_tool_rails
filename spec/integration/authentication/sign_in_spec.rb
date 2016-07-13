@@ -68,7 +68,10 @@ RSpec.feature 'User can login' do
             email_verified:"true",
             kind:"plus#personOpenIdConnect",
             name:"Test Person",
-          )
+          ),
+          id_info: {
+            hd: "rootselementary.org"
+          }
         }
       })
     end
@@ -115,7 +118,10 @@ RSpec.feature 'User can login' do
             email_verified:"true",
             kind:"plus#personOpenIdConnect",
             name:"Test Person",
-          )
+          ),
+          id_info: {
+            hd: "rootselementary.org"
+          }
         }
       })
     end
@@ -162,7 +168,9 @@ RSpec.feature 'User can login' do
             email_verified:"true",
             kind:"plus#personOpenIdConnect",
             name:"Test Person",
-          )
+          ),
+          id_info: {
+          }
         }
       })
     end
