@@ -10,6 +10,7 @@ module Pages
     def search_for(name)
       fill_in "Search", with: name
       click_on "Search"
+      self
     end
   end
 end
