@@ -9,7 +9,7 @@ module Admin
 
     protected
 
-    def collection_attributes
+    def form_attributes
       [:name, :email]
     end
 
