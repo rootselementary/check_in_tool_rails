@@ -5,4 +5,8 @@ class Grove < ActiveRecord::Base
   has_many :teachers
 
   validates :name, presence: true, uniqueness: true
+
+  def teachers
+    Teacher.where(grove: self)
+  end
 end
