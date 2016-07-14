@@ -31,6 +31,14 @@ RSpec.feature 'Grove Playlist Manager' do
       expect(grove_playlist_page).not_to have_content(student2.name)
     end
 
+    scenario "teacher can return to all students" do
+      grove_playlist_page.visit_page.search_for(student.name).click_on("All Students")
+
+      expect(current_path).to eq(admin_grove_playlist_manager_path)
+      expect(grove_playlist_page).to have_content(student.name)
+      expect(grove_playlist_page).to have_content(student2.name)
+    end
+
     scenario "teacher can view playlist for a specific student" do
       grove_playlist_page.visit_page
                          .search_for(student.name)

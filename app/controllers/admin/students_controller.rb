@@ -11,7 +11,7 @@ module Admin
     end
 
     def collection
-      Student.where(grove: current_user.grove).where('name ILIKE ?', "%#{params[:student_search]}%")
+      Student.where(grove: current_user.grove).where('name ILIKE ?', "%#{params[:student_search]}%").order(name: :asc)
     end
   end
 end
