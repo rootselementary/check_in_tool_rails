@@ -1,0 +1,7 @@
+<%= simple_form_for([:admin, resource], html: { class: 'inline' }) do |form| %>
+  <%= render 'error_notification', form: form %>
+  <%= form.input :name %>
+  <%= form.input :email %>
+  <%= form.select :grove_id, collection: current_user.groves.map{|x| [x.name, x.id]} %>
+  <%= form.submit "Save" %>
+<% end %>

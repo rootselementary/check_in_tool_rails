@@ -15,6 +15,7 @@
       <td>
         <%= link_to "View", send("admin_#{resource_as_sym}_path", resource) %>
         <%= link_to "Edit", send("edit_admin_#{resource_as_sym}_path", resource) %>
+        <%= link_to "Delete", send("admin_#{resource_as_sym}_path", resource), method: :delete %>
       </td>
     </tr>
   <% end %>

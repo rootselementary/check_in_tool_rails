@@ -3,4 +3,8 @@ class Grove < ActiveRecord::Base
   has_many :users, dependent: :nullify
 
   validates :name, presence: true, uniqueness: true
+
+  def teachers
+    Teacher.where(grove: self)
+  end
 end

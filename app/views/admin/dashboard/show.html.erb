@@ -1,3 +1,4 @@
 Teacher Dashboard
 
-<%=link_to("Manage Groves", admin_groves_path) if current_user.admin? %>
+<%=link_to("Manage Groves", admin_groves_path) if policy(:grove).index? %>
+<%=link_to("Manage Teachers", admin_teachers_path) if policy(:teacher).index? %>
