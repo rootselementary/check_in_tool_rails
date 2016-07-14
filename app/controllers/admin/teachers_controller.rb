@@ -18,7 +18,7 @@ module Admin
     end
 
     def collection
-      Teacher.where(grove: current_user.grove)
+      Teacher.where(school: current_user.school)
     end
 
     def after_save_path_for(resource)
