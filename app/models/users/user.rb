@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :trackable,
          :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
-  has_and_belongs_to_many :oauth_credentials
   belongs_to :school
   belongs_to :grove
 

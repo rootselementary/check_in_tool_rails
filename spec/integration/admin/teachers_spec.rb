@@ -26,7 +26,7 @@ RSpec.feature 'Managing Teachers' do
     it 'does not show teachers in other schools' do
       other_teacher = create(:teacher, name: "Marge Simpson", school: create(:school))
       dashboard_page.click_on("Manage Teachers")
-      expect(teacher_admin_page).to_not have_content("Marge Simposon")
+      expect(teacher_admin_page).to_not have_content("Marge Simpson")
     end
 
     it 'allows user to delete a teacher' do
@@ -76,4 +76,3 @@ RSpec.feature 'Managing Teachers' do
   end
 
 end
-
