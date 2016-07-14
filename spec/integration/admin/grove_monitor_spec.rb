@@ -14,16 +14,15 @@ RSpec.feature 'Grove Monitor' do
     end
 
 # PlaylistItem => Name, Location, Duration, timestamps
-# ScheduledEventItem => polymorphic on playlistitem
-# FlexTimeItems => polymorphicon playlistitem
+# ScheduledActivity => polymorphic on playlistitem
+# FlexTimeActivity => polymorphicon playlistitem
 # HomeStationActivity => po
 # Activity => User(Id), FlextimeItem(Id), timestamps, CheckInTime, PlaylistItem(Id), PlaylistItem(Type)
 # Activity.playground #=> give me all the activities from the last hour where the last of those activities is a playground type
 # give me the activities for a student within the last hour
 # School master_calendar => [900, 945, 1015]
     it 'shows all lost student' do
-      # a lost student is a student who has checked into an activity at some point in the day but has not checked into an activity/event past the expected time.
-      # 
+      # a lost student is a student who has checked into an activity at some point in the day but has not checked into an activity/event after expected time lapse.
     end
   end
 
