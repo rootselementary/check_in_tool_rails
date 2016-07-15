@@ -20,6 +20,7 @@ RSpec.feature 'Navigation options' do
   describe "logged in student" do
     it "does not a display a nav bar" do
       login(student)
+      visit '/'
 
       expect(page).not_to have_content("Teacher Dashboard")
       expect(page).not_to have_content("Grove Monitor")
