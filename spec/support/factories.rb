@@ -30,15 +30,24 @@ FactoryGirl.define do
       type "Student"
       sequence(:name) { |n| "JJ Letest#{n}" }
       sequence(:email) { |n| "letest#{n}@rootselementary.org" }
+      playlist
     end
 
   end
 
   factory :grove do
     name "Grove 1"
+    factory :grove_with_students do
+      after(:create) do |grove|
+        create_list(:student, 2, grove: grove)
+      end
+    end
   end
 
   factory :school do
     name "Roots Elementary"
+  end
+
+  factory :playlist do
   end
 end

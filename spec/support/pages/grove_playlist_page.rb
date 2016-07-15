@@ -6,5 +6,11 @@ module Pages
       visit '/admin/grove-playlist-manager'
       self
     end
+
+    def search_for(name)
+      fill_in "Search", with: name
+      click_on "Search"
+      self
+    end
   end
 end

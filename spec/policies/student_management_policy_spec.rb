@@ -2,16 +2,15 @@ require 'rails_helper'
 
 describe StudentManagementPolicy do
   describe '#show?' do
-
-    it 'does permit teachers' do
-      teacher = build(:teacher)
-      policy = described_class.new(teacher, described_class)
+    it 'permits teachers' do
+      teacher = create(:teacher)
+      policy = StudentManagementPolicy.new(teacher, nil)
       expect(policy.show?).to be true
     end
 
     it 'does not permit students' do
-      student = build(:student)
-      policy = described_class.new(student, nil)
+      student = create(:student)
+      policy = StudentManagementPolicy.new(student, nil)
       expect(policy.show?).to be false
     end
   end

@@ -10,6 +10,4 @@ class TeacherPolicy < ApplicationPolicy
   alias_method :destroy?, :index?
   alias_method :show?, :index?
 
-  # TODO: this seems wrong
-
 end
