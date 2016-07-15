@@ -31,4 +31,9 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def first_name
+    return email unless name
+    name.split(" ").first
+  end
 end

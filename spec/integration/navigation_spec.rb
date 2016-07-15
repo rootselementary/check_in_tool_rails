@@ -9,7 +9,7 @@ RSpec.feature 'Navigation options' do
     it "sees navigation bar with grove monitor and playlist options" do
       login(teacher)
 
-      expect(page).to have_content("Welcome, #{teacher.email}")
+      expect(page).to have_content("Hello, #{teacher.first_name}")
       expect(page).to have_content("Signed in successfully.")
       expect(page).to have_content("Teacher Dashboard")
       expect(page).to have_content("Grove Monitor")
