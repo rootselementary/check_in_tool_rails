@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/dashboard', controller: 'dashboard', action: 'show', as: :dashboard
     get '/grove-monitor', controller: 'grove_monitor', action: 'show', as: :grove_monitor
-    get '/grove-playlist-manager', controller: 'students', action: 'index', as: :grove_playlist_manager
+    get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
     resources :teachers
     resources :students, only: [] do
