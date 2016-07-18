@@ -10,12 +10,16 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+<<<<<<< 2aef6d65d40252121963261db80f78a4cabe6db6
 
 
+=======
+>>>>>>> Add models and views in order to add activities to playlist
  */
 
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "custom";
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import "font-awesome";
+@import "custom";

@@ -18,7 +18,7 @@ class Student < User
   private
 
   def create_student_playlist
-    student = Student.last
-    Playlist.create(student: student) unless student.playlist
+    # student = Student.last
+    Playlist.create(student: self) unless playlist
   end
 end

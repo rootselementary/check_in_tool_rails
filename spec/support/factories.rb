@@ -33,10 +33,17 @@ FactoryGirl.define do
       playlist
     end
 
+    factory :student_with_activities, class: Student do
+      create(:student)
+      # after(:build) do |student|
+      #   student.playlist.activities << create_list(:student, 2, grove: grove)
+      # end
+    end
+
   end
 
   factory :grove do
-    name "Grove 1"
+    sequence(:name) { |n| "Grove #{n}" }
     factory :grove_with_students do
       after(:create) do |grove|
         create_list(:student, 2, grove: grove)

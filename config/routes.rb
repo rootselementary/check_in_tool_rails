@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :teachers
     resources :students, only: [] do
       resource :playlist, only: [:show]
+      resources :playlist_activities, only: [:new, :create]
     end
   end
 

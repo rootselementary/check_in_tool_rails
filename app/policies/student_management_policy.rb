@@ -4,4 +4,5 @@ class StudentManagementPolicy < ApplicationPolicy
   end
 
   alias_method :show?, :index?
+  alias_method :create?, :index?
 end

@@ -9,10 +9,14 @@
 <%= link_to "All Students", admin_grove_playlist_manager_path %>
 <br>
 <table>
-  <tr>
-    <th>Student Name</th>
-    <th></th>
-  </tr>
-  <%= render partial: "playlist", collection: collection %>
+  <thead>
+    <tr>
+      <th>Student Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "playlist", collection: collection %>
+  </tbody>
 </table>
 <%= will_paginate collection %>

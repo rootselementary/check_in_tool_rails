@@ -3,6 +3,9 @@ class Grove < ActiveRecord::Base
   has_many :users, dependent: :nullify
   has_many :students
   has_many :teachers
+  has_many :locations
+  has_many :focus_areas
+  has_many :activities
 
   validates :name, presence: true, uniqueness: true
 

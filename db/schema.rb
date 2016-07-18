@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713223549) do
+ActiveRecord::Schema.define(version: 20160718021539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "grove_id"
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "activities", ["grove_id"], name: "index_activities_on_grove_id", using: :btree
+  add_index "activities", ["location_id"], name: "index_activities_on_location_id", using: :btree
+
+  create_table "focus_areas", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "grove_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "focus_areas", ["grove_id"], name: "index_focus_areas_on_grove_id", using: :btree
 
   create_table "groves", force: :cascade do |t|
     t.integer  "school_id"
@@ -24,6 +44,28 @@ ActiveRecord::Schema.define(version: 20160713223549) do
   end
 
   add_index "groves", ["school_id"], name: "index_groves_on_school_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "grove_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "locations", ["grove_id"], name: "index_locations_on_grove_id", using: :btree
+
+  create_table "playlist_activities", force: :cascade do |t|
+    t.integer  "playlist_id"
+    t.integer  "activity_id"
+    t.integer  "focus_area_id"
+    t.integer  "position"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "playlist_activities", ["activity_id"], name: "index_playlist_activities_on_activity_id", using: :btree
+  add_index "playlist_activities", ["focus_area_id"], name: "index_playlist_activities_on_focus_area_id", using: :btree
+  add_index "playlist_activities", ["playlist_id"], name: "index_playlist_activities_on_playlist_id", using: :btree
 
   create_table "playlists", force: :cascade do |t|
     t.integer  "user_id"
@@ -82,7 +124,14 @@ ActiveRecord::Schema.define(version: 20160713223549) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["school_id"], name: "index_users_on_school_id", using: :btree
 
+  add_foreign_key "activities", "groves"
+  add_foreign_key "activities", "locations"
+  add_foreign_key "focus_areas", "groves"
   add_foreign_key "groves", "schools"
+  add_foreign_key "locations", "groves"
+  add_foreign_key "playlist_activities", "activities"
+  add_foreign_key "playlist_activities", "focus_areas"
+  add_foreign_key "playlist_activities", "playlists"
   add_foreign_key "playlists", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
