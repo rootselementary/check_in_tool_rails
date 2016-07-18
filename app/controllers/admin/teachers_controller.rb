@@ -4,13 +4,19 @@ module Admin
     def create
       super do |teacher|
         teacher.password = teacher.password_confirmation = SecureRandom.hex
-      end
-            
-      Teacher.last.roles << Role.find(params.dig("teacher", "role_ids"))
-  
+      end            
+      assign_role if role_params
     end
 
     protected
+
+    def assign_role
+      resource.roles << Role.find(role_params)
+    end
+
+    def role_params
+      params.dig("teacher", "role_ids")
+    end
 
     def form_attributes
       [:name, :email]
