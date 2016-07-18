@@ -5,7 +5,7 @@ FactoryGirl.define do
   end
 
   factory :role do
-    name "teacher"
+    name "teacher" 
   end
 
   factory :user do

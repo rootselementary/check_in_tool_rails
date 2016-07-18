@@ -3,6 +3,7 @@ class Role < ActiveRecord::Base
   has_many :users, through: :user_roles
 
   ROLES = {
+    teacher: 'teacher',
     admin: 'admin'
   }
 end

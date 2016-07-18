@@ -5,6 +5,9 @@ module Admin
       super do |teacher|
         teacher.password = teacher.password_confirmation = SecureRandom.hex
       end
+            
+      Teacher.last.roles << Role.find(params.dig("teacher", "role_ids"))
+  
     end
 
     protected
@@ -14,7 +17,7 @@ module Admin
     end
 
     def whitelist
-      collection_attributes + [:grove_id]
+      collection_attributes + [:grove_id, :roles_id]
     end
 
     def collection
