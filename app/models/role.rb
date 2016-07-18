@@ -3,7 +3,6 @@ class Role < ActiveRecord::Base
   has_many :users, through: :user_roles
 
   ROLES = {
-    admin: 'admin',
-    superadmin: 'superadmin'
+    admin: 'admin'
   }
 end
