@@ -1,8 +1,0 @@
-<%=link_to("All Groves", admin_groves_path) if current_user.admin? %>
-
-<table class="table text-center">
-    <tr>
-      <td><%= resource.name %></td>
-      <td id='grove-<%= resource.id %>'><%= button_to 'delete', admin_grove_path(resource.id),  method: 'delete', class: "btn btn-danger" %></td>
-    </tr>
-</table>

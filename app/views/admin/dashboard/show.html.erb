@@ -1,4 +1,4 @@
-<div class="text-center">
-  <h1>Teacher Dashboard</h1>
-  <%=link_to("Manage Groves", admin_groves_path, class: "btn btn-default") if current_user.admin? %>
-</div>
+Teacher Dashboard
+
+<%=link_to("Manage Groves", admin_groves_path) if policy(:grove).index? %>
+<%=link_to("Manage Teachers", admin_teachers_path) if policy(:teacher).index? %>

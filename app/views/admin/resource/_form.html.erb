@@ -1,0 +1,7 @@
+<%= simple_form_for([:admin, resource], html: { class: 'inline' }) do |form| %>
+  <%= render 'error_notification', form: form %>
+  <% form_attributes.each do |attr| %>
+    <%= form.input attr %>
+  <% end %>
+  <%= form.submit "Save" %>
+<% end %>

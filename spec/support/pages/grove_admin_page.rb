@@ -1,5 +1,25 @@
+require_relative '../pages/page'
 module Pages
   class GroveAdminPage < Page
+
+    def visit_page
+      visit '/admin/groves'
+      self
+    end
+
+    def view_grove(name)
+      view_resource(name)
+    end
+
+    def go_to_show_page(id)
+      visit "/admin/groves/#{id}"
+      self
+    end
+
+    def delete_grove(id)
+      delete(:grove, id)
+    end
+
     def create_new_grove(name="Ponderosa")
       page.has_content? "Create A New Grove"
       page.fill_in "Name", with: name

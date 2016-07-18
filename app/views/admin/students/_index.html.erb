@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Grove Playlist Manager</h2>
+  <br>
+  <%= form_tag(admin_grove_playlist_manager_path, method: "get") do %>
+    <%= label_tag(:student_search, "Search for:") %>
+    <%= text_field_tag(:student_search) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+  <br>
+  <%= link_to "All Students", admin_grove_playlist_manager_path %>
+  <br>
+  <table>
+    <tr>
+      <th>Student Name</th>
+      <th></th>
+    </tr>
+    <%= render partial: "student", collection: collection %>
+  </table>
+  <%= will_paginate collection %>
+</div>

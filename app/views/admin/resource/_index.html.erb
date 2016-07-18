@@ -1,0 +1,22 @@
+<%= link_to "New #{resource_class}", send("new_admin_#{resource_as_sym}_path") %>
+
+<table>
+  <tr>
+    <% collection_attributes.each do |header| %>
+      <th><%= header.capitalize %></th>
+    <% end %>
+    <th>Actions</th>
+  </tr>
+  <% collection.each do |resource| %>
+    <tr>
+      <% collection_attributes.each do |attribute| %>
+        <td><%= resource.send(attribute) %></td>
+      <% end %>
+      <td>
+        <%= link_to "View", send("admin_#{resource_as_sym}_path", resource) %>
+        <%= link_to "Edit", send("edit_admin_#{resource_as_sym}_path", resource) %>
+        <%= link_to "Delete", send("admin_#{resource_as_sym}_path", resource), method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>

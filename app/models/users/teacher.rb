@@ -2,6 +2,7 @@ class Teacher < User
   include Rails.application.routes.url_helpers
   has_many :user_roles, foreign_key: 'user_id'
   has_many :roles, through: :user_roles, foreign_key: 'user_id'
+  belongs_to :grove
 
   def after_sign_in_path
     admin_dashboard_path
@@ -20,5 +21,9 @@ class Teacher < User
       # in this case an ActiveRecord::Relation
       Grove.where(id: grove_id)
     end
+  end
+
+  def self.is_teacher?(data)
+    Teacher.where(email: data["email"]).first
   end
 end

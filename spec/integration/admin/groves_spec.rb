@@ -28,11 +28,20 @@ RSpec.feature 'Managing Groves' do
       other_school = create(:school)
       create(:grove, name: "Aspen", school: school)
       create(:grove, name: "Cherry", school: other_school)
-      expect(dashboard_page).to_not have_content("Cherry")
+      dashboard_page.click_on("Manage Groves")
+      expect(grove_admin_page).to_not have_content("Cherry")
+    end
+
+    it 'allows user to delete a grove' do
+      grove = create(:grove, school: school)
+      dashboard_page.click_on("Manage Groves")
+      expect(grove_admin_page).to have_content(grove.name)
+      grove_admin_page.view_grove(grove.name).delete_grove(grove.id)
+      expect(grove_admin_page.visit_page).to_not have_content(grove.name)
     end
 
     describe 'creating a new grove' do
-      before {visit_new_grove_page }
+      before { visit_new_grove_page }
 
       it 'allows creation of a new grove' do
         expect {
@@ -74,41 +83,20 @@ RSpec.feature 'Managing Groves' do
       expect(dashboard_page).not_to have_content("Manage Groves")
     end
 
+    it 'shows navigation links' do
+      expect(dashboard_page).to have_content("Teacher Dashboard")
+      expect(dashboard_page).to have_content("Grove Monitor")
+      expect(dashboard_page).to have_content("Grove Playlist Manager")
+    end
+
     it 'does not allow access' do
-      expect{ dashboard_page.visit('/admin/groves') }.to raise_error(Pundit::NotAuthorizedError)
+      expect { dashboard_page.visit('/admin/groves') }.to raise_error(Pundit::NotAuthorizedError)
     end
   end
 
-  def visit_new_grove_page
-    dashboard_page.click_on("Manage Groves")
-    grove_admin_page.click_on "New Grove"
-  end
 end
 
-RSpec.feature 'showing groves in the application' do
-  let(:school) { create(:school) }
-  let(:grove_index_page) { Pages::GroveIndexPage.new }
-
-  describe 'as a teacher with an administrative role' do
-    let(:grove) { create(:grove, name: "Aspen", school_id: school.id) }
-    let(:administrator) { create(:teacher, :admin, school: school, grove_id: grove.id) }
-
-    before { login(administrator) }
-
-    describe 'showing a grove' do
-      it 'allows user to see a grove show page' do
-        expect(grove_index_page.visit_page).to have_content(grove.name)
-        grove_index_page.go_to_show_page(grove.id)
-        expect(current_path).to eq("/admin/groves/#{grove.id}")
-      end
-    end
-
-    describe 'deleting a grove' do
-      it 'allows user to delete a grove' do
-        expect(grove_index_page.visit_page).to have_content(grove.name)
-        grove_index_page.go_to_show_page(grove.id).delete_grove(grove.id)
-        expect(grove_index_page.visit_page).to_not have_content(grove.name)
-      end
-    end
-  end
+def visit_new_grove_page
+  dashboard_page.click_on("Manage Groves")
+  grove_admin_page.click_on "New Grove"
 end
