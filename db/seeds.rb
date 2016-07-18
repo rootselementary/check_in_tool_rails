@@ -1,8 +1,9 @@
-admin_role = Role.find_or_create_by(name: "admin")
 
 grove = Grove.create!(name: "Aspen")
 Grove.create!(name: "Fir")
 Grove.create!(name: "Pine")
+Role.create!(name: "teacher")
+admin_role = Role.find_or_create_by(name: "admin")
 
 Teacher.create!(name: "Jane Teacher",
                 email: "jane@example.com",
