@@ -38,7 +38,6 @@ RSpec.feature 'Managing Teachers' do
 
     describe 'creating a new teacher' do
 
-
       it 'allows creation of a new teacher' do
         expect {
           dashboard_page.click_on "Manage Teachers"
