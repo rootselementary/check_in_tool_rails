@@ -51,8 +51,14 @@ RSpec.feature 'Managing Teachers' do
           teacher_admin_page.create_teacher(grove.name, "admin")
         }.to change { Role.find_by_name("admin").users.count }.by(1)
       end
-    
-    end 
+
+      it 'ensures teacher is not admin by default' do
+        expect { dashboard_page.click_on "Manage Teachers"
+          teacher_admin_page.create_teacher(grove.name)
+        }.not_to change { Role.find_by_name("admin").users.count }
+      end
+
+    end
 
     describe 'updating a teacher' do
       it 'updates the teacher attributes' do
