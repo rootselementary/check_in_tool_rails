@@ -7,12 +7,12 @@ module Pages
       self
     end
 
-    def create_teacher(grove_name, role="teacher")
+    def create_teacher(grove_name, role=nil)
       click_on "New Teacher"
       fill_in "Name", with: "Bart Simpson"
       fill_in "Email", with: "teacher@example.com"
       select grove_name, from: "teacher[grove_id]"
-      select role, from: "teacher[role_ids]"       
+      select role, from: "teacher[role_ids]" if role
       click_on "Save"
       page.has_content? "Teacher Saved"
     end

@@ -101,7 +101,6 @@ module Admin
     end
 
     def create
-      
       yield resource if block_given?
       if resource.save
         flash[:notice] = "#{resource_class} Saved"
