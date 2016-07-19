@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :groves
     resources :teachers
     resources :students, only: [] do
-      resource :playlist, only: [:show]
+      get '/playlist', controller: 'playlist_activities', action: 'index'
       resources :playlist_activities, only: [:new, :create]
     end
   end

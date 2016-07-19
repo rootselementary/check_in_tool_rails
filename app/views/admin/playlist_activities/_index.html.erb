@@ -1,5 +1,5 @@
 <div class="student-playlist text-center">
-  <h2><%= resource.student.name %>'s Grove Playlist</h2>
+  <h2><%= @student.name %>'s Grove Playlist</h2>
   <div class="calendar-container">
     <table class="table table-striped">
       <thead>
@@ -12,15 +12,15 @@
         </tr>
       </thead>
       <tbody>
-        <%= render partial: "/admin/playlist_activities/playlist_activity", collection: resource.playlist_activities %>
+        <%= render partial: "playlist_activity", collection: collection %>
       </tbody>
     </table>
     <div class="row">
       <%= link_to fa_icon("plus", text: "New Event"),
-                  new_admin_student_playlist_activity_path(resource.student),
+                  new_admin_student_playlist_activity_path(@student),
                   class:"btn btn-info" %>
       <button class="btn btn-success pull-right">
-        <%= fa_icon "calendar", text: "Save #{resource.student.name}'s Grove Playlist" %>
+        <%= fa_icon "calendar", text: "Save #{@student.name}'s Grove Playlist" %>
       </button>
     </div>
   </div>

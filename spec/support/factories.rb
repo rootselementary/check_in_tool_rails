@@ -30,7 +30,6 @@ FactoryGirl.define do
       type "Student"
       sequence(:name) { |n| "JJ Letest#{n}" }
       sequence(:email) { |n| "letest#{n}@rootselementary.org" }
-      playlist
     end
 
     factory :student_with_activities, class: Student do
@@ -53,8 +52,5 @@ FactoryGirl.define do
 
   factory :school do
     name "Roots Elementary"
-  end
-
-  factory :playlist do
   end
 end

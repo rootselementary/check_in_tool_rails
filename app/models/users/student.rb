@@ -1,7 +1,6 @@
 class Student < User
   include Rails.application.routes.url_helpers
-  has_one :playlist, foreign_key: 'user_id'
-  after_create :create_student_playlist
+  has_many :playlist_activities, foreign_key: :user_id
 
   def admin?
     false
@@ -15,10 +14,4 @@ class Student < User
     Student.where(email: data["email"]).first
   end
 
-  private
-
-  def create_student_playlist
-    # student = Student.last
-    Playlist.create(student: self) unless playlist
-  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718021539) do
+ActiveRecord::Schema.define(version: 20160719161537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,25 +55,17 @@ ActiveRecord::Schema.define(version: 20160718021539) do
   add_index "locations", ["grove_id"], name: "index_locations_on_grove_id", using: :btree
 
   create_table "playlist_activities", force: :cascade do |t|
-    t.integer  "playlist_id"
     t.integer  "activity_id"
     t.integer  "focus_area_id"
     t.integer  "position"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "user_id"
   end
 
   add_index "playlist_activities", ["activity_id"], name: "index_playlist_activities_on_activity_id", using: :btree
   add_index "playlist_activities", ["focus_area_id"], name: "index_playlist_activities_on_focus_area_id", using: :btree
-  add_index "playlist_activities", ["playlist_id"], name: "index_playlist_activities_on_playlist_id", using: :btree
-
-  create_table "playlists", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
+  add_index "playlist_activities", ["user_id"], name: "index_playlist_activities_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -131,8 +123,7 @@ ActiveRecord::Schema.define(version: 20160718021539) do
   add_foreign_key "locations", "groves"
   add_foreign_key "playlist_activities", "activities"
   add_foreign_key "playlist_activities", "focus_areas"
-  add_foreign_key "playlist_activities", "playlists"
-  add_foreign_key "playlists", "users"
+  add_foreign_key "playlist_activities", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "groves"
