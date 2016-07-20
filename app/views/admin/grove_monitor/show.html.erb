@@ -1,3 +1,10 @@
 <div class="grove-monitor text-center">
   <h2>Grove Monitor</h2>
 </div>
+
+<%= link_to "Absent", admin_grove_monitor_path(filter: :absent) %>
+<%= link_to "Lost", admin_grove_monitor_path(filter: :lost) %>
+
+<% @students.each do |student| %>
+  <%= student.name %>
+<% end %>
