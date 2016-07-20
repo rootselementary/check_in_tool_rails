@@ -12,7 +12,7 @@ module Pages
       fill_in "Name", with: "Bart Simpson"
       fill_in "Email", with: "teacher@example.com"
       select grove_name, from: "teacher[grove_id]"
-      select role, from: "teacher[role_ids]" if role
+      find("input[type='checkbox']").set(true) if role
       click_on "Save"
       page.has_content? "Teacher Saved"
     end

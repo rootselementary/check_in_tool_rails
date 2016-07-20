@@ -4,10 +4,8 @@
     <%= form.input :name %>
     <%= form.input :email %>
     <%= form.select :grove_id, collection: current_user.groves.map{|x| [x.name, x.id]} %>
-
     <%= form.label 'Is Admin?' %>
-    <input type='checkbox' name='teacher[role_ids]' value='1'>
-
+    <%= form.input_field :role_ids, as: :boolean %>
     <%= form.submit 'Save' %>
   <% end %>
 </div>

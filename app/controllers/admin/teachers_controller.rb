@@ -4,14 +4,18 @@ module Admin
     def create
       super do |teacher|
         teacher.password = teacher.password_confirmation = SecureRandom.hex
-        teacher.roles << Role.find(role_params) if role_params
+        teacher.roles << Role.find(admin_id) if admin_role?
       end
     end
 
     protected
 
-    def role_params
-      params.dig("teacher", "role_ids")
+    def admin_role?
+      params.dig("teacher", "role_ids").to_i == 1
+    end
+
+    def admin_id
+      Role.find_by(name: Role::ROLES[:admin]).id
     end
 
     def form_attributes
@@ -19,7 +23,7 @@ module Admin
     end
 
     def whitelist
-      collection_attributes + [:grove_id, :role_ids]
+      collection_attributes + [:grove_id]
     end
 
     def collection
