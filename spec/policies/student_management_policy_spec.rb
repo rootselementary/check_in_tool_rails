@@ -4,7 +4,8 @@ describe StudentManagementPolicy do
   describe '#show?' do
     it 'permits teachers' do
       teacher = create(:teacher)
-      policy = StudentManagementPolicy.new(teacher, nil)
+      student = create(:student)
+      policy = StudentManagementPolicy.new(teacher, student)
       expect(policy.show?).to be true
     end
 
