@@ -6,6 +6,8 @@ class Admin::PlaylistActivitiesController < Admin::ResourceController
 
   def new
     @student = Student.find(params[:student_id])
+    @focus_areas = FocusArea.where(grove_id: @student.grove_id)
+    @activities = Activity.where(grove_id: @student.grove_id)
     @resource = @student.playlist_activities.new
     authorize(resource)
     respond_with resource
