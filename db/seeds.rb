@@ -14,7 +14,7 @@ Student.create!(name: "Madison Student",
 admin = Teacher.create!(name: "Susie Admin",
                         email: "susie.admin@example.com",
                         password: "password",
-                        grove: grove)
+                        grove: grove)
 admin.roles << admin_role
 
 Student.create!(name: "JJ Letest",
