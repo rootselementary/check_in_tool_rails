@@ -30,16 +30,25 @@ FactoryGirl.define do
       type "Student"
       sequence(:name) { |n| "JJ Letest#{n}" }
       sequence(:email) { |n| "letest#{n}@rootselementary.org" }
-      playlist
     end
-
   end
 
   factory :grove do
-    name "Grove 1"
+    sequence(:name) { |n| "Grove #{n}" }
     factory :grove_with_students do
       after(:create) do |grove|
         create_list(:student, 2, grove: grove)
+      end
+    end
+
+    factory :grove_with_resources do
+      after(:create) do |grove|
+        student1, _ = create_list(:student, 2, grove: grove)
+        create(:teacher, grove: grove)
+        location = create(:location, grove: grove)
+        activity = create(:activity, grove: grove, location: location)
+        focus_area = create(:focus_area, grove: grove)
+        create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
       end
     end
   end
@@ -48,6 +57,26 @@ FactoryGirl.define do
     name "Roots Elementary"
   end
 
-  factory :playlist do
+  factory :activity do
+    sequence(:name) { |n| "Fun Activity #{n}" }
+    grove nil
+    location nil
+  end
+
+  factory :focus_area do
+    sequence(:name) { |n| "Focus up #{n}" }
+    grove nil
+  end
+
+  factory :location do
+    sequence(:name) { |n| "Amazing Location #{n}" }
+    grove nil
+  end
+
+  factory :playlist_activity do
+    student nil
+    activity nil
+    focus_area nil
+    position 1
   end
 end

@@ -1,0 +1,2 @@
+class PlaylistActivityPolicy < StudentManagementPolicy
+end

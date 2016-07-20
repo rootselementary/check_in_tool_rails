@@ -1,0 +1,8 @@
+<%= simple_form_for([:admin, @student, resource], html: { class: 'inline' }) do |form| %>
+  <%= render 'error_notification', form: form %>
+  <%= form.association :activity, collection: @activities %>
+  <%= form.association :focus_area,
+                       collection: @focus_areas,
+                       include_blank: "(none)" %>
+  <%= form.submit %>
+<% end %>

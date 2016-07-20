@@ -1,0 +1,27 @@
+<div class="student-playlist text-center">
+  <h2><%= @student.name %>'s Grove Playlist</h2>
+  <div class="calendar-container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Center</th>
+          <th>Activity</th>
+          <th>Focus Area</th>
+          <th>Edit</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "playlist_activity", collection: collection %>
+      </tbody>
+    </table>
+    <div class="row">
+      <%= link_to fa_icon("plus", text: "New Activity"),
+                  new_admin_student_playlist_activity_path(@student),
+                  class:"btn btn-info pull-left" %>
+      <button class="btn btn-success pull-right">
+        <%= fa_icon "calendar", text: "Save #{@student.name}'s Grove Playlist" %>
+      </button>
+    </div>
+  </div>
+</div>
