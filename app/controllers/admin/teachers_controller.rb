@@ -14,7 +14,7 @@ module Admin
     end
 
     def whitelist
-      collection_attributes + [:grove_id]
+      collection_attributes + [:grove_id, role_ids: []]
     end
 
     def collection

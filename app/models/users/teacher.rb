@@ -4,6 +4,8 @@ class Teacher < User
   has_many :roles, through: :user_roles, foreign_key: 'user_id'
   belongs_to :grove
 
+  accepts_nested_attributes_for :roles
+
   def after_sign_in_path
     admin_dashboard_path
   end

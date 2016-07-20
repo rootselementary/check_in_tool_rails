@@ -11,6 +11,7 @@ RSpec.feature 'Managing Teachers' do
     let(:administrator) { create(:teacher, :admin, school: school, grove: grove) }
     let!(:teacher) { create(:teacher, name: "Homer Simpson", school: school, grove: grove) }
     let!(:grove) { create(:grove, school: school)}
+    let!(:role) { create(:role)}
 
     before { login(administrator) }
 
@@ -38,13 +39,25 @@ RSpec.feature 'Managing Teachers' do
 
     describe 'creating a new teacher' do
 
-
       it 'allows creation of a new teacher' do
         expect {
           dashboard_page.click_on "Manage Teachers"
           teacher_admin_page.create_teacher(grove.name)
         }.to change { Grove.find(grove.id).teachers.count }.by(1)
       end
+
+      it 'allows creation of a new admin teacher' do
+        expect { dashboard_page.click_on "Manage Teachers"
+          teacher_admin_page.create_teacher(grove.name, :admin)
+        }.to change { Role.find_by_name("admin").users.count }.by(1)
+      end
+
+      it 'ensures teacher is not admin by default' do
+        expect { dashboard_page.click_on "Manage Teachers"
+          teacher_admin_page.create_teacher(grove.name)
+        }.not_to change { Role.find_by_name("admin").users.count }
+      end
+
     end
 
     describe 'updating a teacher' do

@@ -1,5 +1,4 @@
 admin_role = Role.find_or_create_by(name: "admin")
-
 grove = Grove.create!(name: "Aspen")
 Grove.create!(name: "Fir")
 Grove.create!(name: "Pine")
