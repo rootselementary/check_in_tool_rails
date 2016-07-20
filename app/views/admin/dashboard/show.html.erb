@@ -1,5 +1,5 @@
-<div class="teacher-dashboard text-center">
-  <h2>Teacher Dashboard</h2>
-  <%=link_to("Manage Groves", admin_groves_path, class: "btn btn-default") if policy(:grove).index? %>
-  <%=link_to("Manage Teachers", admin_teachers_path, class: "btn btn-default") if policy(:teacher).index? %>
+<%= render partial: "/shared/sidebar" %>
+
+<div class="teacher-dashboard col-sm-8">
+  <h2>Welcome</h2>
 </div>

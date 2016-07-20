@@ -1,0 +1,54 @@
+<div class="wrap">
+  <div class="col-xs-2 sidebar">
+    <div class="sidebar-content">
+      <section> 
+        <h3>Teacher Dashboard</h3>
+        <hr>
+        <ul class="nav navbar-nav">
+          <%=link_to("Manage Groves", admin_groves_path, class: "btn btn-success btn-lg btn-block") if policy(:grove).index? %>
+          <br>
+          <hr>
+          <%=link_to("Manage Teachers", admin_teachers_path, class: "btn btn-success btn-lg btn-block") if policy(:teacher).index? %>
+        </ul>
+      </section>
+    </div>
+  </div> 
+  <!--<div class="col-xs-8"></div>    -->
+  <div style="clear:both"></div>       
+</div>
+            
+                
+                
+         
+     
+      
+        
+        
+        
+        
+        
+        
+
+
+
+<!--
+<div class="sidebar col-sm-4 nopadding">
+  <nav class="navbar navbar-default" role="navigation">
+  <a class="navbar-brand" href="#">Teacher Dashboard</a>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li><%=link_to("Manage Groves", admin_groves_path, class: "btn btn-default") if policy(:grove).index? %></li>
+        <li><%=link_to("Manage Teachers", admin_teachers_path, class: "btn btn-default") if policy(:teacher).index? %></li>
+      </ul>
+    </div>
+  </nav>
+</div>-->
+

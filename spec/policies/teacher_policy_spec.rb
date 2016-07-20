@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 describe TeacherPolicy do
   describe '#index?' do
     it 'permits admins' do
