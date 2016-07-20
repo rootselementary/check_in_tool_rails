@@ -48,7 +48,7 @@ RSpec.feature 'Managing Teachers' do
 
       it 'allows creation of a new admin teacher' do
         expect { dashboard_page.click_on "Manage Teachers"
-          teacher_admin_page.create_teacher(grove.name, "admin")
+          teacher_admin_page.create_teacher(grove.name, :admin)
         }.to change { Role.find_by_name("admin").users.count }.by(1)
       end
 

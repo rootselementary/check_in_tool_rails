@@ -1,11 +1,9 @@
-<div class='container'>
-  <%= simple_form_for([:admin, resource], html: { class: 'inline' }) do |form| %>
-    <%= render 'error_notification', form: form %>
-    <%= form.input :name %>
-    <%= form.input :email %>
-    <%= form.select :grove_id, collection: current_user.groves.map{|x| [x.name, x.id]} %>
-    <%= form.label 'Is Admin?' %>
-    <%= form.input_field :role_ids, as: :boolean %>
-    <%= form.submit 'Save' %>
-  <% end %>
-</div>
+<%= simple_form_for([:admin, resource], html: { class: 'inline' }) do |form| %>
+  <%= render 'error_notification', form: form %>
+  <%= form.input :name %>
+  <%= form.input :email %>
+  <%= form.select :grove_id, collection: current_user.groves.map{|x| [x.name, x.id]} %>
+  <%= form.association :roles, as: :check_boxes %>
+  <%= form.submit 'Save' %>
+<% end %>
+

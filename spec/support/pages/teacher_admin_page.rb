@@ -7,12 +7,14 @@ module Pages
       self
     end
 
-    def create_teacher(grove_name, role=nil)
+    def create_teacher(grove_name, *roles)
       click_on "New Teacher"
       fill_in "Name", with: "Bart Simpson"
       fill_in "Email", with: "teacher@example.com"
       select grove_name, from: "teacher[grove_id]"
-      find("input[type='checkbox']").set(true) if role
+      roles.each do |role|
+        check role.to_s.downcase
+      end
       click_on "Save"
       page.has_content? "Teacher Saved"
     end
