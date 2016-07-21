@@ -2,6 +2,6 @@
   <%= render 'error_notification', form: form %>
   <%= form.input :name %>
   <%= form.input :email %>
-  <%= form.input :grove_id, collection: current_user.groves.map{|x| [x.name, x.id]} %>
+  <%= form.input :grove_id, include_blank: false, collection: current_user.groves.map{|x| [x.name, x.id]} %>
   <%= form.submit 'Save' %>
 <% end %>
