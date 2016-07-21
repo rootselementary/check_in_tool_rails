@@ -4,37 +4,24 @@ include Pages::Authentication
 RSpec.feature 'Grove Monitor' do
   let(:grove) { create(:grove_with_students) }
   let(:teacher) { grove.teachers.first }
-  let(:student1) { grove.students.first }
-  let(:student2) { grove.students.last }
-  let(:location) { create(:location) }
-  let(:location2) { create(:location) }
   let(:grove2) { create(:grove_with_resources) }
   let(:teacher2) { grove2.teachers.first }
-  let(:student3) { grove2.students.first }
-  let(:student4) { grove2.students.last }
-  let(:event) { student3.events.first }
-  let(:event2) { student4.events.first }
-  let(:scan) { event.scans.first }
-  let(:scan2) { event2.scans.last }
 
   let(:dashboard_page) { Pages::DashboardPage.new }
 
   describe 'as a teacher' do
     before { login(teacher) }
 
+    let(:student1) { grove.students.first }
+    let(:student2) { grove.students.last }
+    let(:location) { create(:location) }
+    let(:location2) { create(:location) }
+
     it 'can be reached from the main dashboard' do
       dashboard_page.click_on("Grove Monitor")
       expect(current_path).to eq(admin_grove_monitor_path)
     end
 
-# PlaylistItem => Name, Location, Duration, timestamps, type
-# ScheduledActivity => polymorphic on playlistitem
-# FlexTimeActivity => polymorphic on playlistitem
-# HomeStationActivity => polymorphic on playlistitem
-# Activity => User(Id), FlextimeItem(Id), timestamps, CheckInTime, PlaylistItem(Id), PlaylistItem(Type)
-# give me the activities for a student within the last hour
-# Activity.playground #=> give me all the activities from the last hour where the last of those activities is a playground type
-# School master_calendar => [900, 945, 1015]
 
     it 'shows all absent students' do
       student1.update(at_school: false)
@@ -49,6 +36,15 @@ RSpec.feature 'Grove Monitor' do
 
   describe 'As a teacher' do
     before { login(teacher2) }
+
+    let(:location) { create(:location) }
+    let(:student3) { grove2.students.first }
+    let(:student4) { grove2.students.last }
+    let(:event) { student3.events.first }
+    let(:event2) { student4.events.first }
+    let(:scan) { event.scans.first }
+    let(:scan2) { event2.scans.last }
+
 
     it 'shows all lost students who scanned into the wrong location' do
       event.update(student: student3, location: location)
@@ -67,5 +63,17 @@ RSpec.feature 'Grove Monitor' do
       expect(page).to have_content(student4.name)
     end
   end
-
 end
+
+
+
+
+
+# PlaylistItem => Name, Location, Duration, timestamps, type
+# ScheduledActivity => polymorphic on playlistitem
+# FlexTimeActivity => polymorphic on playlistitem
+# HomeStationActivity => polymorphic on playlistitem
+# Activity => User(Id), FlextimeItem(Id), timestamps, CheckInTime, PlaylistItem(Id), PlaylistItem(Type)
+# give me the activities for a student within the last hour
+# Activity.playground #=> give me all the activities from the last hour where the last of those activities is a playground type
+# School master_calendar => [900, 945, 1015]

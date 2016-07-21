@@ -19,16 +19,11 @@ class Student < User
   end
 
   def self.lost
-    result = []
-    result << joins(events: [:scans] ).where(at_school: true)
+    checked_in_ids = joins(events: [:scans] ).where(at_school: true)
                                       .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
-                                      .where.not(scans:{correct: true})
-    joins(:events).where(at_school: true)
-                  .where("start_time <= ? AND end_time >= ?", Time.now, Time.now).each do |student|
-                    result << student if student.events.last.scans.count == 0
-                  end
-
-    result.flatten
+                                      .where(scans:{correct: true})
+                                      .pluck(:id)
+    self.where.not(id: checked_in_ids)
   end
 
 end

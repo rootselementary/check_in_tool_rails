@@ -45,14 +45,15 @@ FactoryGirl.define do
 
     factory :grove_with_resources do
       after(:create) do |grove|
-        student1, student2 = create_list(:student, 2, grove: grove)
+        student1, student2, student3 = create_list(:student, 3, grove: grove)
+        # absent_student = create(:student, at_school: false)
         create(:teacher, grove: grove)
         location1, location2 = create_list(:location, 2, grove: grove)
         activity = create(:activity, grove: grove, location: location1)
         focus_area = create(:focus_area, grove: grove)
         create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
         event = create(:event, student: student1, location: location1)
-        event2 = create(:event, student: student2, location: location1)
+        event2 = create(:event, student: student3, location: location1)
         scan = create(:scan, event: event, location: location2)
         scan2 = create(:scan, event: event2, location: location1)
       end
