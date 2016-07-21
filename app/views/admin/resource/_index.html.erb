@@ -12,7 +12,7 @@
       <% collection_attributes.each do |attribute| %>
         <td>
           <%= resource.send(attribute) unless attribute == :grove %>
-          <%= resource.send(attribute).send(:name) if attribute == :grove %>
+          <%= resource.send(attribute).name if attribute == :grove %>
         </td>
       <% end %>
       <td>
