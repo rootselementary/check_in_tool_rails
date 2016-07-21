@@ -7,6 +7,7 @@ RSpec.feature 'Managing Playlist Activities' do
   let(:student) { grove.students.first }
   let(:student2) { grove.students.last }
   let(:activity) { grove.activities.first }
+  let(:activity2) { grove.activities.last }
   let(:location) { grove.locations.first }
   let(:focus_area) { grove.focus_areas.first }
   let(:grove_playlist_page) { Pages::GrovePlaylistPage.new }
@@ -39,6 +40,25 @@ RSpec.feature 'Managing Playlist Activities' do
 
       expect(grove_playlist_page).to have_content activity.name
       expect(grove_playlist_page).to have_content location.name
+    end
+
+    it "can edit an activity on the playlist" do
+      grove_playlist_page.visit_page
+                         .view_playlist(student.name)
+                         .edit_activity(student.playlist_activities.first, activity2)
+
+      expect(grove_playlist_page).to have_content activity2.name
+      expect(grove_playlist_page).not_to have_content activity.name
+      expect(grove_playlist_page).not_to have_content focus_area.name
+    end
+
+    it "can remove an activity from the playlist" do
+      grove_playlist_page.visit_page
+                         .view_playlist(student.name)
+                         .add_new_activity(activity2)
+                         .delete_activity(student.playlist_activities.first)
+
+      expect(grove_playlist_page).not_to have_content activity.name
     end
   end
 
