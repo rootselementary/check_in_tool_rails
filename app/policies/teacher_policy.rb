@@ -16,4 +16,3 @@ class TeacherPolicy < ApplicationPolicy
   alias_method :show?, :index?
 
 end
-
