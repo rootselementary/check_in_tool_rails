@@ -10,7 +10,10 @@
   <% collection.each do |resource| %>
     <tr>
       <% collection_attributes.each do |attribute| %>
-        <td><%= resource.send(attribute) %></td>
+        <td>
+          <%= resource.send(attribute) unless attribute == :grove %>
+          <%= resource.send(attribute).send(:name) if attribute == :grove %>
+        </td>
       <% end %>
       <td>
         <%= link_to "View", send("admin_#{resource_as_sym}_path", resource), class: "btn btn-default" %>

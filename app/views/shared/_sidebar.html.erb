@@ -1,7 +1,6 @@
 <ul class='button-column'>
   <li><%=link_to("Manage Groves", admin_groves_path, class: "btn btn-success btn-block") if policy(:grove).index? %></li>
   <li><%=link_to("Manage Teachers", admin_teachers_path, class: "btn btn-success btn-block") if policy(:teacher).index? %></li>
-  <li><%=link_to "Teacher Dashboard", admin_dashboard_path, class: "btn btn-success btn-block"%></li>
   <li><%=link_to "Grove Monitor", admin_grove_monitor_path,class: "btn btn-success btn-block" %></li>
   <li><%=link_to "Grove Playlist Manager", admin_grove_playlist_manager_path, class: "btn btn-success btn-block" %></li>
 </ul>

@@ -4,7 +4,7 @@
     </article>
     <aside class="secondary-content">
       <section class="container">
-		  <%= render partial: "shared/sidebar" %>
+		  <%= render partial: "shared/sidebar" if user_signed_in? %>
       </section>
     </aside>
   </section>

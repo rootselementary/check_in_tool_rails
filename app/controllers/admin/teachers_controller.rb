@@ -10,7 +10,7 @@ module Admin
     protected
 
     def form_attributes
-      [:name, :email]
+      [:name, :email, :grove]
     end
 
     def whitelist

@@ -2,9 +2,20 @@
 
 .secondary-content {
   height: 100%;
-  border-left: 2px solid #000;
+  border-left: 2px solid #DDD;
   width: 24%;
   text-align: center;
+
+  .btn {
+    background-color: #fff;
+    border: 1px solid #8BA65F;
+    color: #000;
+
+    &:hover {
+        background-color: #8BA65F;
+        color: #fff;
+    }  
+  }
 }
 
 .secondary-content li,
@@ -28,7 +39,7 @@
   }
 
   .secondary-content {
-    border-top: 2px solid #000;
+    border-top: 2px solid #DDD;
     border-left: none;
     margin-top: 25px;
     padding-top: 50px;
