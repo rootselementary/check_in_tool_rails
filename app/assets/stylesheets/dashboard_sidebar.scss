@@ -1,25 +1,50 @@
-.sidebar{
-    background-color:#fff;
-    background-repeat: repeat;
-    padding:0;
-    min-height:100% !important;
-    position:relative;
-    border-right: 1px solid #eee;
-    border-top: 1px solid #eee;
+/* secondary content */
+
+.secondary-content {
+  height: 100%;
+  border-left: 2px solid #000;
+  width: 24%;
+  text-align: center;
 }
 
-html, body {height: 100%}
+.secondary-content li,
+.secondary-content p {
+  font-size: 140%;
+  line-height: 160%;
+  margin-top: 10%;
+}
 
-.wrap{ 
-  height: 100%;
-  margin-top: -1.4%;
+.secondary-content ul {
+  margin: 5px 0;
+  padding: 5px 0;
+}
+
+
+@media screen and (max-width: 975px) {
+  .main-content,
+  .secondary-content {
+    display: block;
+    width: 100%;
   }
 
-.sidebar .sidebar-content{ 
-    height:100%;
-    width:100%;
-    padding: 5px;
-    margin:0;
-    position:relative;
-}
+  .secondary-content {
+    border-top: 2px solid #000;
+    border-left: none;
+    margin-top: 25px;
+    padding-top: 50px;
+  }
 
+  .secondary-content ul {
+    margin: 0;
+  }
+
+  .secondary-content li {
+    margin: 2%;
+  }
+
+  .button-column {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+  }
+}
