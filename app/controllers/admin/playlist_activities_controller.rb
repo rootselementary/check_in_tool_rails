@@ -13,6 +13,13 @@ class Admin::PlaylistActivitiesController < Admin::ResourceController
     respond_with resource
   end
 
+  def edit
+    @student = Student.find(params[:student_id])
+    @focus_areas = FocusArea.where(grove_id: @student.grove_id)
+    @activities = Activity.where(grove_id: @student.grove_id)
+    respond_with resource
+  end
+
   private
     def resource_as_sym
       :playlist_activity

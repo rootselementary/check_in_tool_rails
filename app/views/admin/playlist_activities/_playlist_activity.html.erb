@@ -1,4 +1,4 @@
-<tr>
+<tr id="playlist-activity-<%= playlist_activity.id %>">
   <td><%= playlist_activity.activity.location.name %></td>
   <td><%= playlist_activity.activity.name %></td>
   <% if playlist_activity.focus_area %>
@@ -6,6 +6,6 @@
   <% else %>
     <td></td>
   <% end %>
-  <td></td>
-  <td></td>
+  <td><%= link_to fa_icon("pencil", text: ""), edit_admin_student_playlist_activity_path(student, playlist_activity), class: "btn btn-xs btn-info", id: "edit-#{playlist_activity.id}"%></td>
+  <td><%= link_to fa_icon("times", text: ""), admin_student_playlist_activity_path(student, playlist_activity), method: :delete, class: "btn btn-xs btn-danger", id: "delete-#{playlist_activity.id}"%></td>
 </tr>

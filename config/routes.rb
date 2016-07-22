@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :teachers
     resources :students, only: [] do
       get '/playlist', controller: 'playlist_activities', action: 'index'
-      resources :playlist_activities, only: [:new, :create]
+      resources :playlist_activities, except: [:show]
     end
   end
 
