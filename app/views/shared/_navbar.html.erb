@@ -10,8 +10,9 @@
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right" style="margin-top:9px">
-        <li><%=link_to "Teacher Dashboard", admin_dashboard_path %></li>
-        
+        <li><%= link_to "Teacher Dashboard", admin_dashboard_path %></li>
+        <li><%= link_to "Grove Monitor", admin_grove_monitor_all_path %></li>
+        <li><%= link_to "Grove Playlist Manager", admin_grove_playlist_manager_path %></li>
         <li><%= link_to "Log out", destroy_user_session_path, method: 'delete' %></li>
       </ul>
     </div>

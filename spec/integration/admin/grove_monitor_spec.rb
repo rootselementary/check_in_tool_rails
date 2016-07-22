@@ -2,9 +2,9 @@ require 'rails_helper'
 include Pages::Authentication
 
 RSpec.feature 'Grove Monitor' do
-  let(:grove) { create(:grove_with_students) }
-  let(:teacher) { grove.teachers.first }
-  let(:grove2) { create(:grove_with_resources) }
+  let(:grove)    { create(:grove_with_students) }
+  let(:teacher)  { grove.teachers.first }
+  let(:grove2)   { create(:grove_with_absent_students) }
   let(:teacher2) { grove2.teachers.first }
 
   let(:dashboard_page) { Pages::DashboardPage.new }
@@ -19,7 +19,14 @@ RSpec.feature 'Grove Monitor' do
 
     it 'can be reached from the main dashboard' do
       dashboard_page.click_on("Grove Monitor")
-      expect(current_path).to eq(admin_grove_monitor_path)
+      expect(current_path).to eq(admin_grove_monitor_all_path)
+    end
+
+    it 'shows all students' do
+      dashboard_page.click_on("Grove Monitor")
+      expect(current_path).to eq(admin_grove_monitor_all_path)
+      expect(page).to have_content(student1.name)
+      expect(page).to have_content(student2.name)
     end
 
 
@@ -61,6 +68,13 @@ RSpec.feature 'Grove Monitor' do
       click_on("Lost")
       expect(page).to have_content(student3.name)
       expect(page).to have_content(student4.name)
+    end
+  end
+
+  describe 'As a teacher' do
+
+    it 'returns students by location' do
+
     end
   end
 end

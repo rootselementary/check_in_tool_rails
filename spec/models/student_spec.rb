@@ -12,7 +12,7 @@ RSpec.describe Student, type: :model do
     describe '#absent' do
       it 'returns all absent students' do
         student.update(at_school: false)
-        
+
         absent_students = Student.absent
 
         expect(absent_students.size).to eq(1)
@@ -30,7 +30,7 @@ RSpec.describe Student, type: :model do
 
       it 'returns all lost students' do
         event.update(student: student1, location: location)
-        scan2.update(correct: true)
+        scan2.update(correct: false)
         event2.update(student: student2, location: location)
 
         lost_students = Student.lost
