@@ -72,9 +72,22 @@ RSpec.feature 'Grove Monitor' do
   end
 
   describe 'As a teacher' do
+    let(:grove3) { create(:grove_with_scanned_in_students) }
+    let(:teacher3) { grove3.teachers.first }
+    let(:location3) { grove3.locations.first }
+    let(:student5) { grove3.students.first }
+    let(:student6) { grove3.students.last }
+
+
+    before { login(teacher3) }
+
 
     it 'returns students by location' do
+      dashboard_page.click_on("Grove Monitor")
+      click_on(location3.name)
 
+      expect(page).to have_content(student5.name)
+      expect(page).to have_content(student6.name)
     end
   end
 end

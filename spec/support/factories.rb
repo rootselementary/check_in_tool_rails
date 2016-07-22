@@ -36,6 +36,7 @@ FactoryGirl.define do
 
   factory :grove do
     sequence(:name) { |n| "Grove #{n}" }
+
     factory :grove_with_students do
       after(:create) do |grove|
         create(:teacher, grove: grove)
@@ -70,6 +71,21 @@ FactoryGirl.define do
         event2 = create(:event, student: student2, location: location1)
         scan = create(:scan, event: event, location: location2)
         scan2 = create(:scan, event: event2, location: location1)
+      end
+    end
+
+    factory :grove_with_scanned_in_students do
+      after(:create) do |grove|
+        student1, student2 = create_list(:student, 2, grove: grove)
+        create(:teacher, grove: grove)
+        location = create(:location, grove: grove)
+        activity = create(:activity, grove: grove, location: location)
+        focus_area = create(:focus_area, grove: grove)
+        create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
+        event = create(:event, student: student1, location: location)
+        event2 = create(:event, student: student2, location: location)
+        scan = create(:scan, event: event, location: location, correct: true)
+        scan2 = create(:scan, event: event2, location: location, correct: true)
       end
     end
   end

@@ -5,6 +5,9 @@
 <%= link_to "All", admin_grove_monitor_all_path %>
 <%= link_to "Absent", admin_grove_monitor_path(filter: :absent) %>
 <%= link_to "Lost", admin_grove_monitor_path(filter: :lost) %>
+<% @locations.each do |location| %>
+  <%= link_to location.name, admin_grove_monitor_path({filter: :location, name: location.name}) %>
+<% end %>
 
 <% @students.each do |student| %>
   <%= student.name %>
