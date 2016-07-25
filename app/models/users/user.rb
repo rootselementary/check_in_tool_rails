@@ -36,4 +36,15 @@ class User < ActiveRecord::Base
     return email unless name
     name.split(" ").first
   end
+
+  def google_auth_token_store
+    json = {
+      client_id: ENV['GOOGLE_CLIENT_ID'],
+      access_token: self.token,
+      refresh_token: self.refresh_token,
+      scope: ["https://www.googleapis.com/auth/calendar.readonly"],
+      expiration_time_millis: self.expires_at
+    }.to_json
+    {default: json}
+  end
 end

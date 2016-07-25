@@ -1,12 +1,14 @@
 class Admin::GroveMonitorController < ApplicationController
 
-  # /admin/grove_monitor
-  # /admin/grove_montior?filter=[lost]
-  # /admin/grove_montior?filter=[lost,absent]&teacher=smith
-  # link_to("Lost", admin_grove_monitor_path(filter: [lost]))
+  def index
+    binding.pry
+    @students = Student.all
+    @locations = current_user.grove.locations
+    authorize(:grove_monitor, :index?)
+  end
 
   def show
-    if params[:filter] == "location"
+    if params[:name]
       @students = current_user.grove.students.send(filter_params, params[:name])
     else
       @students = current_user.grove.students.send(filter_params)
