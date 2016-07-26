@@ -21,7 +21,7 @@ gem 'coveralls', require: false
 gem 'editorconfig'
 gem 'omniauth-google-oauth2'
 gem 'will_paginate', '~> 3.1.0'
-gem 'google-api-client', '0.9'
+gem 'google_calendar'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

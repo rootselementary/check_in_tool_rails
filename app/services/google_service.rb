@@ -1,83 +1,25 @@
-require 'pry'
-require 'google/apis/calendar_v3'
-require 'googleauth'
-require 'googleauth/stores/file_token_store'
-
-require 'fileutils'
-
-OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'
-APPLICATION_NAME = 'Google Calendar API Ruby Quickstart'
-CLIENT_SECRETS_PATH = 'client_secret.json'
-CREDENTIALS_PATH = File.join(Dir.home, '.credentials',
-                             "calendar-ruby-quickstart.yaml")
-# SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
-
-##
-# Ensure valid credentials, either by restoring from the saved credentials
-# files or intitiating an OAuth2 authorization. If authorization is required,
-# the user's default browser will be launched to approve the request.
-#
-# @return [Google::Auth::UserRefreshCredentials] OAuth2 credentials
+require 'rubygems'
+require 'google_calendar'
 
 class GoogleService
-  # attr_reader :service
+  attr_reader :user
 
   def initialize(user)
-    # @service = Faraday.new("https://www.googleapis.com/calendar/v3/calendars/#{user.email}/events")
     @user = user
   end
 
-  def authorize
-    # FileUtils.mkdir_p(File.dirname(CREDENTIALS_PATH))
-
-    client_id = Google::Auth::ClientId.from_file(JSON.parse(ENV['GOOGLE_API_SECRETS']))
-    binding.pry
-    token_store = Google::Auth::Stores::FileTokenStore.new(user.google_auth_token_store)
-    authorizer = Google::Auth::UserAuthorizer.new(
-    client_id, "https://www.googleapis.com/auth/calendar.readonly", token_store)
-    user_id = 'default'
-    credentials = authorizer.get_credentials(user_id)
-    if credentials.nil?
-      url = authorizer.get_authorization_url(
-      base_url: OOB_URI)
-      puts "Open the following URL in the browser and enter the " +
-      "resulting code after authorization"
-      puts url
-      code = gets.chomp
-      credentials = authorizer.get_and_store_credentials_from_code(
-      user_id: user_id, code: code, base_url: OOB_URI)
-    end
-    credentials
-  end
-
   def calendar_request
-    # binding.pry
-    # Initialize the API
-    service = Google::Apis::CalendarV3::CalendarService.new
-    service.client_options.application_name = 'roots'
-    service.authorization = authorize
-    binding.pry
-    # client = Signet::OAuth2::Client.new(access_token: @user.token)
-    # binding.pry
-    # service = Google::Apis::CalendarV3::CalendarService.new
-    #
-    # service.authorization = client
+    cal = Google::Calendar.new(client_id: ENV['GOOGLE_CLIENT_ID'],
+                               client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+                               calendar: user.email,
+                               redirect_url: "urn:ietf:wg:oauth:2.0:oob",
+                               refresh_token: user.refresh_token)
 
-    # @calendar_list = service.list_calendar_lists
+    start_day = Date.today.beginning_of_day + 6.hours
+    end_day = Date.today.end_of_day + 6.hours
 
-    # calendar_id = 'primary'
-    response = service.list_events('jj.letest@rootselementary.org',
-    time_max: (Time.now + 12.hours).iso8601,
-    single_events: true,
-    order_by: 'startTime',
-    time_min: Time.now.iso8601)
+    daily_events = cal.find_events_in_range(start_day, end_day)
     binding.pry
-    # puts "Upcoming events:"
-    # puts "No upcoming events found" if response.items.empty?
-    # response.items.each do |event|
-    #   start = event.start.date || event.start.date_time
-    #   puts "- #{event.summary} (#{start})"
-    # end
 
     # Take response and use a CalendarZipper to change it into a json object
 

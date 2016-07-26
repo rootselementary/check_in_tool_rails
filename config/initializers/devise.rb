@@ -25,6 +25,6 @@ Devise.setup do |config|
 
   config.sign_out_via = :delete
 
-  config.omniauth :google_oauth2, ENV["google_client_id"], ENV["google_client_secret"], { scope: "email" }
+  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], { scope: "email,plus.login,calendar.readonly" }
 
 end

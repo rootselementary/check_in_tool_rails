@@ -1,10 +1,9 @@
 class Admin::GroveMonitorController < ApplicationController
 
   def index
-    binding.pry
     @students = Student.all
     @locations = current_user.grove.locations
-    authorize(:grove_monitor, :index?)
+    authorize(:teacher_resource, :index?)
   end
 
   def show
