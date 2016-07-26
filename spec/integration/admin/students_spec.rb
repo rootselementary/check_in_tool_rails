@@ -67,7 +67,7 @@ RSpec.feature 'Managing Students' do
 
     before { login(teacher) }
 
-    xit 'does not allow access' do
+    it 'does not allow access' do
       expect { dashboard_page.visit('/admin/students') }.to raise_error(Pundit::NotAuthorizedError)
     end
   end

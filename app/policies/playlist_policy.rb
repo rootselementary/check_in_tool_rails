@@ -1,2 +1,2 @@
-class PlaylistPolicy < StudentManagementPolicy
+class PlaylistPolicy < TeacherResourcePolicy
 end

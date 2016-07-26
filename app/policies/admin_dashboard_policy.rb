@@ -1,2 +1,2 @@
-class AdminDashboardPolicy < StudentManagementPolicy
+class AdminDashboardPolicy < TeacherResourcePolicy
 end

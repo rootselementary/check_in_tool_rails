@@ -1,17 +1,16 @@
 require 'rails_helper'
 
-describe StudentManagementPolicy do
+describe TeacherResourcePolicy do
   describe '#show?' do
     it 'permits teachers' do
       teacher = create(:teacher)
-      student = create(:student)
-      policy = StudentManagementPolicy.new(teacher, student)
+      policy = TeacherResourcePolicy.new(teacher, nil)
       expect(policy.show?).to be true
     end
 
     it 'does not permit students' do
       student = create(:student)
-      policy = StudentManagementPolicy.new(student, nil)
+      policy = TeacherResourcePolicy.new(student, nil)
       expect(policy.show?).to be false
     end
   end

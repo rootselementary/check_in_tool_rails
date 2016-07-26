@@ -3,7 +3,7 @@ module Admin
     private
 
     def authorize_collection
-      authorize(:student, :index?)
+      authorize(:playlist, :index?)
     end
 
     def collection
