@@ -1,11 +1,11 @@
-<section class="container">
-    <article class="main-content">
-    	<%= yield %>
-    </article>
+<section>
     <aside class="secondary-content">
       <section class="container">
 		  <%= render partial: "shared/sidebar" if user_signed_in? %>
       </section>
     </aside>
+    <article class="main-content">
+    	<%= yield %>
+    </article>
   </section>
 </section>

@@ -1,6 +1,10 @@
+.main-content {
+  padding-left: 4%;
+}
+
 .secondary-content {
   height: 100%;
-  border-left: 2px solid #DDD;
+  border-right: 2px solid #DDD;
   width: 24%;
   text-align: center;
 
@@ -28,7 +32,6 @@
   padding: 5px 0;
 }
 
-
 @media screen and (max-width: 975px) {
   .main-content,
   .secondary-content {
@@ -37,10 +40,9 @@
   }
 
   .secondary-content {
-    border-top: 2px solid #DDD;
-    border-left: none;
-    margin-top: 25px;
-    padding-top: 50px;
+    border-bottom: 2px solid #DDD;
+    border-right: none;
+    padding-top: 0px;
   }
 
   .secondary-content ul {
