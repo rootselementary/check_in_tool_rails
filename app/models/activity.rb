@@ -5,4 +5,11 @@ class Activity < ActiveRecord::Base
   validates :location, presence: true
 
   mount_uploader :image, ImageUploader
+
+  def self.for_user(user)
+    select('activities.*, locations.name as location_name')
+      .joins(:location)
+      .where(grove_id: user.grove_id)
+      .order(name: :asc)
+  end
 end

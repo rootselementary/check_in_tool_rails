@@ -1,14 +1,7 @@
 class Admin::ActivitiesController < Admin::ResourceController
   def new
-<<<<<<< 53cc441b34e298c55dcffade3249989f90a50646
     @locations = Location.where(grove_id: current_user.grove_id)
     super
-=======
-    @resource = resource_class.new
-    @locations = Location.where(grove_id: current_user.grove_id)
-    authorize(resource)
-    respond_with resource
->>>>>>> Add CRUD functionality for activities; add image uploading
   end
 
   def create
@@ -33,11 +26,7 @@ class Admin::ActivitiesController < Admin::ResourceController
     end
 
     def form_attributes
-<<<<<<< 53cc441b34e298c55dcffade3249989f90a50646
       [:name, :image]
-=======
-      [:name]
->>>>>>> Add CRUD functionality for activities; add image uploading
     end
 
     def whitelist

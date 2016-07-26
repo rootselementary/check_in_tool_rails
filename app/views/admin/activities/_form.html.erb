@@ -3,7 +3,6 @@
   <% form_attributes.each do |attr| %>
     <%= form.input attr %>
   <% end %>
-  <%= form.input :image, label: "Image" %>
   <%= form.association :location, collection: @locations %>
   <%= form.submit "Save", class: "btn btn-default" %>
 <% end %>
