@@ -3,17 +3,14 @@
 <table class="table">
   <tr>
     <% collection_attributes.each do |header| %>
-      <th><%= header.capitalize %></th>
+      <th><%= header.to_s.titleize %></th>
     <% end %>
     <th>Actions</th>
   </tr>
   <% collection.each do |resource| %>
     <tr>
       <% collection_attributes.each do |attribute| %>
-        <td>
-          <%= resource.send(attribute) unless attribute == :grove %>
-          <%= resource.grove.name if attribute == :grove %>
-        </td>
+        <td><%= resource.send(attribute) %></td>
       <% end %>
       <td>
         <%= link_to "View", send("admin_#{resource_as_sym}_path", resource), class: "btn btn-default" %>
