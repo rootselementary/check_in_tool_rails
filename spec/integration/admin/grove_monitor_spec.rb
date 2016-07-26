@@ -91,16 +91,3 @@ RSpec.feature 'Grove Monitor' do
     end
   end
 end
-
-
-
-
-
-# PlaylistItem => Name, Location, Duration, timestamps, type
-# ScheduledActivity => polymorphic on playlistitem
-# FlexTimeActivity => polymorphic on playlistitem
-# HomeStationActivity => polymorphic on playlistitem
-# Activity => User(Id), FlextimeItem(Id), timestamps, CheckInTime, PlaylistItem(Id), PlaylistItem(Type)
-# give me the activities for a student within the last hour
-# Activity.playground #=> give me all the activities from the last hour where the last of those activities is a playground type
-# School master_calendar => [900, 945, 1015]
