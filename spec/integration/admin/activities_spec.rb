@@ -21,19 +21,45 @@ RSpec.feature 'Managing Activities' do
 
     it "shows only activities in the teacher's grove" do
       grove2 = create(:grove)
-      create(:activity, name: "Reading outloud", grove: grove2)
+      location2 = create(:location, grove: grove2)
+      create(:activity, name: "Reading outloud", location: location2, grove: grove2)
       activity_admin_page.visit_page
 
       expect(activity_admin_page).to have_content("Playing with numbers")
       expect(activity_admin_page).not_to have_content("Reading outloud")
     end
 
-    xit 'allows a teacher to delete an activity' do
+    it 'allows a teacher to delete an activity' do
       activity_admin_page.visit_page
 
-      expect(grove_admin_page).to have_content(grove.name)
-      grove_admin_page.view_grove(grove.name).delete_grove(grove.id)
-      expect(grove_admin_page.visit_page).to_not have_content(grove.name)
+      expect(activity_admin_page).to have_content(activity.name)
+      activity_admin_page.delete_activity(activity.id)
+      expect(activity_admin_page.visit_page).not_to have_content(activity.name)
     end
+
+    it 'allows a teacher to create an activity' do
+      activity_admin_page.visit_new_activity_page
+      expect {
+        activity_admin_page.create_new_activity("Reading time", location)
+      }.to change {
+        Activity.where(grove_id: teacher.grove_id).count
+      }.by 1
+    end
+
+    it 'allows a teacher to edit an activity' do
+      location2 = create(:location, name: "New Location", grove: grove)
+      expect {
+        activity_admin_page.visit_edit_activity_page(activity.id)
+                         .edit_activity("Reading time", location2)
+      }.not_to change {
+        Activity.where(grove_id: teacher.grove_id).count
+      }
+      activity_admin_page.visit_page
+      expect(activity_admin_page).to have_content "Reading time"
+      expect(activity_admin_page).not_to have_content activity.name
+      expect(activity_admin_page).to have_content "New Location"
+      expect(activity_admin_page).not_to have_content location.name
+    end
+
   end
 end

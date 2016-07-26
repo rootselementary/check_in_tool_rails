@@ -11,7 +11,7 @@ module Pages
 
     def delete(resource, id)
       within("##{resource}-#{id}") do
-        click_on('delete')
+        click_on('Delete')
       end
     end
   end

@@ -1,4 +1,4 @@
-<%= link_to("All #{resource_class}s", send("admin_#{resource_as_sym}s_path"), class: "btn btn-default") if current_user.admin? %>
+<%= link_to("All #{resource.class.name.pluralize.capitalize}", send("admin_#{ resource_as_sym.to_s.pluralize}_path"), class: "btn btn-default") if current_user.admin? %>
 <br><br>
 <table class="table">
 
@@ -6,6 +6,6 @@
     <% form_attributes.each do |attr| %>
       <td><%= resource.send(attr) %></td>
     <% end %>
-    <td id="<%= resource_as_sym %>-<%= resource.id %>"><%= button_to 'delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete', class: "btn btn-danger" %></td>
+    <td id="<%= resource_as_sym %>-<%= resource.id %>"><%= button_to 'Delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete', class: "btn btn-danger" %></td>
   </tr>
 </table>
