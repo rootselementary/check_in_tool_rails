@@ -12,6 +12,11 @@ module Pages
       self
     end
 
+    def visit_activity_page(id)
+      visit "/admin/activities/#{id}"
+      self
+    end
+
     def visit_edit_activity_page(id)
       visit "/admin/activities/#{id}/edit"
       self

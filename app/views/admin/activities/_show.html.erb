@@ -1,4 +1,5 @@
 <%= link_to("All Grove Activities", admin_activities_path, class: "btn btn-default") %>
 <br><br>
 <h1><%= resource.name%></h1>
+<h2><%= "Location: #{resource.location.name}" %> </h2>
 <%= image_tag resource.image_url %>
