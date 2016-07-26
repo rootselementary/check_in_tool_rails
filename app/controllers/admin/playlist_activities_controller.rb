@@ -40,5 +40,6 @@ class Admin::PlaylistActivitiesController < Admin::ResourceController
 
     def collection
       PlaylistActivity.where(user_id: params[:student_id])
+                      .order(id: :asc)
     end
 end
