@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719161537) do
+ActiveRecord::Schema.define(version: 20160726170452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160719161537) do
     t.integer  "location_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "image"
   end
 
   add_index "activities", ["grove_id"], name: "index_activities_on_grove_id", using: :btree
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160719161537) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
   end
 
   add_index "groves", ["school_id"], name: "index_groves_on_school_id", using: :btree
@@ -50,6 +52,7 @@ ActiveRecord::Schema.define(version: 20160719161537) do
     t.integer  "grove_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
   end
 
   add_index "locations", ["grove_id"], name: "index_locations_on_grove_id", using: :btree
@@ -77,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160719161537) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
   end
 
   create_table "user_roles", force: :cascade do |t|

@@ -7,6 +7,8 @@ class Grove < ActiveRecord::Base
   has_many :focus_areas
   has_many :activities
 
+  mount_uploader :image, ImageUploader
+
   validates :name, presence: true, uniqueness: true
 
   def teachers

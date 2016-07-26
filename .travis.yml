@@ -12,6 +12,10 @@ script:
 cache: bundler
 after_success:
 - coveralls
+env:
+  S3_SECRET: secret
+  S3_KEY: anotherkey
+  S3_BUCKET_NAME: dev-dev
 deploy:
   provider: heroku
   api_key:

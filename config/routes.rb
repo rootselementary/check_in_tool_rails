@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get '/playlist', controller: 'playlist_activities', action: 'index'
       resources :playlist_activities, except: [:show]
     end
+    resources :activities
   end
 
   get '/compass', controller: 'compass', action: 'show', as: :compass

@@ -11,9 +11,13 @@ module Pages
 
     def delete(resource, id)
       within("##{resource}-#{id}") do
-        click_on('delete')
+        click_on('Delete')
       end
     end
-  end
 
+    def has_image?(image_name)
+      src = image_name[0...image_name.index('.')]
+      has_xpath?("//img[contains(@src,\"/assets/#{src}\")]")
+    end
+  end
 end
