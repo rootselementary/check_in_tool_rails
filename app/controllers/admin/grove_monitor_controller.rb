@@ -1,5 +1,5 @@
 class Admin::GroveMonitorController < ApplicationController
   def show
-    authorize(:student_management, :show?)
+    authorize(:teacher_resource, :show?)
   end
 end

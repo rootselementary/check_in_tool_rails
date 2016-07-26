@@ -1,2 +1,2 @@
-class StudentPolicy < StudentManagementPolicy
+class StudentPolicy < AdminResourcePolicy
 end

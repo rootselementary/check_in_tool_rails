@@ -18,3 +18,4 @@
 # Ignore test coverage files from SimpleCov
 /coverage
 check_in_tool.iml
+npm-debug.log
