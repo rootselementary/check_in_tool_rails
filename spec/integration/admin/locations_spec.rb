@@ -9,8 +9,9 @@ RSpec.feature 'Managing Locations' do
   describe 'as a teacher with an administrative role' do
     let(:administrator) { create(:teacher, :admin, school: school, grove: grove) }
     let!(:location) { create(:location, name: "Shelbyville", grove: grove) }
-    let!(:grove) { create(:grove, school: school)}
-    let!(:role) { create(:role)}
+    let!(:grove) { create(:grove, school: school) }
+    let!(:new_grove) { create(:grove, school: school)}
+    let!(:role) { create(:role) }
 
     before { login(administrator) }
 
@@ -33,12 +34,21 @@ RSpec.feature 'Managing Locations' do
     end
 
     describe 'updating a location' do
-      it 'updates the location attributes' do
+      it 'updates the location name' do
         dashboard_page.click_on("Manage Locations")
         expect {
           location_admin_page.update_location_name(location.name, "Springfield")
         }.to change {
           Location.where(name: "Springfield").count
+        }.from(0).to(1)
+      end
+
+      it 'updates the location grove' do
+        dashboard_page.click_on("Manage Locations")
+        expect {
+          location_admin_page.update_location_grove(location.name, new_grove.name)
+        }.to change {
+          Location.where(grove: new_grove.id).count
         }.from(0).to(1)
       end
     end

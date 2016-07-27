@@ -29,7 +29,16 @@ module Pages
       end
       page.fill_in "Name", with: new_name
       page.click_on "Save"
-      page.has_content? "Student Saved"
+      page.has_content? "Location Saved"
+    end
+
+    def update_location_grove(name, new_grove)
+      page.within('tr', text: name) do
+        click_on "Edit"
+      end
+      select new_grove, from: "location[grove_id]"
+      page.click_on "Save"
+      page.has_content? "Location Saved"
     end
   end
 end
