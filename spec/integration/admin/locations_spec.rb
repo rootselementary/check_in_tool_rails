@@ -8,7 +8,7 @@ RSpec.feature 'Managing Locations' do
 
   describe 'as a teacher with an administrative role' do
     let(:administrator) { create(:teacher, :admin, school: school, grove: grove) }
-    let!(:location) { create(:location, grove: grove) }
+    let!(:location) { create(:location, name: "Shelbyville", grove: grove) }
     let!(:grove) { create(:grove, school: school)}
     let!(:role) { create(:role)}
 
@@ -18,9 +18,9 @@ RSpec.feature 'Managing Locations' do
       expect(dashboard_page).to have_content("Manage Locations")
     end
 
-    xit 'shows the students in the school' do
+    it 'shows the students in the school' do
       dashboard_page.click_on("Manage Locations")
-      expect(location_admin_page).to have_content("Lisa Simpson")
+      expect(location_admin_page).to have_content("Shelbyville")
     end
 
     describe 'creating a new location' do
@@ -33,21 +33,21 @@ RSpec.feature 'Managing Locations' do
     end
 
     describe 'updating a location' do
-      xit 'updates the location attributes' do
+      it 'updates the location attributes' do
         dashboard_page.click_on("Manage Locations")
         expect {
-          location_admin_page.update_location_name(location.name, "Maggie Simpson")
+          location_admin_page.update_location_name(location.name, "Springfield")
         }.to change {
-          Student.where(name: "Maggie Simpson").count
+          Location.where(name: "Springfield").count
         }.from(0).to(1)
       end
     end
 
     describe 'viewing a location' do
-      xit 'views an individual location' do
+      it 'views an individual location' do
         dashboard_page.click_on("Manage Locations")
         dashboard_page.click_on("View")
-        expect(page).to have_content("Lisa Simpson")
+        expect(page).to have_content("Shelbyville")
       end
     end
 
@@ -67,7 +67,7 @@ RSpec.feature 'Managing Locations' do
 
     before { login(teacher) }
 
-    xit 'does not allow access' do
+    it 'does not allow access' do
       expect { dashboard_page.visit('/admin/locations') }.to raise_error(Pundit::NotAuthorizedError)
     end
   end

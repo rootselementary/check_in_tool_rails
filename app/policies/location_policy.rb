@@ -1,2 +1,2 @@
-class LocationPolicy < TeacherResourcePolicy
+class LocationPolicy < AdminResourcePolicy
 end
