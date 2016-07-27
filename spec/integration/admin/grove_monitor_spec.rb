@@ -44,7 +44,7 @@ RSpec.feature 'Grove Monitor' do
   describe 'As a teacher' do
     before { login(teacher2) }
 
-    let(:location) { create(:location) }
+    let(:location) { grove2.locations.last }
     let(:student3) { grove2.students.first }
     let(:student4) { grove2.students.last }
     let(:event) { student3.events.first }
