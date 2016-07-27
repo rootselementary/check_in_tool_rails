@@ -27,6 +27,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'google_calendar'
 gem 'rqrcode'
 gem 'rails_12factor', group: :production
+gem 'sidekiq'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
