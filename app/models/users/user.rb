@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   belongs_to :school
   belongs_to :grove
 
+  # validates :name, presence: true
+  # validates :email, presence: true
+  # validates :grove, presence: true
+
   def self.from_omniauth(access_token)
     data = access_token.info
     if within_roots?(access_token)

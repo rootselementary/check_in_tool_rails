@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get '/grove-monitor-all', controller: 'grove_monitor', action: 'index', as: :grove_monitor_all
     get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
+    resources :locations
     resources :teachers
     resources :students do
       get '/playlist', controller: 'playlist_activities', action: 'index'
