@@ -1,11 +1,11 @@
 class GroveMonitorPresenter
   attr_reader :lost_students, :absent_students, :locations
-  def initialize(locations)
-    @absent_students = Student.absent
-    @lost_students = Student.lost
+  def initialize(grove)
+    @absent_students = grove.students.absent
+    @lost_students = grove.students.lost
     @locations = {}
-    locations.each do |location|
-      @locations[location.name] = Student.location(location.name) || []
+    grove.locations.each do |location|
+      @locations[location.name] = grove.students.location(location.name) || []
     end
   end
 end

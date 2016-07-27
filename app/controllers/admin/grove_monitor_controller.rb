@@ -1,7 +1,7 @@
 class Admin::GroveMonitorController < ApplicationController
 
   def index
-    @presenter = GroveMonitorPresenter.new(current_user.grove.locations)
+    @presenter = GroveMonitorPresenter.new(current_user.grove)
     authorize(:grove_monitor, :index?)
   end
 
