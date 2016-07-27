@@ -13,6 +13,10 @@ class Teacher < User
   def admin?
     roles.where(name: Role::ROLES[:admin]).any?
   end
+  
+  def grove_name
+    grove.name
+  end
 
   def groves
     if admin?

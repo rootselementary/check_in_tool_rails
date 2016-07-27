@@ -1,7 +1,2 @@
-<div class="teacher-dashboard text-center">
-  <h2>Teacher Dashboard</h2>
-  <%=link_to("Manage Groves", admin_groves_path, class: "btn btn-default") if policy(:grove).index? %>
-  <%=link_to("Manage Teachers", admin_teachers_path, class: "btn btn-default") if policy(:teacher).index? %>
-  <%=link_to("Manage Students", admin_students_path, class: "btn btn-default") if policy(:student).index? %>
-  <%=link_to("Manage Activities", admin_activities_path, class: "btn btn-default") if policy(:activity).index? %>
-</div>
+<h2>Welcome</h2>
+

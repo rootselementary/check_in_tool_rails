@@ -1,0 +1,25 @@
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.secondary-content {
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
+}
+.main-content {
+  display: inline-block;
+  vertical-align: top;
+  width: 75%;
+}
+
+.main-content,
+.secondary-content {
+  background: none;
+}
+
+.main-content p {
+  display: inline-block;
+  width: 50%;
+}

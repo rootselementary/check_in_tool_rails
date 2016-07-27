@@ -1,5 +1,11 @@
+$roots-green: #8BA65F;
+ 
 * {
   font-family: 'Source Sans Pro', sans-serif;
+}
+
+.btn-success {
+  background-color: $roots-green;
 }
 
 p.navbar-text {

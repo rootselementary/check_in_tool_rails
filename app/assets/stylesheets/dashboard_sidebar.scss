@@ -1,0 +1,77 @@
+.main-content {
+  padding-left: 4%;
+  
+  table {
+    text-align: center;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  .new-btn {
+    margin-top: 3%;
+  }
+}
+
+.secondary-content {
+  height: 100%;
+  border-right: 2px solid #DDD;
+  width: 24%;
+  text-align: center;
+
+  .btn {
+    background-color: #fff;
+    border: 1px solid #8BA65F;
+    color: #000;
+
+    &:hover {
+        background-color: #8BA65F;
+        color: #fff;
+    }  
+  }
+}
+
+.secondary-content li,
+.secondary-content p {
+  font-size: 140%;
+  line-height: 160%;
+  margin-top: 10%;
+}
+
+.secondary-content ul {
+  margin: 5px 0;
+  padding: 5px 0;
+}
+
+@media screen and (max-width: 975px) {
+  .main-content,
+  .secondary-content {
+    display: block;
+    width: 100%;
+
+  }
+
+  .new-btn {
+    width: 25%;
+    margin-left: 37%;
+  }
+  .secondary-content {
+    border-bottom: 2px solid #DDD;
+    border-right: none;
+  }
+
+  .secondary-content ul {
+    margin: 2%;
+  }
+
+  .secondary-content li {
+    margin: 2%;
+  }
+
+  .button-column {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+  }
+}

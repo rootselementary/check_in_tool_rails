@@ -12,8 +12,11 @@
  */
 
 
+@import "reset.css";
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 @import "font-awesome";
+@import "body_main";
 @import "custom";
+@import "dashboard_sidebar.scss";

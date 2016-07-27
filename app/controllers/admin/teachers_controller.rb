@@ -10,9 +10,13 @@ module Admin
     protected
 
     def form_attributes
-      [:name, :email]
+      [:name, :email, :grove]
     end
 
+    def collection_attributes
+      [:name, :email, :grove_name]
+    end
+    
     def whitelist
       collection_attributes + [:grove_id, role_ids: []]
     end
