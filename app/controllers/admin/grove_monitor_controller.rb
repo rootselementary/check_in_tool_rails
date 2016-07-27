@@ -1,8 +1,7 @@
 class Admin::GroveMonitorController < ApplicationController
 
   def index
-    @students = Student.all
-    @locations = current_user.grove.locations
+    @presenter = GroveMonitorPresenter.new(current_user.grove.locations)
     authorize(:teacher_resource, :index?)
   end
 
