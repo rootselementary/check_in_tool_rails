@@ -11,3 +11,15 @@ $roots-green: #8BA65F;
 p.navbar-text {
   margin-top: 24px;
 }
+
+
+.hollow-btn {
+    background-color: #fff;
+    border: 1px solid $roots-green;
+    color: #000;
+
+    &:hover {
+        background-color: $roots-green;
+        color: #fff;
+    }
+}  

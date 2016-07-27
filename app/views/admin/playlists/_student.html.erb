@@ -1,4 +1,6 @@
 <tr>
-  <td><%= student.name %><td>
-  <td><%= link_to "View Playlist", admin_student_playlist_path(student), class: "btn btn-default"%></td>
+  <section class="col-sm-2 col-md-3 student-block">
+  <h6><%= student.name %></h6>
+  <%= link_to "View Playlist", admin_student_playlist_path(student), class: "btn hollow-btn"%>
+  </section>
 </tr>
