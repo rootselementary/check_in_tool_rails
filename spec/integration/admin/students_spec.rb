@@ -9,8 +9,8 @@ RSpec.feature 'Managing Students' do
   describe 'as a teacher with an administrative role' do
     let(:administrator) { create(:teacher, :admin, school: school, grove: grove) }
     let!(:student) { create(:student, name: "Lisa Simpson", school: school, grove: grove) }
-    let!(:grove) { create(:grove, school: school)}
-    let!(:role) { create(:role)}
+    let!(:grove) { create(:grove, school: school) }
+    let!(:role) { create(:role) }
 
     before { login(administrator) }
 
