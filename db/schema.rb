@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20160726170452) do
   add_index "activities", ["grove_id"], name: "index_activities_on_grove_id", using: :btree
   add_index "activities", ["location_id"], name: "index_activities_on_location_id", using: :btree
 
+  create_table "events", force: :cascade do |t|
+    t.integer  "location_id"
+    t.integer  "user_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
   create_table "focus_areas", force: :cascade do |t|
     t.string   "name"
     t.integer  "grove_id"
@@ -76,6 +88,18 @@ ActiveRecord::Schema.define(version: 20160726170452) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "scans", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "location_id"
+    t.boolean  "correct"
+    t.datetime "timestamp"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "scans", ["event_id"], name: "index_scans_on_event_id", using: :btree
+  add_index "scans", ["location_id"], name: "index_scans_on_location_id", using: :btree
+
   create_table "schools", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -113,6 +137,7 @@ ActiveRecord::Schema.define(version: 20160726170452) do
     t.string   "token"
     t.string   "refresh_token"
     t.integer  "expires_at"
+    t.boolean  "at_school"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -122,12 +147,16 @@ ActiveRecord::Schema.define(version: 20160726170452) do
 
   add_foreign_key "activities", "groves"
   add_foreign_key "activities", "locations"
+  add_foreign_key "events", "locations"
+  add_foreign_key "events", "users"
   add_foreign_key "focus_areas", "groves"
   add_foreign_key "groves", "schools"
   add_foreign_key "locations", "groves"
   add_foreign_key "playlist_activities", "activities"
   add_foreign_key "playlist_activities", "focus_areas"
   add_foreign_key "playlist_activities", "users"
+  add_foreign_key "scans", "events"
+  add_foreign_key "scans", "locations"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "groves"

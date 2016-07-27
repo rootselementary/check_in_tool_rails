@@ -21,6 +21,7 @@ gem 'coveralls', require: false
 gem 'editorconfig'
 gem 'omniauth-google-oauth2'
 gem 'will_paginate', '~> 3.1.0'
+gem 'google_calendar'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
@@ -46,4 +47,6 @@ end
 group :test do
   gem 'simplecov', require: false
   gem 'timecop'
+  gem 'webmock'
+  gem 'vcr'
 end
