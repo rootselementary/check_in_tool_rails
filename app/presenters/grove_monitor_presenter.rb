@@ -5,7 +5,7 @@ class GroveMonitorPresenter
     @lost_students = Student.lost
     @locations = {}
     locations.each do |location|
-      @locations[location.name] = Student.location(location.name) || Student.new
+      @locations[location.name] = Student.location(location.name) || []
     end
   end
 end
