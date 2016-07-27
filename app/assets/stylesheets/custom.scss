@@ -2,6 +2,14 @@ $roots-green: #8BA65F;
  
 * {
   font-family: 'Source Sans Pro', sans-serif;
+
+  li {
+    list-style: none;
+  } 
+
+  ul {
+    list-style: none;
+  }
 }
 
 .btn-success {
