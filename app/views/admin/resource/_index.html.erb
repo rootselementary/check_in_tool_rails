@@ -12,7 +12,7 @@
       <% collection_attributes.each do |attribute| %>
         <td><%= resource.send(attribute) %></td>
       <% end %>
-      <td>
+      <td id="<%= resource_as_sym %>-<%= resource.id %>">
         <%= link_to "View", send("admin_#{resource_as_sym}_path", resource), class: "btn btn-default" %>
         <%= link_to "Edit", send("edit_admin_#{resource_as_sym}_path", resource), class: "btn btn-default" %>
         <%= link_to "Delete", send("admin_#{resource_as_sym}_path", resource), method: :delete, class: "btn btn-danger" %>

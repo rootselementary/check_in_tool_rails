@@ -46,7 +46,7 @@ FactoryGirl.define do
         student1, _ = create_list(:student, 2, grove: grove)
         create(:teacher, grove: grove)
         location = create(:location, grove: grove)
-        activity = create(:activity, grove: grove, location: location)
+        activity, _ = create_list(:activity, 2, grove: grove, location: location)
         focus_area = create(:focus_area, grove: grove)
         create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
       end

@@ -22,6 +22,26 @@ module Pages
       select activity.name, from: "Activity"
       select focus_area.name, from: "Focus area" if focus_area
       click_on "Create Playlist activity"
+      self
+    end
+
+    def delete_activity(playlist_activity)
+      within("#playlist-activity-#{playlist_activity.id}") do
+        click_on("delete-#{playlist_activity.id}")
+      end
+    end
+
+    def edit_activity(playlist_activity, activity, focus_area = nil)
+      within("#playlist-activity-#{playlist_activity.id}") do
+        click_on("edit-#{playlist_activity.id}")
+      end
+      select activity.name, from: "Activity"
+      if focus_area
+        select focus_area.name, from: "Focus area"
+      else
+        select "none", from: "Focus area"
+      end
+      click_on "Update Playlist activity"
     end
   end
 end

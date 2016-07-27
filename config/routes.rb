@@ -9,10 +9,11 @@ Rails.application.routes.draw do
     get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
     resources :teachers
-    resources :students, only: [] do
+    resources :students do
       get '/playlist', controller: 'playlist_activities', action: 'index'
-      resources :playlist_activities, only: [:new, :create]
+      resources :playlist_activities, except: [:show]
     end
+    resources :activities
   end
 
   get '/compass', controller: 'compass', action: 'show', as: :compass

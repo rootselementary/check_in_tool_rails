@@ -1,4 +1,4 @@
-<div class="student-playlist text-center">
+<div class="student-playlist">
   <h2><%= @student.name %>'s Grove Playlist</h2>
   <div class="calendar-container">
     <table class="table table-striped">
@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <%= render partial: "playlist_activity", collection: collection %>
+        <%= render partial: "playlist_activity", collection: collection, locals: {student: @student} %>
       </tbody>
     </table>
     <div class="row">
