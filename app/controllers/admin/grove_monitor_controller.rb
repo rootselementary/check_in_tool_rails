@@ -2,7 +2,7 @@ class Admin::GroveMonitorController < ApplicationController
 
   def index
     @presenter = GroveMonitorPresenter.new(current_user.grove.locations)
-    authorize(:teacher_resource, :index?)
+    authorize(:grove_monitor, :index?)
   end
 
   def show
@@ -12,7 +12,7 @@ class Admin::GroveMonitorController < ApplicationController
       @students = current_user.grove.students.send(filter_params)
     end
     @locations = current_user.grove.locations
-    authorize(:teacher_resource, :show?)
+    authorize(:grove_monitor, :show?)
   end
 
   private
