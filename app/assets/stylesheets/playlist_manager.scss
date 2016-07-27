@@ -1,0 +1,36 @@
+
+@mixin centered($width) {
+  width: $width;
+  margin: auto;
+}
+
+.playlist-manager {
+  h2 {
+    padding-top: 3%;
+    @include centered(50%);   
+  }
+
+  form {
+    padding-top: 3%;
+    @include centered(60%);
+ }
+
+}
+
+.student-block {
+  margin-top: 5%;
+  text-align: center;
+  border: 1px solid $roots-green;
+  margin-left: 2%;
+  margin-right: 4%;
+  padding-bottom: 2%;
+
+  &:hover {
+    background-color: rgba(#000, .1)
+  }
+
+  h6 {
+    font-size: 18px;
+  }
+}
+
