@@ -11,7 +11,6 @@ RSpec.feature 'Managing Locations' do
     let!(:location) { create(:location, name: "Shelbyville", grove: grove) }
     let!(:grove) { create(:grove, school: school) }
     let!(:new_grove) { create(:grove, school: school)}
-    let!(:role) { create(:role) }
 
     before { login(administrator) }
 
