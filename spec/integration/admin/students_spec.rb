@@ -71,5 +71,4 @@ RSpec.feature 'Managing Students' do
       expect { dashboard_page.visit('/admin/students') }.to raise_error(Pundit::NotAuthorizedError)
     end
   end
-
 end

@@ -39,6 +39,13 @@ RSpec.feature 'Grove Monitor' do
       expect(page).to have_content(absent_student.name)
       expect(page).not_to have_content(present_student.name)
     end
+
+    it 'allows teacher to mark student absent from grove monitor' do
+      dashboard_page.click_on("Grove Monitor")
+      e
+save_and_open_page
+    end
+
   end
 
   describe 'As a teacher' do
