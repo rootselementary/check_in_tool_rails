@@ -15,3 +15,9 @@ const sortable = function() {
     placeholder: "sortable-placeholder"
   });
 };
+
+const savePositions = () => {
+  $('#submit-playlist').on('click', function() {
+    updatePositions();
+  });
+}
