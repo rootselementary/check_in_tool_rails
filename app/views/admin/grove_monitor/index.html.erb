@@ -2,7 +2,7 @@
   <h2>Grove Monitor</h2>
 </div>
 
-<ul class="nav nav-pills">
+<ul class="row nav nav-pills">
   <li role="presentation" class="active"><%= link_to "All", admin_grove_monitor_all_path %></li>
   <li role="presentation" class="active"><%= link_to "Absent", admin_grove_monitor_path(filter: :absent) %></li>
   <li role="presentation" class="active"><%= link_to "Lost", admin_grove_monitor_path(filter: :lost) %></li>
@@ -13,15 +13,20 @@
 
 <div class="container">
   <div class="row">
+    <div class="lost-students">
 
     <h2>Lost</h2>
 
     <%= render partial: "student", collection: @presenter.lost_students %>
 
+    </div>
+    <div class="absent-students">
+
     <h2>Absent</h2>
 
     <%= render partial: "student", collection: @presenter.absent_students %>
 
+    </div>
     <% @presenter.locations.keys.each do |location| %>
       <h2><%= location %></h2>
 
