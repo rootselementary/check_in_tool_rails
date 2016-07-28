@@ -22,6 +22,7 @@ gem 'editorconfig'
 gem 'omniauth-google-oauth2'
 gem 'will_paginate', '~> 3.1.0'
 gem 'google_calendar'
+gem 'jquery-ui-rails'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
