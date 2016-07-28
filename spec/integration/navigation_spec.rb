@@ -11,7 +11,7 @@ RSpec.feature 'Navigation options' do
 
       expect(page).to have_content("Hello, #{teacher.first_name}")
       expect(page).to have_content("Signed in successfully.")
-      expect(page).to have_content("Teacher Dashboard")
+      expect(page).to have_content("Grove Configuration")
       expect(page).to have_content("Grove Monitor")
       expect(page).to have_content("Grove Playlist Manager")
     end
@@ -22,7 +22,7 @@ RSpec.feature 'Navigation options' do
       login(student)
       visit '/'
 
-      expect(page).not_to have_content("Teacher Dashboard")
+      expect(page).not_to have_content("Grove Configuration")
       expect(page).not_to have_content("Grove Monitor")
       expect(page).not_to have_content("Grove Playlist Manager")
     end
@@ -32,7 +32,7 @@ RSpec.feature 'Navigation options' do
     it "does not a display a nav bar" do
       visit '/'
 
-      expect(page).not_to have_content("Teacher Dashboard")
+      expect(page).not_to have_content("Grove Configuration")
       expect(page).not_to have_content("Grove Monitor")
       expect(page).not_to have_content("Grove Playlist Manager")
     end
