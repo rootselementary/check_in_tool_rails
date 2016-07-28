@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '/dashboard', controller: 'dashboard', action: 'show', as: :dashboard
     get '/grove-monitor', controller: 'grove_monitor', action: 'show', as: :grove_monitor
     get '/grove-monitor-all', controller: 'grove_monitor', action: 'index', as: :grove_monitor_all
+    patch '/grove-monitor-all', controller: 'grove_monitor', action: 'update', as: :update_grove_monitor_all
     get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
     resources :locations

@@ -15,6 +15,14 @@ class Admin::GroveMonitorController < ApplicationController
     authorize(:grove_monitor, :show?)
   end
 
+  def update
+    student = Student.find(params[:id])
+    student.update_attribute(:at_school, false)
+    require "pry"
+    binding.pry
+    redirect_to admin_grove_monitor_all_path
+  end
+
   private
 
     def filter_params
