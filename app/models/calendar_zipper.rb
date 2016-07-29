@@ -40,8 +40,13 @@ class CalendarZipper
   def construct_schedule(schedule, activities, start_time, end_time)
     first, *middle, last = activities
     schedule = wrap_with_playlist(schedule, first, start_time, first[:end_time])
-    schedule = middle.each_cons(2).inject(schedule) do |acc, (a,b)|
-      wrap_with_playlist(acc, a, a[:end_time], b[:end_time])
+    middle.each_with_index do |activity, i|
+      next_activity = middle[i + 1]
+      if next_activity
+        schedule = wrap_with_playlist(schedule, activity, schedule.last[:end_time], middle[i + 1][:start_time])
+      else
+        schedule = wrap_with_playlist(schedule, activity, schedule.last[:end_time], activity[:end_time])
+      end
     end
     schedule = wrap_with_playlist(schedule, last, schedule.last[:end_time], end_time)
   end
@@ -59,10 +64,6 @@ class CalendarZipper
 
   def number_of_playlist_items(start_time, end_time)
     (end_time - start_time).to_i / FLEX_INTERVAL
-  end
-
-  def to_range(start_time, end_time)
-    Range.new(to_time(start_time), to_time(end_time), exclude_end: true)
   end
 
   def to_time(tuple)
