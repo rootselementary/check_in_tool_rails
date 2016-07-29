@@ -11,6 +11,7 @@ const fixHelper = (e, ui) => {
 };
 
 const setPosition = () => {
+  $('#submit-playlist').prop('disabled', false)
   let rows = $('.sortable').children('tr');
   rows.each( function(index) {
     $(this).data('position', index);
@@ -37,7 +38,10 @@ const updatePositions = () => {
     type: "PATCH",
     url: url,
     dataType: 'JSON',
-    data: { data: data }
+    data: { data: data },
+    success: () => {
+      $('#submit-playlist').prop('disabled', true)
+    }
   });
 }
 
