@@ -1,46 +1,64 @@
 class CalendarZipper
 
   TRANSITION = 120 # 2 min transition period
+  FLEX_INTERVAL = 900 # 15 min
+  PERIOD_LENGTH = 2700 # 45 min
 
   def initialize(master_calendar, activities, playlist)
     @master_calendar = master_calendar
-    @activities      = activities
+    @beginning_of_day = to_time(@master_calendar.first)
+    @end_of_day = to_time(@master_calendar.last) + PERIOD_LENGTH
+    @activities      = activities.sort{|a,b| a[:start_time] <=> b[:start_time] }
     @playlist        = playlist
   end
 
   def schedule
-    data = { schedule: [], activities: @activities, playlist: @playlist }
-    daily_schedule = @master_calendar.each_cons(2).inject(data) do |acc, (start_time, end_time)|
-      playlist = acc[:playlist]
-      activities = relevant_activities(acc[:activities], start_time, end_time)
-      if activities.present?
-        schedule = apply_activities(acc[:schedule], activities)
-      else
-        schedule = apply_playlist_items(acc[:schedule], playlist.take(3))
-        playlist.rotate!(3)
-      end
-      { schedule: schedule, activities: (acc[:activities] - activities), playlist: playlist }
-    end
-    daily_schedule[:schedule]
-  end
-
-  def apply_playlist_items(schedule, items)
-    items.inject(schedule) do |acc, i|
-      acc << {name: i[:name], duration: 900}
+    case @activities.length
+      when 0 then fill_with_playlist([], @beginning_of_day, @end_of_day)
+      when 1 then wrap_with_playlist([], @activities.first, @beginning_of_day, @end_of_day)
+      else construct_schedule([], @activities, @beginning_of_day, @end_of_day)
     end
   end
 
-  def apply_activities(schedule, activities)
-    activities.inject(schedule) do |acc, a|
-      duration = (a[:end_time] - a[:start_time]).to_i
-      acc << { name: a[:name], duration: duration }
+  def fill_with_playlist(schedule, start_time, end_time)
+    schedule + update_playlist(number_of_playlist_items(start_time, end_time), start_time)
+  end
+
+  def update_playlist(n, start_time)
+    _start_time = start_time.dup
+    cycles = (n / @playlist.length.to_f).ceil
+    cycles = cycles.zero? ? 1 : cycles
+    items = @playlist.cycle(cycles).take(n).inject([]) do |acc, i|
+      acc.push i.merge({start_time: _start_time, end_time: _start_time + FLEX_INTERVAL})
+      _start_time += FLEX_INTERVAL
       acc
     end
+    @playlist.rotate!(n)
+    items
   end
 
-  def relevant_activities(activities, start_time, end_time)
-    r = to_range(start_time, end_time)
-    activities.select { |e| r.cover?(e[:start_time]) }
+  def construct_schedule(schedule, activities, start_time, end_time)
+    first, *middle, last = activities
+    schedule = wrap_with_playlist(schedule, first, start_time, first[:end_time])
+    schedule = middle.each_cons(2).inject(schedule) do |acc, (a,b)|
+      wrap_with_playlist(acc, a, a[:end_time], b[:end_time])
+    end
+    schedule = wrap_with_playlist(schedule, last, schedule.last[:end_time], end_time)
+  end
+
+  def wrap_with_playlist(schedule, activity, start_time, end_time)
+    if activity[:start_time] == start_time
+      n_items = number_of_playlist_items(activity[:end_time], end_time)
+      schedule + [activity] + update_playlist(n_items, activity[:end_time])
+    else
+      before = update_playlist number_of_playlist_items(start_time, activity[:start_time]), start_time
+      after = update_playlist number_of_playlist_items(activity[:end_time], end_time), activity[:end_time]
+      schedule + before + [activity] + after
+    end
+  end
+
+  def number_of_playlist_items(start_time, end_time)
+    (end_time - start_time).to_i / FLEX_INTERVAL
   end
 
   def to_range(start_time, end_time)
