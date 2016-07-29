@@ -18,7 +18,7 @@
     <div class="row">
       <%= link_to fa_icon("plus", text: "New Activity"),
                   new_admin_student_playlist_activity_path(@student),
-                  class:"btn btn-info pull-left" %>
+                  class:"new-activity btn btn-info pull-left" %>
       <button class="btn btn-success pull-right" id="submit-playlist" disabled>
         <%= fa_icon "calendar", text: "Save #{@student.name}'s Grove Playlist" %>
       </button>
