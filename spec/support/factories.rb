@@ -53,7 +53,6 @@ FactoryGirl.define do
         activity, _ = create_list(:activity, 2, grove: grove, location: location1)
         focus_area = create(:focus_area, grove: grove)
         create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
-        # create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
         event = create(:event, student: student1, location: location1)
         event2 = create(:event, student: student2, location: location1)
         scan = create(:scan, event: event, location: location2)
