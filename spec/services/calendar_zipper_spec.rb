@@ -5,10 +5,6 @@ RSpec.describe CalendarZipper do
   before { Timecop.freeze }
   after { Timecop.return }
 
-  let(:master_schedule) {
-    [[8, 0], [8, 45], [9, 30], [10, 15], [11, 00]]
-  }
-
   let(:playlist) {
     [
       { name: "coloring" },
@@ -90,6 +86,39 @@ RSpec.describe CalendarZipper do
                                                         'geometry',
                                                         'addition',
                                                         'subtraction',
+                                                      ])
+        end
+
+        it 'handles lots of activities' do
+          activity = english.merge(start_time: Time.zone.now.change(hour: 8, min: 30), end_time: Time.zone.now.change(hour: 9, min: 15))
+          lunch = { name: 'lunch', start_time: Time.zone.now.change(hour: 10, min: 30), end_time: Time.zone.now.change(hour: 10, min: 45) }
+          schedule = described_class.new(master_schedule, [activity, math, lunch], playlist).schedule
+          expect(schedule.map { |x| x[:name] }).to eq([
+                                                        'coloring',
+                                                        'drawing',
+                                                        'english 101',
+                                                        'reading',
+                                                        'math 101',
+                                                        'geometry',
+                                                        'lunch',
+                                                        'addition',
+                                                      ])
+        end
+
+        it 'handles lots n lots of activities' do
+          breakfast = { name: 'breakfast', start_time: Time.zone.now.change(hour: 8, min: 0), end_time: Time.zone.now.change(hour: 8, min: 15) }
+          activity = english.merge(start_time: Time.zone.now.change(hour: 8, min: 30), end_time: Time.zone.now.change(hour: 9, min: 15))
+          lunch = { name: 'lunch', start_time: Time.zone.now.change(hour: 10, min: 30), end_time: Time.zone.now.change(hour: 10, min: 45) }
+          schedule = described_class.new(master_schedule, [breakfast, activity, math, lunch], playlist).schedule
+          expect(schedule.map { |x| x[:name] }).to eq([
+                                                        'breakfast',
+                                                        'coloring',
+                                                        'english 101',
+                                                        'drawing',
+                                                        'math 101',
+                                                        'reading',
+                                                        'lunch',
+                                                        'geometry',
                                                       ])
         end
       end
