@@ -15,16 +15,17 @@ module Api
 
         private
 
+          def playlist_params
+            positions = params[:data].try(:fetch, :positions, {}).keys
+            params.require(:data).permit(:id, positions: positions)
+          end
+
           def set_student
-            @student = Student.find(playlist_params[:student_id])
+            @student = Student.find(playlist_params[:id])
           end
 
           def new_position(id)
-            playlist_params[:activities][id.to_s].to_i
-          end
-
-          def playlist_params
-            params.require(:data)
+            playlist_params[:positions][id.to_s].to_i
           end
       end
     end

@@ -32,8 +32,8 @@ const activityData = () => {
 const updatePositions = () => {
   let id = window.location.href.split('/')[5];
   let url = `/api/v1/admin/playlist_activities/${id}`;
-  let activities = activityData();
-  let data = { activities: activities, student_id: id }
+  let data = { id: id, positions: activityData() }
+
   $.ajax({
     type: "PATCH",
     url: url,
