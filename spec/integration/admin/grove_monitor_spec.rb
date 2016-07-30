@@ -40,22 +40,26 @@ RSpec.feature 'Grove Monitor' do
       expect(page).not_to have_content(present_student.name)
     end
 
-    it 'allows teacher to mark student absent from grove monitor' do
+    it 'can mark student absent or present from grove monitor' do
       dashboard_page.click_on("Grove Monitor")
 
       within('.lost-students') do
-        expect( all('.student').count ).to eq(2)
+        expect(Student.where(at_school: true).count).to eq(2)
         within first('.student') do
           click_on("Mark as Absent")
         end
-        save_and_open_page
-        expect( all('.student').count ).to eq(1)
+        expect(Student.where(at_school: true).count).to eq(1)
       end
 
-      # save_and_open_page
-      # page.find('.lost_students').should_not have_content
-
+      within('.absent-students') do
+        expect(Student.where(at_school: true).count).to eq(1)
+        within first('.student') do
+          click_on("Mark as Present")
+        end
+        expect(Student.where(at_school: true).count).to eq(2)
+      end
     end
+
 
   end
 

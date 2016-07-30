@@ -6,9 +6,10 @@
         <h3><%= student.name %></h3>
         <p>...</p>
         <% if student.at_school %>
-          <%= link_to "Mark as Absent", admin_update_grove_monitor_all_path(id: student.id), method: :patch, class: "btn btn-danger" %>
+          <%= link_to "Mark as Absent", admin_update_grove_monitor_all_path(id: student.id), method: :patch, class: "btn btn-default" %>
+          <% else %>
+          <%= link_to "Mark as Present", admin_update_grove_monitor_all_path(id: student.id), method: :patch, class: "btn btn-default" %>
         <% end %>
-        <a href="#" class="btn btn-default" role="button">Button</a>
       </div>
     </div>
   </div>
