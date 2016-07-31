@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     get '/grove-monitor-all', controller: 'grove_monitor', action: 'index', as: :grove_monitor_all
     get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
-    resources :locations
+    resources :locations do
+      member do
+        get '/qr', to: 'locations#qr'
+      end
+    end
     resources :teachers
     resources :students do
       get '/playlist', controller: 'playlist_activities', action: 'index'
@@ -30,4 +34,9 @@ Rails.application.routes.draw do
 
   get '/compass', controller: 'compass', action: 'show', as: :compass
   get '/logout', controller: 'compass', action: 'logout', as: :logout
+  resources :locations, only: [] do
+    member do
+      get '/checkin', to: 'locations#checkin'
+    end
+  end
 end
