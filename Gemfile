@@ -28,6 +28,9 @@ gem 'google_calendar'
 gem 'rqrcode'
 gem 'rails_12factor', group: :production
 gem 'sidekiq'
+gem 'sidekiq-cron', '~> 0.4.0'
+gem 'whenever', require: false
+gem 'redis-rails', '~> 4'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

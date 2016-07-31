@@ -1,12 +1,10 @@
 class UpdateScheduleWorker
-#   include Active::Job
+  include Sidekiq::Worker
 
-  def perform(student_id)
-    student = Student.find(student_id)
-    scheduled_events = GoogleService.fetch_events(student)
-    playlist = student.playlist
-    master_calendar = student.grove.master_calendar
-    schedule = CalendarZipper.zip(master_calendar, playlist, scheduled_events)
-    Redis.set("student-#{{student.id}}",  {schedule: schedule, checksum: Checksum.new(schedule)})
+  def self.perform
+    Student.all.each do |student|
+      student.update(at_school: false)
+      UpdateScheduleJob.perform(student)
+    end
   end
 end

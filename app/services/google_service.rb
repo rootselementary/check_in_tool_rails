@@ -1,3 +1,4 @@
+require 'google/apis/calendar_v3'
 require 'rubygems'
 require 'google_calendar'
 
