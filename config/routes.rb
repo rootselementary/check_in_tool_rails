@@ -36,7 +36,13 @@ Rails.application.routes.draw do
   get '/logout', controller: 'compass', action: 'logout', as: :logout
   resources :locations, only: [] do
     member do
-      get '/checkin', to: 'locations#checkin'
+      get '/checkin', to: 'compass#checkin'
+    end
+  end
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      get '/compass/status', to: 'compass#status'
     end
   end
 end

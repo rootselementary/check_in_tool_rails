@@ -6,6 +6,10 @@ class CompassController < ApplicationController
     authorize(:compass, :show?)
   end
 
+  def checkin
+    authorize(:compass, :show?)
+  end
+
   def logout
   end
 end

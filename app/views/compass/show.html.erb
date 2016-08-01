@@ -1,1 +1,18 @@
-Grove Compass
+<h2 class="text-center"><%= current_user.name %>'s Next Step</h2>
+<div class="container compass-details red-outline">
+  <div class="event-images row">
+    <div class="col-xs-4">
+      <%= image_tag "location-default.png", class: "compass-image" %>
+    </div>
+    <div class="col-xs-4">
+      <%= image_tag "activity-default.png", class: "compass-image" %>
+    </div>
+    <div class="col-xs-4">
+      <%= image_tag "grove-default.png", class: "compass-image" %>
+    </div>
+  </div>
+</div>
+<br>
+<div class="col-md-12 text-center" id="scan-location-button">
+  <%= link_to fa_icon("qrcode", text: "Scan"), "scan://scan", class: "btn btn-success" %>
+</div>
