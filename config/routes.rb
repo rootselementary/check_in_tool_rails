@@ -18,6 +18,16 @@ Rails.application.routes.draw do
     resources :activities
   end
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      namespace :admin do
+        resources :students, only: [] do
+          patch '/playlist_activities', controller: 'students/playlist_activities', action: 'update'
+        end
+      end
+    end
+  end
+
   get '/compass', controller: 'compass', action: 'show', as: :compass
   get '/logout', controller: 'compass', action: 'logout', as: :logout
 end

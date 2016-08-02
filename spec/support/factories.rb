@@ -31,6 +31,7 @@ FactoryGirl.define do
       sequence(:name) { |n| "JJ Letest#{n}" }
       sequence(:email) { |n| "letest#{n}@rootselementary.org" }
       at_school true
+ 
     end
   end
 
@@ -114,7 +115,7 @@ FactoryGirl.define do
     student nil
     activity nil
     focus_area nil
-    position 1
+    position 0
   end
 
   factory :event do
