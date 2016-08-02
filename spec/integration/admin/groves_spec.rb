@@ -84,7 +84,7 @@ RSpec.feature 'Managing Groves' do
     end
 
     it 'shows navigation links' do
-      expect(dashboard_page).to have_content("Teacher Dashboard")
+      expect(dashboard_page).to have_content("Grove Configuration")
       expect(dashboard_page).to have_content("Grove Monitor")
       expect(dashboard_page).to have_content("Grove Playlist Manager")
     end

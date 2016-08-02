@@ -18,6 +18,10 @@ class Student < User
     Student.where(email: data["email"]).first
   end
 
+  def avatar
+    "http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=identicon"
+  end
+
   def self.lost
     where.not(id: checked_in_ids)
   end
