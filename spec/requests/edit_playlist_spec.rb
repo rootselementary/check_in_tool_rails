@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "PATCH api/v1/admin/playlist_activities/:id" do
+describe "PATCH api/v1/admin/student/playlist_activities/:id" do
   let(:grove) { create(:grove_with_resources) }
   let(:teacher) { grove.teachers.first }
   let(:student) { grove.students.first }
@@ -9,12 +9,11 @@ describe "PATCH api/v1/admin/playlist_activities/:id" do
   it "can update the position priority of the activities for a specific student " do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(teacher)
 
-    data = { positions: { (playlist_activity.id.to_s) => "1" },
-             id: student.id }
+    data = { positions: { (playlist_activity.id.to_s) => "1" } }
 
     expect(playlist_activity.position).to eq nil
 
-    patch api_v1_admin_playlist_activity_path(playlist_activity.id), { data: data }
+    patch "/api/v1/admin/students/#{student.id}/playlist_activities/#{playlist_activity.id}", { data: data }
 
     expect(response.status).to eq 204
 

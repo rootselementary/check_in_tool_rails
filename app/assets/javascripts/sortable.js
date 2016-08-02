@@ -23,7 +23,7 @@ const activityObject = {}
 const activityData = () => {
   let rows = $('.sortable').children('tr');
   rows.each(function(index){
-    id = this.id.split('-')[2]
+    let id = this.id.split('-')[2]
     activityObject[id] = $(this).data("position")
   })
   return activityObject;
@@ -31,8 +31,9 @@ const activityData = () => {
 
 const updatePositions = () => {
   let id = window.location.href.split('/')[5];
-  let url = `/api/v1/admin/playlist_activities/${id}`;
-  let data = { id: id, positions: activityData() }
+  let data = { positions: activityData() }
+  let playlist_activity_id = Object.keys(data["positions"])[0];
+  let url = `/api/v1/admin/students/${id}/playlist_activities/${playlist_activity_id}`;
 
   $.ajax({
     type: "PATCH",
