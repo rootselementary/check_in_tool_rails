@@ -13,6 +13,12 @@ class Admin::PlaylistActivitiesController < Admin::ResourceController
     respond_with resource
   end
 
+  def create 
+    super do |playlist_activity|
+      playlist_activity.position = playlist_activity.student.next_position
+    end 
+  end 
+
   def edit
     @student = Student.find(params[:student_id])
     @focus_areas = FocusArea.where(grove_id: @student.grove_id)

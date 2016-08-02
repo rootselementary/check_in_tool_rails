@@ -115,7 +115,7 @@ FactoryGirl.define do
     student nil
     activity nil
     focus_area nil
-    position nil
+    position 0
   end
 
   factory :event do

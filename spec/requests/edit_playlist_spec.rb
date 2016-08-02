@@ -11,7 +11,7 @@ describe "PATCH api/v1/admin/students/:student_id/playlist_activities" do
 
     data = { positions: { (playlist_activity.id.to_s) => "1" } }
 
-    expect(playlist_activity.position).to eq nil
+    expect(playlist_activity.position).to eq 0
 
     patch "/api/v1/admin/students/#{student.id}/playlist_activities", { data: data }
 
