@@ -39,6 +39,7 @@ FactoryGirl.define do
 
   factory :grove do
     sequence(:name) { |n| "Grove #{n}" }
+    master_calendar [[8, 0], [8, 45], [9, 30], [10, 15]].to_json
 
     factory :grove_with_students do
       after(:create) do |grove|

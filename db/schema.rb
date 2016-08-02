@@ -56,9 +56,10 @@ ActiveRecord::Schema.define(version: 20160811164508) do
   create_table "groves", force: :cascade do |t|
     t.integer  "school_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "image"
+    t.json     "master_calendar"
   end
 
   add_index "groves", ["school_id"], name: "index_groves_on_school_id", using: :btree

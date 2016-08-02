@@ -1,4 +1,6 @@
 class Student < User
+  include Redis::Objects
+  hash_key :schedule
   include Rails.application.routes.url_helpers
   has_many :playlist_activities, foreign_key: :user_id
   has_many :events, foreign_key: :user_id

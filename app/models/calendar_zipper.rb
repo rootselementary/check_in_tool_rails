@@ -1,5 +1,6 @@
 class CalendarZipper
-
+  attr_reader :playlist
+  
   TRANSITION = 120 # 2 min transition period
   FLEX_INTERVAL = 900 # 15 min
   PERIOD_LENGTH = 2700 # 45 min

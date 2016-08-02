@@ -30,7 +30,7 @@ gem 'rails_12factor', group: :production
 gem 'sidekiq'
 gem 'sidekiq-cron', '~> 0.4.0'
 gem 'whenever', require: false
-gem 'redis-rails', '~> 4'
+gem 'redis-objects'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

@@ -238,33 +238,15 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     redis (3.3.1)
-    redis-actionpack (4.0.1)
-      actionpack (~> 4)
-      redis-rack (~> 1.5.0)
-      redis-store (~> 1.1.0)
-    redis-activesupport (4.1.5)
-      activesupport (>= 3, < 5)
-      redis-store (~> 1.1.0)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    redis-rack (1.5.0)
-      rack (~> 1.5)
-      redis-store (~> 1.1.0)
-    redis-rails (4.0.0)
-      redis-actionpack (~> 4)
-      redis-activesupport (~> 4)
-      redis-store (~> 1.1.0)
-    redis-store (1.1.7)
-      redis (>= 2.2)
+    redis-objects (1.2.1)
+      redis (>= 3.0.2)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
-<<<<<<< d2e9f5a840489370fca3db9348a90457e6ac09be
     rqrcode (0.10.1)
       chunky_png (~> 1.0)
-    rspec-core (3.5.1)
-=======
     rspec-core (3.5.2)
->>>>>>> Adds background worker to fetch google calendars
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -396,12 +378,16 @@ DEPENDENCIES
   pundit
   quiet_assets
   rails (= 4.2.5.1)
+<<<<<<< d8caad13519916745b284b57d34b9303ca901ed6
 <<<<<<< d2e9f5a840489370fca3db9348a90457e6ac09be
   rails_12factor
   rqrcode
 =======
   redis-rails (~> 4)
 >>>>>>> Adds background worker to fetch google calendars
+=======
+  redis-objects
+>>>>>>> Adds ability to set schedule to Redis and tests for it
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
