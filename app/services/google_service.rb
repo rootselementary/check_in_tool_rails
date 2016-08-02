@@ -1,7 +1,3 @@
-require 'google/apis/calendar_v3'
-require 'rubygems'
-require 'google_calendar'
-
 class GoogleService
   def self.fetch_events(student)
     cal = Google::Calendar.new(client_id: ENV['GOOGLE_CLIENT_ID'],

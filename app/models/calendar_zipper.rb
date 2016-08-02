@@ -5,11 +5,11 @@ class CalendarZipper
   PERIOD_LENGTH = 2700 # 45 min
 
   def initialize(master_calendar, activities, playlist)
-    @master_calendar = master_calendar
+    @master_calendar  = master_calendar
     @beginning_of_day = to_time(@master_calendar.first)
-    @end_of_day = to_time(@master_calendar.last) + PERIOD_LENGTH
-    @activities      = activities.sort{|a,b| a[:start_time] <=> b[:start_time] }
-    @playlist        = playlist
+    @end_of_day       = to_time(@master_calendar.last) + PERIOD_LENGTH
+    @activities       = activities.sort{|a,b| a[:start_time] <=> b[:start_time] }
+    @playlist         = playlist
   end
 
   def schedule

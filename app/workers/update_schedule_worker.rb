@@ -3,7 +3,7 @@ class UpdateScheduleWorker
 
   def self.perform
     Student.all.each do |student|
-      student.update(at_school: false)
+      student.update(at_school: true)
       UpdateScheduleJob.perform(student)
     end
   end

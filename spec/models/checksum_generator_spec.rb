@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ChecksumHelper, type: :helper do
+RSpec.describe ChecksumGenerator, type: :helper do
   it "will generate the same checksum for each unique schedule hash" do
     schedule =  {
        [[8,0],[8,30]] => {
@@ -19,8 +19,8 @@ RSpec.describe ChecksumHelper, type: :helper do
          creator: "JJ Leteach"
        }
        }
-       checksum  = ChecksumHelper.get_checksum(schedule)
-       checksum2 = ChecksumHelper.get_checksum(schedule)
+       checksum  = ChecksumGenerator.get_checksum(schedule)
+       checksum2 = ChecksumGenerator.get_checksum(schedule)
        expect(checksum).to eq(checksum2)
   end
 
@@ -59,8 +59,8 @@ RSpec.describe ChecksumHelper, type: :helper do
         creator: "JJ Leteacher"
       }
       }
-      checksum  = ChecksumHelper.get_checksum(schedule)
-      checksum2 = ChecksumHelper.get_checksum(schedule2)
+      checksum  = ChecksumGenerator.get_checksum(schedule)
+      checksum2 = ChecksumGenerator.get_checksum(schedule2)
       expect(checksum).not_to eq(checksum2)
   end
 end

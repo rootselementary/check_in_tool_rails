@@ -21,4 +21,4 @@ check_in_tool.iml
 npm-debug.log
 .DS_Store
 
-spec/cassettes
+/spec/cassettes
