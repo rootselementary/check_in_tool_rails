@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       namespace :admin do
-        resources :students, only: [:update] do
+        resources :students, only: [] do
           patch '/playlist_activities/:id', controller: 'students/playlist_activities', action: 'update'
         end
       end

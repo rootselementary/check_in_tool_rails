@@ -12,13 +12,8 @@ module Api
             end
             respond_with @student
           end
-
+          
           private
-
-            # def authorize_resource
-            #   playlist_activity = Student.find(params[:student_id]).playlist_activities.first
-            #   authorize(playlist_activity)
-            # end
 
             def playlist_params
               positions = params[:data].try(:fetch, :positions, {}).keys
@@ -30,7 +25,7 @@ module Api
             end
 
             def new_position(id)
-              playlist_params[:positions][id.to_s].to_i
+              playlist_params[:positions][id.to_s]
             end
         end
       end

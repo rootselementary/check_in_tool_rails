@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "PATCH api/v1/admin/student/playlist_activities/:id" do
+describe "PATCH api/v1/admin/students/:student_id/playlist_activities/:id" do
   let(:grove) { create(:grove_with_resources) }
   let(:teacher) { grove.teachers.first }
   let(:student) { grove.students.first }
