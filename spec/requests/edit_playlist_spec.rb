@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "PATCH api/v1/admin/students/:student_id/playlist_activities/:id" do
+describe "PATCH api/v1/admin/students/:student_id/playlist_activities" do
   let(:grove) { create(:grove_with_resources) }
   let(:teacher) { grove.teachers.first }
   let(:student) { grove.students.first }
@@ -13,7 +13,7 @@ describe "PATCH api/v1/admin/students/:student_id/playlist_activities/:id" do
 
     expect(playlist_activity.position).to eq nil
 
-    patch "/api/v1/admin/students/#{student.id}/playlist_activities/#{playlist_activity.id}", { data: data }
+    patch "/api/v1/admin/students/#{student.id}/playlist_activities", { data: data }
 
     expect(response.status).to eq 204
 

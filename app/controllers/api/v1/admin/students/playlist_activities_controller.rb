@@ -4,6 +4,8 @@ module Api
       module Students
         class PlaylistActivitiesController < Api::ApiController
           respond_to :json
+          skip_before_action :authorize_resource, only: [:update]
+          before_action :authorize_collection, only: [:update]
           before_action :set_student
 
           def update
@@ -14,6 +16,10 @@ module Api
           end
           
           private
+
+            def resource_as_sym
+               :playlist_activity
+            end 
 
             def playlist_params
               positions = params[:data].try(:fetch, :positions, {}).keys

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :admin do
         resources :students, only: [] do
-          patch '/playlist_activities/:id', controller: 'students/playlist_activities', action: 'update'
+          patch '/playlist_activities', controller: 'students/playlist_activities', action: 'update'
         end
       end
     end
