@@ -2,7 +2,6 @@ module Api
   module V1
     module Admin
       class PlaylistActivitiesController < Api::ApiController
-        skip_after_action :verify_authorized, only: [:update]
         respond_to :json
         before_action :set_student
 
