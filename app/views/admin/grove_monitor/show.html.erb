@@ -16,7 +16,7 @@
   <% @students.each do |student| %>
       <div class="col-xs-3">
         <div class="thumbnail">
-          <img src="..." alt="...">
+          <img src="<%= student.avatar %>" alt="student image">
           <div class="caption">
             <h3><%= student.name %></h3>
             <p>...</p>
