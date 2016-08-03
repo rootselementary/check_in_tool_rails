@@ -6,7 +6,7 @@ class GroveMonitorPresenter
 
     @locations = {}
     grove.locations.each do |location|
-      @locations[location.name] = grove.students.location(location.name) || []
+      @locations[location.name] = grove.students.location(location.name).reject(&:nil?)
     end
   end
   # POSSIBLE ENUM REFACTOR

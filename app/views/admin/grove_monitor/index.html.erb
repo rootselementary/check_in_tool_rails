@@ -27,10 +27,10 @@
     <%= render partial: "student", collection: @presenter.absent_students %>
 
     </div>
-    <% @presenter.locations.keys.each do |location| %>
+    <% @presenter.locations.each do |(location, students)| %>
       <h2><%= location %></h2>
 
-      <%= render partial: "student", collection: @presenter.locations[location] %>
+      <%= render partial: "student", collection: students %>
 
     <% end %>
   </div>
