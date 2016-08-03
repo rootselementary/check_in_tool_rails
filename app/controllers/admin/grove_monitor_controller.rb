@@ -7,9 +7,9 @@ class Admin::GroveMonitorController < ApplicationController
   end
 
   def show
-    if params[:location_id]
-      @students = current_user.grove.students.send(filter_params, params[:location_id])
-      @location = Location.find(params[:location_id])
+    if params[:name]
+      @students = current_user.grove.students.send(filter_params, params[:name])
+      @location = Location.find_by_name(params[:name])
     else
       @students = current_user.grove.students.send(filter_params)
       @category = filter_params
