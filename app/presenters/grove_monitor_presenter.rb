@@ -2,7 +2,7 @@ class GroveMonitorPresenter
   attr_reader :lost_students, :absent_students, :locations
   def initialize(grove)
     @absent_students = grove.students.absent
-    @lost_students = grove.students.lost.where(at_school: true)
+    @lost_students = grove.students.lost
 
     @locations = {}
     grove.locations.each do |location|
