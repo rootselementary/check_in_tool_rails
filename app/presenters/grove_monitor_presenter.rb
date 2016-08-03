@@ -9,9 +9,4 @@ class GroveMonitorPresenter
       @locations[location.name] = grove.students.location(location.name).reject(&:nil?)
     end
   end
-  # POSSIBLE ENUM REFACTOR
-  # @locations = grove.locations.inject({}) do |acc, location|
-  #   acc[location.name] = grove.students.location(location.name) || []
-  # end
-  #
 end
