@@ -26,5 +26,9 @@ module Admin
       @qr = RQRCode::QRCode.new("#{location.id}", :size => 6, :level => :h)
     end
 
+    def collection_attributes
+      [:name, :grove_name, :image]
+    end
+
   end
 end
