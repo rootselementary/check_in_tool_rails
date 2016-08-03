@@ -21,5 +21,9 @@ module Admin
       whitelist
     end
 
+    def collection_attributes
+      [:name, :email, :grove_name]
+    end
+
   end
 end
