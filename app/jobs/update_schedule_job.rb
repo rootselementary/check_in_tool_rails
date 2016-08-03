@@ -7,7 +7,7 @@ class UpdateScheduleJob < ActiveJob::Base
     master_calendar = student.grove.master_calendar
     schedule = CalendarZipper.new(master_calendar, playlist, scheduled_events).schedule
     checksum = ChecksumGenerator.get_checksum(schedule)
-    # schedule the next update in 15 minutes
+    UpdateScheduleJob.set(wait: 15.minutes).perform_later(student)
     if checksum != student.schedule[:checksum]
       student.schedule.update({ schedule: schedule.to_json, checksum: checksum })
     end
