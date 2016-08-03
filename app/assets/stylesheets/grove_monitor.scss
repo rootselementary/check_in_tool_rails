@@ -1,0 +1,23 @@
+.collection {
+  text-align: center;
+
+  .location-image {
+    width: 65%;
+    height: 65%;
+  }
+
+  .student-image {
+    width: 65%;
+    height: 65%;
+  }
+
+  .single {
+    border: 1px solid $roots-green;
+    margin-left: 2%;
+    padding-bottom: 2%;
+
+    &:hover{
+      opacity: .5;
+    } 
+  }
+}

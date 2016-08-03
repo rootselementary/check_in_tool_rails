@@ -10,6 +10,10 @@ class Student < User
     false
   end
 
+  def avatar
+    "https://robohash.org/104.236.21.134.png"
+  end 
+
   def after_sign_in_path
     compass_path
   end
