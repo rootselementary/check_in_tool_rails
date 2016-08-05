@@ -1,32 +1,16 @@
+<ul class="nav nav-pills pull-right">
+  <li role="presentation" class="active"><%= link_to "Absent", admin_grove_monitor_path(filter: :absent) %></li>
+  <li role="presentation" class="active"><%= link_to "Lost", admin_grove_monitor_path(filter: :lost) %></li>
+</ul>
 <div class="grove-monitor text-center">
   <h2>Grove Monitor</h2>
 </div>
 
-<ul class="nav nav-pills">
-  <li role="presentation" class="active"><%= link_to "All", admin_grove_monitor_all_path %></li>
-  <li role="presentation" class="active"><%= link_to "Absent", admin_grove_monitor_path(filter: :absent) %></li>
-  <li role="presentation" class="active"><%= link_to "Lost", admin_grove_monitor_path(filter: :lost) %></li>
-  <% @presenter.locations.keys.each do |location| %>
-    <li role="presentation" class="active"><%= link_to location, admin_grove_monitor_path({filter: :location, name: location}) %></li>
+<div class="row collection">
+  <% @locations.each do |location| %>
+    <div class="col-md-3 col-sm-6 single">
+      <h2><%= link_to location.name.titleize, admin_grove_monitor_path({filter: :location, name: location.name}) %></h2>
+      <%= link_to (image_tag location.image_url, class: "location-image"), admin_grove_monitor_path({filter: :location, name: location.name}) %>
+    </div>
   <% end %>
-</ul>
-
-<div class="container">
-  <div class="row">
-
-    <h2>Lost</h2>
-
-    <%= render partial: "student", collection: @presenter.lost_students %>
-
-    <h2>Absent</h2>
-
-    <%= render partial: "student", collection: @presenter.absent_students %>
-
-    <% @presenter.locations.keys.each do |location| %>
-      <h2><%= location %></h2>
-
-      <%= render partial: "student", collection: @presenter.locations[location] %>
-
-    <% end %>
-  </div>
 </div>

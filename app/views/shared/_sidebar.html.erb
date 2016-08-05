@@ -1,9 +1,12 @@
 <ul class='button-column'>
+  <h4>School Configuration</h4>
   <li><%=link_to("Manage Groves", admin_groves_path, class: "btn hollow-btn btn-block") if policy(:grove).index? %></li>
+  <li><%=link_to("Manage Locations", admin_locations_path, class: "btn hollow-btn btn-block") if policy(:location).index? %></li>
   <li><%=link_to("Manage Teachers", admin_teachers_path, class: "btn hollow-btn btn-block") if policy(:teacher).index? %></li>
   <li><%=link_to("Manage Students", admin_students_path, class: "btn hollow-btn btn-block") if policy(:student).index? %></li>
-  <li><%=link_to("Manage Activities", admin_activities_path, class: "btn hollow-btn btn-block") if policy(:activity).index? %></li>
-  <li><%=link_to("Manage Locations", admin_locations_path, class: "btn hollow-btn btn-block") if policy(:location).index? %></li>
+  <hr>
+  <h4>Grove Management</h4>
   <li><%=link_to "Grove Monitor", admin_grove_monitor_all_path,class: "btn hollow-btn btn-block" %></li>
   <li><%=link_to "Grove Playlist Manager", admin_grove_playlist_manager_path, class: "btn hollow-btn btn-block" %></li>
+  <li><%=link_to("Manage Activities", admin_activities_path, class: "btn hollow-btn btn-block") if policy(:activity).index? %></li>
 </ul>

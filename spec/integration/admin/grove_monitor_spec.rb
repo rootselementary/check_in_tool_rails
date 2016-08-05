@@ -2,7 +2,7 @@ require 'rails_helper'
 include Pages::Authentication
 
 RSpec.feature 'Grove Monitor' do
-  let(:grove)    { create(:grove_with_students) }
+  let(:grove)    { create(:grove_with_resources) }
   let(:teacher)  { grove.teachers.first }
   let(:grove2)   { create(:grove_with_absent_students) }
   let(:teacher2) { grove2.teachers.first }
@@ -14,19 +14,21 @@ RSpec.feature 'Grove Monitor' do
 
     let(:student1) { grove.students.first }
     let(:student2) { grove.students.last }
-    let(:location) { create(:location) }
-    let(:location2) { create(:location) }
+    let(:location) { grove.locations.first }
+    let(:location2) { grove.locations.last }
 
     it 'can be reached from the main dashboard' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(teacher)
+    
       dashboard_page.click_on("Grove Monitor")
       expect(current_path).to eq(admin_grove_monitor_all_path)
     end
 
-    it 'shows all students' do
+    it 'shows all locations' do  
       dashboard_page.click_on("Grove Monitor")
-      expect(current_path).to eq(admin_grove_monitor_all_path)
-      expect(page).to have_content(student1.name)
-      expect(page).to have_content(student2.name)
+      expect(current_path).to eq(admin_grove_monitor_all_path) 
+      expect(page).to have_content(location.name)
+      expect(page).to have_content(location2.name)
     end
 
 
@@ -84,8 +86,11 @@ RSpec.feature 'Grove Monitor' do
 
     it 'returns students by location' do
       dashboard_page.click_on("Grove Monitor")
+      
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(teacher3)
+      
       click_on(location3.name)
-
+      
       expect(page).to have_content(student5.name)
       expect(page).to have_content(student6.name)
     end

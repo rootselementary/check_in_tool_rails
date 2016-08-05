@@ -1,29 +1,11 @@
-<div class="grove-monitor text-center">
-  <h2>Grove Monitor</h2>
-</div>
-
-<ul class="nav nav-pills">
-  <li role="presentation" class="active"><%= link_to "All", admin_grove_monitor_all_path %></li>
-  <li role="presentation" class="active"><%= link_to "Absent", admin_grove_monitor_path(filter: :absent) %></li>
-  <li role="presentation" class="active"><%= link_to "Lost", admin_grove_monitor_path(filter: :lost) %></li>
-  <% @locations.each do |location| %>
-    <li role="presentation" class="active"><%= link_to location.name, admin_grove_monitor_path({filter: :location, name: location.name}) %></li>
-  <% end %>
+<ul class="nav nav-pills pull-right">
+  <li role="presentation" class="active"><%= link_to "Back to Grove Monitor", admin_grove_monitor_all_path %></li>
 </ul>
-
-<div class="container">
-  <div class="row">
-  <% @students.each do |student| %>
-      <div class="col-xs-3">
-        <div class="thumbnail">
-          <img src="..." alt="...">
-          <div class="caption">
-            <h3><%= student.name %></h3>
-            <p>...</p>
-            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-          </div>
-        </div>
-      </div>
-  <% end %>
+<div class="grove-monitor text-center">
+  <h2><%= @location.name.titleize  if @location %></h2>
+  <h2><%= "#{@category.titleize} Students"  if @category %></h2>
 </div>
+
+<div class="row collection">
+  <%= render partial: "student", collection: @students %>
 </div>
