@@ -11,7 +11,11 @@ RSpec.feature 'Grove Monitor' do
   let(:grove_monitor_page) { Pages::GroveMonitorPage.new }
 
   describe 'as a teacher' do
-    before { login(teacher) }
+    before do
+      login(teacher)
+      Scan.delete_all
+      Event.delete_all
+    end
 
     let(:student1) { grove.students.first }
     let(:student2) { grove.students.last }
@@ -40,9 +44,8 @@ RSpec.feature 'Grove Monitor' do
       expect(grove_monitor_page).not_to have_content(present_student.name)
     end
 
-    it 'can mark student absent from location pages' do
+    it 'can mark student absent from lost page' do
       grove_monitor_page.visit_page.click_on("Lost")
-      expect(Student.where(at_school: true).count).to eq(2)
       expect {
         within first('.student') do
           click_on("Mark as Absent")
@@ -62,58 +65,19 @@ RSpec.feature 'Grove Monitor' do
       }.by 1
     end
 
-  end
+    it 'shows all students that are supposed to be at a given location' do
+      student1.events.create(location: location, start_time: Time.now-100, end_time: Time.now+3600)
+      grove_monitor_page.visit_page.click_on(location.name)
 
-  # describe 'As a teacher' do
-  #   before { login(teacher2) }
-  #
-  #   let(:location) { grove2.locations.last }
-  #   let(:student3) { grove2.students.first }
-  #   let(:student4) { grove2.students.last }
-  #   let(:event) { student3.events.first }
-  #   let(:event2) { student4.events.first }
-  #   let(:scan) { event.scans.first }
-  #   let(:scan2) { event2.scans.last }
-  #
-  #
-  #   it 'shows all lost students who scanned into the wrong location' do
-  #     event.update(student: student3, location: location)
-  #     scan2.update(correct: true)
-  #     dashboard_page.click_on("Grove Monitor")
-  #     click_on("Lost")
-  #     expect(page).to have_content(student3.name)
-  #     expect(page).not_to have_content(student4.name)
-  #   end
-  #
-  #   it 'shows all lost students who have not scanned in anywhere' do
-  #     event2.update(student: student4, location: location)
-  #     dashboard_page.click_on("Grove Monitor")
-  #     click_on("Lost")
-  #     expect(page).to have_content(student3.name)
-  #     expect(page).to have_content(student4.name)
-  #   end
-  # end
-  #
-  # describe 'As a teacher' do
-  #   let(:grove3) { create(:grove_with_scanned_in_students) }
-  #   let(:teacher3) { grove3.teachers.first }
-  #   let(:location3) { grove3.locations.first }
-  #   let(:student5) { grove3.students.first }
-  #   let(:student6) { grove3.students.last }
-  #
-  #
-  #   before { login(teacher3) }
-  #
-  #
-  #   it 'returns students by location' do
-  #     dashboard_page.click_on("Grove Monitor")
-  #
-  #     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(teacher3)
-  #
-  #     click_on(location3.name)
-  #
-  #     expect(page).to have_content(student5.name)
-  #     expect(page).to have_content(student6.name)
-  #   end
-  # end
+      expect(grove_monitor_page).to have_content student1.name
+    end
+
+    it 'shows students that are scanned in' do
+      student1.events.create(location: location, start_time: Time.now-100, end_time: Time.now+3600)
+      Event.last.scans.create(location: location, timestamp: Time.now, correct:true, user_id: student1.id)
+      grove_monitor_page.visit_page.click_on(location.name)
+
+      expect(grove_monitor_page).to have_css('.scanned-in')
+    end
+  end
 end

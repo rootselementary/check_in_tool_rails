@@ -19,21 +19,23 @@ class Student < User
   end
 
   def self.lost
-    where(at_school: true).where.not(id: checked_in_ids)
+    self.where(at_school: true)
+        .where.not(id: has_event_ids)
   end
 
   def self.location(name)
     location = Location.find_by(name: name)
-    where(id: checked_in_ids).map do |student|
-      student if student.events.last.location == location
-    end
+    self.joins(:events)
+        .where(at_school: true)
+        .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
+        .where(events: {location_id: location.id})
   end
 
-  def self.checked_in_ids
-    joins(events: [:scans] ).where(at_school: true)
-                            .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
-                            .where(scans:{correct: true})
-                            .pluck(:id)
+  def self.has_event_ids
+    self.joins(:events)
+        .where(at_school: true)
+        .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
+        .pluck(:id)
   end
 
   def next_position
@@ -43,5 +45,10 @@ class Student < User
 
   def current_event
     events.where("start_time <= ? AND end_time >= ?", Time.now, Time.now ).first
+  end
+
+  def scanned_in?
+    return false unless current_event
+    current_event.scanned_in?
   end
 end

@@ -20,22 +20,14 @@ RSpec.describe Student, type: :model do
     end
 
     describe '#lost' do
-      let(:student1) { grove.students.first }
-      let(:student2) { grove.students.last }
-      let(:event) { student1.events.first }
-      let(:event2) { student2.events.first }
-      let(:scan) { event.scans.first }
-      let(:scan2) { event2.scans.last }
-      let(:location) { create(:location) }
-
-      it 'returns all lost students' do
-        event.update(student: student1, location: location)
-        scan2.update(correct: false)
-        event2.update(student: student2, location: location)
+      it 'returns all students without a scheduled event' do
+        grove
+        Scan.delete_all
+        Event.delete_all
 
         lost_students = Student.lost
 
-        expect(lost_students.size).to eq(2)
+        expect(lost_students.count).to eq(2)
       end
     end
   end

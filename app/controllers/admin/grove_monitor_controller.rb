@@ -2,7 +2,6 @@ class Admin::GroveMonitorController < ApplicationController
 
   def index
     authorize(:grove_monitor, :index?)
-    @presenter = GroveMonitorPresenter.new(current_user.grove)
     @locations = Location.where(grove_id: current_user.grove_id)
   end
 
@@ -21,7 +20,8 @@ class Admin::GroveMonitorController < ApplicationController
     authorize(:grove_monitor, :index?)
     student = Student.find(params[:id])
     student.update(student_params)
-    redirect_to admin_grove_monitor_path(filter: filter_params)
+    redirect_to admin_grove_monitor_path(filter: params[:filter],
+                                         name: params[:name])
   end
 
   private
