@@ -21,7 +21,7 @@ class Admin::GroveMonitorController < ApplicationController
     authorize(:grove_monitor, :index?)
     student = Student.find(params[:id])
     student.update(student_params)
-    redirect_to admin_grove_monitor_all_path
+    redirect_to admin_grove_monitor_path(filter: filter_params)
   end
 
   private
