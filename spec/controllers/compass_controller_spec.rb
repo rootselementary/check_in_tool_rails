@@ -7,6 +7,7 @@ RSpec.describe CompassController, type: :controller do
     context "incorrect location for scanning" do
       it "creates a new scan with incorrect status and redirects to compass" do
         student = create(:student)
+        create(:event, user_id: student.id)
         location1 = create(:location)
         location2 = create(:location)
         allow(request.env['warden']).to receive(:authenticate!).and_return(student)
@@ -23,6 +24,7 @@ RSpec.describe CompassController, type: :controller do
       context "correct location for scanning" do
         it "creates a new scan with correct status and redirects to compass" do
           student = create(:student)
+          create(:event, user_id: student.id)
           location1 = create(:location)
           allow(request.env['warden']).to receive(:authenticate!).and_return(student)
           allow(controller).to receive(:current_user).and_return(student)
