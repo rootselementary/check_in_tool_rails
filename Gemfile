@@ -31,6 +31,7 @@ gem 'sidekiq'
 gem 'sidekiq-cron', '~> 0.4.0'
 gem 'whenever', require: false
 gem 'redis-objects'
+gem 'google-api-client', '~> 0.9'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

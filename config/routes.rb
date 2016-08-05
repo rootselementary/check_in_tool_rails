@@ -29,9 +29,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :callbacks do
-    get '/notifications', controller: 'google', action: 'watch'
-  end
+  post '/notifications', controller: 'callbacks/google', action: 'watch'
 
   get '/compass', controller: 'compass', action: 'show', as: :compass
   get '/logout', controller: 'compass', action: 'logout', as: :logout

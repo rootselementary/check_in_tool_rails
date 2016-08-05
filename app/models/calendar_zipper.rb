@@ -1,6 +1,6 @@
 class CalendarZipper
   attr_reader :playlist
-  
+
   TRANSITION = 120 # 2 min transition period
   FLEX_INTERVAL = 900 # 15 min
   PERIOD_LENGTH = 2700 # 45 min
@@ -27,6 +27,8 @@ class CalendarZipper
 
   def update_playlist(n, start_time)
     _start_time = start_time.dup
+    # This next line will blow up if there is nothing on the schedule. It should never happen but
+    # is this something we should account for?
     cycles = (n / @playlist.length.to_f).ceil
     cycles = cycles.zero? ? 1 : cycles
     items = @playlist.cycle(cycles).take(n).inject([]) do |acc, i|
