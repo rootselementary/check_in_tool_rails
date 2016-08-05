@@ -1,11 +1,11 @@
 $roots-green: #8BA65F;
- 
+
 * {
   font-family: 'Source Sans Pro', sans-serif;
 
   li {
     list-style: none;
-  } 
+  }
 
   ul {
     list-style: none;
@@ -30,4 +30,8 @@ p.navbar-text {
         background-color: $roots-green;
         color: #fff;
     }
-}  
+}
+
+.sortable-placeholder {
+  border: 2px dashed $roots-green;
+}

@@ -1,18 +1,20 @@
 class Admin::GroveMonitorController < ApplicationController
 
   def index
-    @presenter = GroveMonitorPresenter.new(current_user.grove)
     authorize(:grove_monitor, :index?)
+    @presenter = GroveMonitorPresenter.new(current_user.grove)
+    @locations = Location.where(grove_id: current_user.grove_id)
   end
 
   def show
     authorize(:grove_monitor, :show?)
     if params[:name]
       @students = current_user.grove.students.send(filter_params, params[:name])
+      @location = Location.find_by_name(params[:name])
     else
       @students = current_user.grove.students.send(filter_params)
+      @category = filter_params
     end
-    @locations = current_user.grove.locations
   end
 
   def update
@@ -29,6 +31,6 @@ class Admin::GroveMonitorController < ApplicationController
     end
 
     def filter_params
-      params[:filter] || :all
+      params[:filter]
     end
 end

@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     patch '/grove-monitor-all', controller: 'grove_monitor', action: 'update', as: :update_grove_monitor_all
     get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
-    resources :locations
+    resources :locations do
+      member do
+        get '/qr', to: 'locations#qr'
+      end
+    end
     resources :teachers
     resources :students do
       get '/playlist', controller: 'playlist_activities', action: 'index'
@@ -19,6 +23,17 @@ Rails.application.routes.draw do
     resources :activities
   end
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      namespace :admin do
+        resources :students, only: [] do
+          patch '/playlist_activities', controller: 'students/playlist_activities', action: 'update'
+        end
+      end
+    end
+  end
+
   get '/compass', controller: 'compass', action: 'show', as: :compass
   get '/logout', controller: 'compass', action: 'logout', as: :logout
+  get '/checkin', to: 'compass#checkin'
 end

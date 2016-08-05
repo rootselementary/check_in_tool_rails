@@ -31,6 +31,7 @@ FactoryGirl.define do
       sequence(:name) { |n| "JJ Letest#{n}" }
       sequence(:email) { |n| "letest#{n}@rootselementary.org" }
       at_school true
+ 
     end
   end
 
@@ -47,7 +48,7 @@ FactoryGirl.define do
     factory :grove_with_resources do
       after(:create) do |grove|
         student1, student2 = create_list(:student, 2, grove: grove)
-        create(:teacher, grove: grove)
+        create_list(:teacher, 2, grove: grove)
         location1, location2 = create_list(:location, 2, grove: grove)
         activity, _ = create_list(:activity, 2, grove: grove, location: location1)
         focus_area = create(:focus_area, grove: grove)
@@ -114,7 +115,7 @@ FactoryGirl.define do
     student nil
     activity nil
     focus_area nil
-    position 1
+    position 0
   end
 
   factory :event do

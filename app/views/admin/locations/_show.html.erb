@@ -1,0 +1,11 @@
+<%= link_to("All Locations", admin_locations_path, class: "btn btn-default") %>
+<br>
+<br>
+<div id="<%="#{resource_as_sym}-#{resource.id}" %>">
+  <h1><%= resource.name%></h1>
+  <h2><%= "Grove: #{resource.grove.name}" %> </h2>
+  <%= image_tag resource.image_url %>
+  <br>
+  <%= link_to "Print QR code", qr_admin_location_path(resource), class: "btn btn-default" %>
+  <%= button_to 'Delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete', class: "btn btn-danger"%>
+</div>

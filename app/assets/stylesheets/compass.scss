@@ -1,0 +1,25 @@
+.enroute {
+  border: 10px solid red;
+}
+
+.scanned-in {
+  border: 10px solid $roots-green;
+}
+
+.event-images {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.compass-image {
+  height: 250px;
+}
+
+.img-responsive {
+  height: 90%
+}
+
+.compass-details {
+  padding-bottom: 2%;
+}

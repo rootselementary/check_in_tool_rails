@@ -11,6 +11,9 @@
  * file per style scope.
  */
 
+ /*
+ *= require jquery-ui/sortable
+ */
 
 @import "reset.css";
 @import "bootstrap-sprockets";
@@ -21,3 +24,7 @@
 @import "custom";
 @import "dashboard_sidebar";
 @import "playlist_manager";
+@import "student_playlist";
+@import "qr_code";
+@import "compass";
+@import "grove_monitor";

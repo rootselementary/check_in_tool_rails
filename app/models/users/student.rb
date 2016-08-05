@@ -40,4 +40,12 @@ class Student < User
                             .pluck(:id)
   end
 
+  def next_position
+    max_position = playlist_activities.maximum(:position)
+    max_position ? max_position + 1 : 1
+  end
+
+  def current_event
+    events.where("start_time <= ? AND end_time >= ?", Time.now, Time.now ).first
+  end
 end

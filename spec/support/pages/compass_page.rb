@@ -1,9 +1,8 @@
 require_relative '../pages/page'
 module Pages
-  class GroveMonitorPage < Page
-
+  class CompassPage < Page
     def visit_page
-      visit '/admin/grove-monitor-all'
+      visit '/compass'
       self
     end
   end

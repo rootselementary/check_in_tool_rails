@@ -11,6 +11,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
 gem 'figaro'
 gem 'carrierwave'
 gem 'mini_magick'
@@ -22,6 +25,8 @@ gem 'editorconfig'
 gem 'omniauth-google-oauth2'
 gem 'will_paginate', '~> 3.1.0'
 gem 'google_calendar'
+gem 'rqrcode'
+gem 'rails_12factor', group: :production
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
