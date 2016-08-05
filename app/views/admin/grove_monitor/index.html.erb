@@ -8,7 +8,7 @@
 
 <div class="row collection">
   <% @locations.each do |location| %>
-    <div class="col-md-4 col-sm-6 single">
+    <div class="col-md-3 col-sm-6 single">
       <h2><%= link_to location.name.titleize, admin_grove_monitor_path({filter: :location, name: location.name}) %></h2>
       <%= link_to (image_tag location.image_url, class: "location-image"), admin_grove_monitor_path({filter: :location, name: location.name}) %>
     </div>

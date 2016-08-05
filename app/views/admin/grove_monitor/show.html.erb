@@ -1,5 +1,5 @@
 <ul class="nav nav-pills pull-right">
-  <li role="presentation" class="active"><%= link_to "Back to Locations", admin_grove_monitor_all_path %></li>
+  <li role="presentation" class="active"><%= link_to "Back to Grove Monitor", admin_grove_monitor_all_path %></li>
 </ul>
 <div class="grove-monitor text-center">
   <h2><%= @location.name.titleize  if @location %></h2>
@@ -9,4 +9,3 @@
 <div class="row collection">
   <%= render partial: "student", collection: @students %>
 </div>
-
