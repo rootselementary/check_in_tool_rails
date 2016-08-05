@@ -17,7 +17,7 @@ module Pages
 
     def has_image?(image_name)
       src = image_name[0...image_name.index('.')]
-      has_xpath?("//img[contains(@src,\"/assets/#{src}\")]")
+      has_xpath?("//img[contains(@src,\"#{src}\")]")
     end
   end
 end
