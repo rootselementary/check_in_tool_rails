@@ -27,7 +27,7 @@ RSpec.feature 'User can login' do
       login(student)
       expect(current_path).to eq(compass_path)
       expect(page).to have_content("Hello, #{student.first_name}")
-      expect(page).to have_content("Grove Compass")
+      expect(page).to have_content("#{student.name}'s Next Step")
       expect(page).to have_content("Signed in successfully.")
     end
   end

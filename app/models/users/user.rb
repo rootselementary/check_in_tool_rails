@@ -36,4 +36,8 @@ class User < ActiveRecord::Base
     return email unless name
     name.split(" ").first
   end
+
+  def avatar
+    "http://placekitten.com/300/300"
+  end
 end

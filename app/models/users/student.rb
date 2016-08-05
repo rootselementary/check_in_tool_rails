@@ -41,7 +41,7 @@ class Student < User
     max_position ? max_position + 1 : 1
   end
 
-  def status
-    true
+  def current_event
+    events.where("start_time <= ? AND end_time >= ?", Time.now, Time.now ).first
   end
 end

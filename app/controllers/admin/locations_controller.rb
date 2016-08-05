@@ -23,7 +23,7 @@ module Admin
     def build_and_authorize_qr
       location = Location.find(params[:id])
       authorize(location, :show?)
-      @qr = RQRCode::QRCode.new("#{checkin_location_url(location)}", :size => 10, :level => :h)
+      @qr = RQRCode::QRCode.new("#{location.id}", :size => 6, :level => :h)
     end
 
   end
