@@ -11,6 +11,11 @@ Student.create!(name: "Madison Student",
                 email: "student@example.com",
                 password: "password",
                 grove: grove)
+Student.create!(name: "David Student",
+                email: "student2@example.com",
+                password: "password",
+                grove: grove,
+                at_school: true)
 admin = Teacher.create!(name: "Susie Admin",
                         email: "susie.admin@example.com",
                         password: "password",

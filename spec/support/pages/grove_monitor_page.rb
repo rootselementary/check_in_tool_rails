@@ -3,7 +3,7 @@ module Pages
   class GroveMonitorPage < Page
 
     def visit_page
-      visit '/admin/grove-monitor'
+      visit '/admin/grove-monitor-all'
       self
     end
   end
