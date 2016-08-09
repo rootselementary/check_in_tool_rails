@@ -47,6 +47,10 @@ class Student < User
     events.where("start_time <= ? AND end_time >= ?", Time.now, Time.now ).first
   end
 
+  def grove_name
+    grove.name
+  end
+
   def scanned_in?
     return false unless current_event
     current_event.scanned_in?
