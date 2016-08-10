@@ -5,6 +5,6 @@ class LocationPolicy < AdminResourcePolicy
   end
 
   def destroy?
-    false
+    user.admin?
   end
 end
