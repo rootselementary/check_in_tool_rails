@@ -118,6 +118,7 @@ module Admin
     end
 
     def show
+      yield if block_given?
       respond_with resource
     end
 

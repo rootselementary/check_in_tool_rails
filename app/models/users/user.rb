@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     name.split(" ").first
   end
 
+  def teacher?
+    false
+  end
+
   def avatar
     "http://placekitten.com/300/300"
   end

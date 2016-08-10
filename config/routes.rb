@@ -10,11 +10,7 @@ Rails.application.routes.draw do
     patch '/grove-monitor-all', controller: 'grove_monitor', action: 'update', as: :update_grove_monitor_all
     get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
-    resources :locations do
-      member do
-        get '/qr', to: 'locations#qr'
-      end
-    end
+    resources :locations
     resources :teachers
     resources :students do
       get '/playlist', controller: 'playlist_activities', action: 'index'

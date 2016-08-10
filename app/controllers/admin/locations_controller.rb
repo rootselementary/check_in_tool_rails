@@ -1,9 +1,8 @@
 module Admin
   class LocationsController < ResourceController
 
-    def qr
-      build_and_authorize_qr
-      render layout: "compass_application"
+    def show
+      super { @qr = RQRCode::QRCode.new("#{resource.id}", :size => 6, :level => :h) }
     end
 
     protected

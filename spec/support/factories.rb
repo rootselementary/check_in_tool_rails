@@ -12,6 +12,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "JJ Letest#{n}" }
     sequence(:email) { |n| "letest#{n}@example.com" }
     password "password"
+    association :grove
 
     factory :teacher, class: Teacher do
       type "Teacher"
@@ -31,7 +32,7 @@ FactoryGirl.define do
       sequence(:name) { |n| "JJ Letest#{n}" }
       sequence(:email) { |n| "letest#{n}@rootselementary.org" }
       at_school true
- 
+
     end
   end
 
@@ -108,7 +109,7 @@ FactoryGirl.define do
 
   factory :location do
     sequence(:name) { |n| "Amazing Location #{n}" }
-    grove nil
+    association :grove
   end
 
   factory :playlist_activity do

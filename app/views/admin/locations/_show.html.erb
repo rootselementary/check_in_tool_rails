@@ -6,6 +6,9 @@
   <h2><%= "Grove: #{resource.grove.name}" %> </h2>
   <%= image_tag resource.image_url %>
   <br>
-  <%= link_to "Print QR code", qr_admin_location_path(resource), class: "btn btn-default" %>
+  <div class= "qr">
+    <%= raw @qr.as_html %>
+  </div>
   <%= button_to 'Delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete', class: "btn btn-danger"%>
 </div>
+

@@ -8,6 +8,7 @@ class AdminResourcePolicy < ApplicationPolicy
   alias_method :create?, :index?
   alias_method :update?, :index?
   alias_method :edit?, :index?
+  alias_method :show?, :index?
 
   def destroy?
     show?
