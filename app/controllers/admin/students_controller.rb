@@ -18,7 +18,7 @@ module Admin
     end
 
     def form_attributes
-      whitelist
+      collection_attributes
     end
 
     def collection_attributes

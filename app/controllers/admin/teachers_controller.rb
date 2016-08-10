@@ -10,7 +10,7 @@ module Admin
     protected
 
     def form_attributes
-      [:name, :email, :grove]
+      [:name, :email, :grove_name]
     end
 
     def collection_attributes
