@@ -51,8 +51,7 @@ RSpec.feature 'Student Compass' do
 
     context "student is checked in" do
       it "does not show the scan button" do
-        create(:scan, event: event,
-                      location: location,
+        create(:scan, location: location,
                       correct: true,
                       timestamp: Time.now,
                       student: student)

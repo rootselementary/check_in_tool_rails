@@ -56,8 +56,8 @@ FactoryGirl.define do
         create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
         event = create(:event, student: student1, location: location1)
         event2 = create(:event, student: student2, location: location1)
-        scan = create(:scan, event: event, location: location2)
-        scan2 = create(:scan, event: event2, location: location1)
+        scan = create(:scan, location: location2)
+        scan2 = create(:scan, location: location1)
       end
     end
 
@@ -71,8 +71,8 @@ FactoryGirl.define do
         create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
         event = create(:event, student: student1, location: location1)
         event2 = create(:event, student: student2, location: location1)
-        scan = create(:scan, event: event, location: location2)
-        scan2 = create(:scan, event: event2, location: location1)
+        scan = create(:scan, location: location2)
+        scan2 = create(:scan, location: location1)
       end
     end
 
@@ -86,8 +86,8 @@ FactoryGirl.define do
         create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
         event = create(:event, student: student1, location: location)
         event2 = create(:event, student: student2, location: location)
-        scan = create(:scan, event: event, location: location, correct: true)
-        scan2 = create(:scan, event: event2, location: location, correct: true)
+        scan = create(:scan, location: location, correct: true)
+        scan2 = create(:scan, location: location, correct: true)
       end
     end
   end
@@ -127,7 +127,6 @@ FactoryGirl.define do
   end
 
   factory :scan do
-    event nil
     location nil
     timestamp Time.now + 10*60
     correct false
