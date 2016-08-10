@@ -1,0 +1,36 @@
+.locations-show {
+  @media print {
+    .secondary-content {
+      visibility: hidden;
+    }
+
+    .main-content {
+      margin-top: -15%;
+      margin-left: -15%;
+
+      h1 {
+        visibility: hidden;
+      }
+
+      h2 {
+        visibility: hidden;
+      }
+      input {
+        visibility: hidden;
+      }
+
+      a {
+        visibility: hidden;
+      }
+
+      .qr {
+        padding: 0;
+        margin: 0;
+        margin-left: 15%;
+      }
+    }
+    nav {
+      visibility: hidden;
+    }
+  }
+}

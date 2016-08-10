@@ -3,16 +3,16 @@
 <% end %>
 <br>
 <br>
-<div id="<%="#{resource_as_sym}-#{resource.id}" %>">
-  <h1><%= resource.name%></h1>
+<div id="<%="#{resource_as_sym}-#{resource.id}" %>" class=" location-info col-sm-4">
+  <h1 class="text-center"><%= resource.name%></h1>
   <h2><%= "Grove: #{resource.grove.name}" %> </h2>
   <%= image_tag resource.image_url %>
-  <br>
-  <div class= "qr">
-    <%= raw @qr.as_html %>
-  </div>
   <% if policy(resource).destroy? %>
-    <%= button_to 'Delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete', class: "btn btn-danger"%>
+  <%= button_to 'Delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete', class: "btn btn-danger"%>
   <% end %>
 </div>
+<div class= "qr col-sm-8">
+  <%= raw @qr.as_html %>
+</div>
+
 
