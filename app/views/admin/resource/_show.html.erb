@@ -1,7 +1,12 @@
 <%= link_to("All #{resource.class.name.pluralize.capitalize}", send("admin_#{ resource_as_sym.to_s.pluralize}_path"), class: "btn btn-default") if current_user.admin? %>
 <br><br>
 <table class="table">
-
+  <tr>
+    <% collection_attributes.each do |header| %>
+      <th><%= header.to_s.titleize %></th>
+    <% end %>
+    <th>Actions</th>
+  </tr>
   <tr>
     <% form_attributes.each do |attr| %>
       <td><%= resource.send(attr) %></td>
