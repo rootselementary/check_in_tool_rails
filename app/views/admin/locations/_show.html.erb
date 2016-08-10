@@ -1,4 +1,6 @@
-<%= link_to("All Locations", admin_locations_path, class: "btn btn-default") %>
+<% if policy(resource).index? %>
+  <%= link_to("All Locations", admin_locations_path, class: "btn btn-default") %>
+<% end %>
 <br>
 <br>
 <div id="<%="#{resource_as_sym}-#{resource.id}" %>">
@@ -9,6 +11,8 @@
   <div class= "qr">
     <%= raw @qr.as_html %>
   </div>
-  <%= button_to 'Delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete', class: "btn btn-danger"%>
+  <% if policy(resource).destroy? %>
+    <%= button_to 'Delete', send("admin_#{resource_as_sym}_path", resource), method: 'delete', class: "btn btn-danger"%>
+  <% end %>
 </div>
 
