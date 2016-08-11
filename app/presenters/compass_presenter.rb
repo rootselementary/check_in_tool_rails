@@ -24,7 +24,7 @@ class CompassPresenter
   end
 
   def creator_image
-    event.creator.avatar
+    event.creator.google_image
   end
 
   def creator_name

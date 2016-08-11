@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
       if Teacher.is_teacher?(data)
         user = Teacher.where(email: data["email"]).first
         user = check_or_create_token(user, access_token)
+        user = check_or_create_image(user, data['image'])
       elsif Student.is_student?(data)
         user = Student.where(email: data["email"]).first
         user = check_or_create_token(user, access_token)
@@ -48,8 +49,5 @@ class User < ActiveRecord::Base
   def teacher?
     false
   end
-
-  def avatar
-    "http://placekitten.com/300/300"
-  end
+  
 end

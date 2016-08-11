@@ -38,7 +38,7 @@ RSpec.feature 'Student Compass' do
       expect(compass_page).to have_content event.creator.name
       expect(compass_page).to have_image event.location.image_url
       expect(compass_page).to have_image event.activity.image_url
-      expect(compass_page).to have_image event.creator.avatar
+      expect(compass_page).to have_image event.creator.google_image
     end
 
     context "no event is scheduled" do
