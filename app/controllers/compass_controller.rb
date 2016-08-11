@@ -5,6 +5,7 @@ class CompassController < ApplicationController
   def show
     authorize(:compass, :show?)
     @compass = CompassPresenter.new(current_user)
+    binding.pry
   end
 
   def checkin

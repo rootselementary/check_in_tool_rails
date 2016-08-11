@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
       elsif Student.is_student?(data)
         user = Student.where(email: data["email"]).first
         user = check_or_create_token(user, access_token)
+        user = check_or_create_image(user, data['image'])      
       end
       user
     end
@@ -31,6 +32,13 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def self.check_or_create_image(user, image)
+    unless user.google_image
+      user.update_attributes(google_image: image)
+    end 
+    user 
+  end 
 
   def first_name
     return email unless name
