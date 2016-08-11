@@ -12,6 +12,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "JJ Letest#{n}" }
     sequence(:email) { |n| "letest#{n}@example.com" }
     password "password"
+    google_image "http://placekitten.com/300/300"
     association :grove
 
     factory :teacher, class: Teacher do

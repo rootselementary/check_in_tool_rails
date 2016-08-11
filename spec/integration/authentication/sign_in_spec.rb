@@ -53,7 +53,7 @@ RSpec.feature 'User can login' do
           email: student.email,
           first_name: "JJ",
           last_name: "Letest",
-          image: ""
+          image: "http://placekitten.com/300/300"
         },
         credentials: {
           token: "token",
@@ -82,6 +82,7 @@ RSpec.feature 'User can login' do
         expect(current_path).to eq(compass_path)
         expect(page).to have_content("Successfully authenticated from Google account.")
         expect(page).to have_content(student.first_name)
+        expect(Student.find(student.id).google_image).to eq('http://placekitten.com/300/300')
       end
 
     after do

@@ -5,43 +5,69 @@ class User < ActiveRecord::Base
   belongs_to :grove
 
   def self.from_omniauth(access_token)
-    data = access_token.info
-    if within_roots?(access_token)
-      if Teacher.is_teacher?(data)
-        user = Teacher.where(email: data["email"]).first
-        user = check_or_create_token(user, access_token)
-      elsif Student.is_student?(data)
-        user = Student.where(email: data["email"]).first
-        user = check_or_create_token(user, access_token)
-      end
-      user
-    end
-  end
-
-  def self.within_roots?(data)
-    data["extra"]["id_info"]["hd"] == "rootselementary.org"
-  end
-
-  def self.check_or_create_token(user, access_token)
-    unless user.refresh_token
-      creds = access_token["credentials"]
-      user.update_attributes(token: creds["token"],
-                             refresh_token: creds["refresh_token"],
-                             expires_at: creds["expires_at"])
+    package = OmniauthPackage.new(access_token)
+    user = User.where(email: package.email).first
+    if user.present?
+      user.set_token(package) unless user.refresh_token
+      user.google_image = package.image
+      user.save if user.changed?
     end
     user
   end
 
+  def set_token(package)
+    self.token = package.token
+    self.refresh_token = package.refresh_token
+    self.expires_at = package.expires_at
+  end
+
   def first_name
     return email unless name
-    name.split(" ").first
+    name.split(' ').first
   end
 
   def teacher?
     false
   end
 
-  def avatar
-    "http://placekitten.com/300/300"
+  class OmniauthPackage
+
+    attr_accessor :access_token
+
+    def initialize(access_token)
+      @access_token = access_token
+    end
+
+    def data
+      access_token.info
+    end
+
+    def credentials
+      access_token['credentials']
+    end
+
+    def email
+      data['email']
+    end
+
+    def image
+      data['image']
+    end
+
+    def domain
+      data['extra']['id_info']['hd']
+    end
+
+    def token
+      credentials['token']
+    end
+
+    def refresh_token
+      credentials['refresh_token']
+    end
+
+    def expires_at
+      credentials['expires_at']
+    end
   end
 end
