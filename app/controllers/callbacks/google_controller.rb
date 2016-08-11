@@ -4,7 +4,8 @@ class Callbacks::GoogleController < ApplicationController
   # This was supposed to be the endpoint to set up push notifications
   # It is not operational right now
   def watch
-    student = Student.find(request.env["HTTP_X_GOOG_CHANNEL_ID"])
+    student = Student.find(request.env["HTTP_X_GOOG_CHANNEL_ID"].split("-")[1])
+    UpdateScheduleJob.perform(student.id)
     binding.pry
   end
 

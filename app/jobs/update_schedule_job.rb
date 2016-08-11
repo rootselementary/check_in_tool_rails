@@ -1,7 +1,8 @@
 class UpdateScheduleJob < ActiveJob::Base
   queue_as :default
 
-  def self.perform(student)
+  def self.perform(student_id)
+    student = Student.find(student_id)
     scheduled_events = CalendarEventParser.parse_events(GoogleService.fetch_events(student))
     playlist = student.playlist_activities
     master_calendar = student.grove.master_calendar
