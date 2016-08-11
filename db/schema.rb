@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804173540) do
+ActiveRecord::Schema.define(version: 20160811141420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,10 +33,11 @@ ActiveRecord::Schema.define(version: 20160804173540) do
     t.integer  "user_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "activity_id"
     t.integer  "creator_id"
+    t.integer  "duration",    default: 0
   end
 
   add_index "events", ["activity_id"], name: "index_events_on_activity_id", using: :btree
@@ -92,7 +93,6 @@ ActiveRecord::Schema.define(version: 20160804173540) do
   end
 
   create_table "scans", force: :cascade do |t|
-    t.integer  "event_id"
     t.integer  "location_id"
     t.boolean  "correct"
     t.datetime "timestamp"
@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 20160804173540) do
     t.integer  "user_id"
   end
 
-  add_index "scans", ["event_id"], name: "index_scans_on_event_id", using: :btree
   add_index "scans", ["location_id"], name: "index_scans_on_location_id", using: :btree
   add_index "scans", ["user_id"], name: "index_scans_on_user_id", using: :btree
 
@@ -161,7 +160,6 @@ ActiveRecord::Schema.define(version: 20160804173540) do
   add_foreign_key "playlist_activities", "activities"
   add_foreign_key "playlist_activities", "focus_areas"
   add_foreign_key "playlist_activities", "users"
-  add_foreign_key "scans", "events"
   add_foreign_key "scans", "locations"
   add_foreign_key "scans", "users"
   add_foreign_key "user_roles", "roles"

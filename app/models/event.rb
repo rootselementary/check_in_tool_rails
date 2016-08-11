@@ -3,9 +3,12 @@ class Event < ActiveRecord::Base
   belongs_to :student, foreign_key: :user_id
   belongs_to :activity
   belongs_to :creator, class_name: "Teacher"
-  has_many :scans, dependent: :destroy
 
   def scanned_in?
-    !scans.where(correct: true).empty?
+    scans.where('timestamp > ? AND timestamp < ?', start_time, end_time).present?
+  end
+
+  def scans
+    Scan.where(correct: true, student:student, location: location)
   end
 end
