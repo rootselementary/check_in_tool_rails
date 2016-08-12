@@ -9,20 +9,19 @@
     <div class="field">
       <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
     </div>
-
-    <% if devise_mapping.rememberable? -%>
+    <br>
+    <% if devise_mapping.rememberable? %>
       <div class="field">
         <%= f.check_box :remember_me %>
         <%= f.label :remember_me %>
       </div>
-    <% end -%>
-
+    <% end %>
     <div class="actions">
-      <br>
       <%= f.submit "Log in", class: "btn btn-primary" %>
     </div>
-    <p>OR</p>
   <% end %>
-  <%= link_to "Sign in With Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-primary" %>
 
+  <p>OR</p>
+  <br>
+  <%= link_to "Sign in With Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-primary" %>
 </div>
