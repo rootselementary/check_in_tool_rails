@@ -32,11 +32,25 @@ p.navbar-text {
     }
 }
 
+
 .sign-form {
-  width: 50%;
-  margin: auto;
-  margin-top: 10%;
+  border: 5px solid $roots-green;
+  padding-bottom: 5%;
+  padding-top: 3%;
+  margin-top: 15%;
+
+  .actions {
+    margin-bottom: 2%;
+  }
 }
+@media (min-width:961px) {
+  .sign-form {
+    margin-right: 35%;
+  }
+
+}
+
+
 
 .sortable-placeholder {
   border: 2px dashed $roots-green;
