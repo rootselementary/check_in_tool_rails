@@ -1,0 +1,16 @@
+.flash {
+  position: absolute;
+  z-index: 10000;
+  top: 8%;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.alert-alert {
+  @extend .alert-warning;
+}
+
+.alert-notice {
+  @extend .alert-info;
+}
