@@ -10,7 +10,6 @@ RSpec.describe 'Push Notifications', type: :request do
       }
 
       post '/notifications', { :test => {:name => "Test Data"} }, headers
-      binding.pry
       expect(response).to eq("hi")
   end
   end
