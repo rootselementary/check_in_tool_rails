@@ -27,9 +27,7 @@ class CalendarZipper
 
   def update_playlist(n, start_time)
     _start_time = start_time.dup
-    # This next line will blow up if there is nothing on the schedule. It should never happen but
-    # is this something we should account for?
-    cycles = (n / @playlist.length.to_f).ceil
+    cycles = @playlist.length > 0 ? (n / @playlist.length.to_f).ceil : 0
     cycles = cycles.zero? ? 1 : cycles
     items = @playlist.cycle(cycles).take(n).inject([]) do |acc, i|
       acc.push i.merge({start_time: _start_time, end_time: _start_time + FLEX_INTERVAL})

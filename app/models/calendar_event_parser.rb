@@ -5,8 +5,11 @@ module CalendarEventParser
        start_time: event.start_time,
        end_time: event.end_time,
        title: event.title,
-       location: event.location,
-       creator: event.creator_name
+       activity_id: Activity.find_by(name: event.title).id,
+       location_id: Location.find_by_location(event.location).id,
+       creator: event.creator_name,
+      #  creator_id: User.find_by(email: event.creator_name).id if event.creator_name,
+       metadata: event.to_json
       }
     end
   end

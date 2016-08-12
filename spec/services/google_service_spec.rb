@@ -12,8 +12,8 @@ feature 'Google Calendar Request' do
   it 'Will return list of scheduled events' do
     VCR.use_cassette 'google_calendar_service' do
 
-      student = create(:student, email: "jj.letest@rootselementary.org",
-                               refresh_token: ENV['REFRESH_TOKEN'])
+      student = create(:student, email: "student@example.org",
+                               refresh_token: "xxxxxxxxxxxxxxyyyyyyyyyyyy")
 
       response = GoogleService.fetch_events(student)
       expect(response.count).to eq(2)

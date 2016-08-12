@@ -12,18 +12,25 @@ RSpec.describe 'Update Schedule Job' do
   it "sets a schedule in Redis" do
     VCR.use_cassette 'google_calendar_service' do
       grove = create(:grove)
-      student = create(:student, email: "jj.letest@rootselementary.org",
-                                 refresh_token: ENV['REFRESH_TOKEN'],
+      location = create(:location, name: "breakfast nook",
+                                   grove: grove)
+      activity = create(:activity, name: "morning stuff",
+                                   location: location)
+      location2 = create(:location, name: "cafeteria",
+                                    grove: grove)
+      activity2 = create(:activity, name: "lunch",
+                                    location: location2)
+      student = create(:student, email: "student@example.org",
+                                 refresh_token: "xxxxxxxxxxxxxxyyyyyyyyyyyy",
                                  grove: grove)
 
-      UpdateScheduleJob.perform(student)
-      schedule = student.schedule
-      expect(schedule.class).to eq(Redis::HashKey)
-      expect(schedule["schedule"].class).to eq(String)
-      first_event = JSON.parse(schedule["schedule"]).first
-      expect(first_event["start_time"]).to eq("2016-08-05T08:00:00.000Z")
-      expect(first_event["end_time"]).to eq("2016-08-05T08:15:00.000Z")
-      expect(first_event["title"]).to eq("morning stuff")
+      UpdateScheduleJob.perform(student.id)
+      events = student.events
+      expect(events.first.class).to eq(Event)
+      first_event = events.first
+      expect(first_event.start_time).to eq("2016-08-05T08:00:00.000-06:00")
+      expect(first_event.end_time).to eq("2016-08-05T08:15:00.000-06:00")
+      expect(first_event.title).to eq("morning stuff")
     end
   end
 end

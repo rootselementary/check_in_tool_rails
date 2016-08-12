@@ -7,10 +7,9 @@ class UpdateScheduleJob < ActiveJob::Base
     playlist = student.playlist_activities
     master_calendar = student.grove.master_calendar
     schedule = CalendarZipper.new(master_calendar, playlist, scheduled_events).schedule
-    checksum = ChecksumGenerator.get_checksum(schedule)
-    UpdateScheduleJob.set(wait: 15.minutes).perform_later(student)
-    if checksum != student.schedule[:checksum]
-      student.schedule.update({ schedule: schedule.to_json, checksum: checksum })
+    student.events.destroy_all
+    schedule.each do |sched|
+      student.events.create(sched)
     end
   end
 end
