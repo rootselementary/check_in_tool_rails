@@ -20,7 +20,6 @@ p.navbar-text {
   margin-top: 24px;
 }
 
-
 .hollow-btn {
     background-color: #fff;
     border: 1px solid $roots-green;
@@ -30,6 +29,23 @@ p.navbar-text {
         background-color: $roots-green;
         color: #fff;
     }
+}
+
+.sign-form {
+  border: 5px solid $roots-green;
+  padding-bottom: 5%;
+  padding-top: 3%;
+  margin-top: 15%;
+
+  .actions {
+    margin-bottom: 2%;
+  }
+}
+@media (min-width:961px) {
+  .sign-form {
+    margin-right: 35%;
+  }
+
 }
 
 .sortable-placeholder {
