@@ -39,7 +39,7 @@ FactoryGirl.define do
 
   factory :grove do
     sequence(:name) { |n| "Grove #{n}" }
-    master_calendar [[8, 0], [8, 45], [9, 30], [10, 15]].to_json
+    master_calendar [[8, 0], [8, 45], [9, 30], [10, 15], [11, 0], [11, 45], [12, 30], [1, 15], [2, 0], [2, 45]].to_json
 
     factory :grove_with_students do
       after(:create) do |grove|
@@ -100,8 +100,8 @@ FactoryGirl.define do
 
   factory :activity do
     sequence(:name) { |n| "Fun Activity #{n}" }
-    grove nil
-    location nil
+    association :grove
+    association :location
   end
 
   factory :focus_area do

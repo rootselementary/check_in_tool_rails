@@ -1,6 +1,6 @@
 class Student < User
   include Redis::Objects
-  hash_key :schedule
+  value :last_activity_id
   include Rails.application.routes.url_helpers
   has_many :playlist_activities, foreign_key: :user_id
   has_many :events, foreign_key: :user_id
@@ -61,5 +61,11 @@ class Student < User
   def last_activity
     event = events.where.not(activity_id: nil).order('start_time DESC').first
     Activity.find(event.activity_id)
+  end
+
+  def rotated_playlist
+    @playlist_activities = playlist_activities.joins(:activity).order('position ASC')
+    offset = @playlist_activities.index { |x| x.activity.id == last_activity_id.value.to_i } || 0
+    @playlist_activities.to_a.rotate!(offset)
   end
 end

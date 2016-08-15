@@ -1,10 +1,9 @@
 class UpdateScheduleWorker
   include Sidekiq::Worker
 
-  def self.perform
+  def perform
     Student.all.each do |student|
-      student.update(at_school: true)
-      UpdateScheduleJob.perform(student)
+      UpdateScheduleDailyJob.perform_now(student.id)
     end
   end
 end

@@ -1,16 +1,25 @@
 class UpdateScheduleJob < ActiveJob::Base
   queue_as :default
 
-  def self.perform(student_id)
+  def perform(student_id)
     student = Student.find(student_id)
     scheduled_events = CalendarEventParser.parse_events(GoogleService.fetch_events(student))
-    playlist = student.playlist_activities
+    playlist = student.rotated_playlist.map(&:activity).map(&:attributes)
     master_calendar = student.grove.master_calendar
-    schedule = CalendarZipper.new(master_calendar, playlist, scheduled_events).schedule
+    schedule = CalendarZipper.new(master_calendar, scheduled_events, playlist).schedule
     student.events.destroy_all
     schedule.each do |sched|
       student.events.create(sched)
     end
-    student.schedule.update({ last_activity: student.last_activity.id })
   end
+
+  # class ActivityPresenter
+  #   def initialize(playlist_activity)
+  #     @activity = playlist_activity.activity
+  #   end
+  #
+  #   def attributes
+  #     { id: @activity.id, name: @activity.name }
+  #   end
+  # end
 end

@@ -146,10 +146,10 @@ http_interactions:
             "email": "teacher@example.org"
            },
            "start": {
-            "dateTime": "2016-08-05T13:30:00-06:00"
+            "dateTime": "2016-08-05T09:30:00-06:00"
            },
            "end": {
-            "dateTime": "2016-08-05T16:00:00-06:00"
+            "dateTime": "2016-08-05T10:00:00-06:00"
            },
            "iCalUID": "iCal@google.com",
            "sequence": 0,
@@ -188,10 +188,10 @@ http_interactions:
             "email": "teacher@example.org"
            },
            "start": {
-            "dateTime": "2016-08-05T16:30:00-06:00"
+            "dateTime": "2016-08-05T12:30:00-06:00"
            },
            "end": {
-            "dateTime": "2016-08-05T17:30:00-06:00"
+            "dateTime": "2016-08-05T13:30:00-06:00"
            },
            "iCalUID": "h4mo5njq0f1vo1fgd5j13d51a8@google.com",
            "sequence": 0,

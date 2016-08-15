@@ -9,22 +9,24 @@ RSpec.describe 'Update Schedule Job' do
     Timecop.return
   end
 
-  it "sets a schedule in Redis" do
+  it "creates events for daily schedule" do
     VCR.use_cassette 'google_calendar_service' do
       grove = create(:grove)
       location = create(:location, name: "breakfast nook",
                                    grove: grove)
-      activity = create(:activity, name: "morning stuff",
+      activity = create(:activity, name: "computer activity",
                                    location: location)
       location2 = create(:location, name: "cafeteria",
                                     grove: grove)
-      activity2 = create(:activity, name: "lunch",
+      activity2 = create(:activity, name: "writing activity",
                                     location: location2)
       student = create(:student, email: "student@example.org",
                                  refresh_token: "xxxxxxxxxxxxxxyyyyyyyyyyyy",
                                  grove: grove)
+      student.playlist_activities.create(activity: activity,  position: 1)
+      student.playlist_activities.create(activity: activity2, position: 2)
 
-      UpdateScheduleJob.perform(student.id)
+      UpdateScheduleJob.perform_now(student.id)
       events = student.events
       expect(events.first.class).to eq(Event)
       first_event = events.first

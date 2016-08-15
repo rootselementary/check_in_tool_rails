@@ -5,19 +5,19 @@ class CalendarZipper
   FLEX_INTERVAL = 900 # 15 min
   PERIOD_LENGTH = 2700 # 45 min
 
-  def initialize(master_calendar, activities, playlist)
+  def initialize(master_calendar, events, playlist)
     @master_calendar  = master_calendar
     @beginning_of_day = to_time(@master_calendar.first)
     @end_of_day       = to_time(@master_calendar.last) + PERIOD_LENGTH
-    @activities       = activities.sort{|a,b| a[:start_time] <=> b[:start_time] }
+    @events           = events.sort{|a,b| a[:start_time] <=> b[:start_time] }
     @playlist         = playlist
   end
 
   def schedule
-    case @activities.length
+    case @events.length
       when 0 then fill_with_playlist([], @beginning_of_day, @end_of_day)
-      when 1 then wrap_with_playlist([], @activities.first, @beginning_of_day, @end_of_day)
-      else construct_schedule([], @activities, @beginning_of_day, @end_of_day)
+      when 1 then wrap_with_playlist([], @events.first, @beginning_of_day, @end_of_day)
+      else construct_schedule([], @events, @beginning_of_day, @end_of_day)
     end
   end
 
@@ -38,8 +38,8 @@ class CalendarZipper
     items
   end
 
-  def construct_schedule(schedule, activities, start_time, end_time)
-    first, *middle, last = activities
+  def construct_schedule(schedule, events, start_time, end_time)
+    first, *middle, last = events
     schedule = wrap_with_playlist(schedule, first, start_time, first[:end_time])
     middle.each_with_index do |activity, i|
       next_activity = middle[i + 1]
