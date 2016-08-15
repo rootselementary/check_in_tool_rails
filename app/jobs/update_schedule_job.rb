@@ -11,5 +11,6 @@ class UpdateScheduleJob < ActiveJob::Base
     schedule.each do |sched|
       student.events.create(sched)
     end
+    student.schedule.update({ last_activity: student.last_activity.id })
   end
 end

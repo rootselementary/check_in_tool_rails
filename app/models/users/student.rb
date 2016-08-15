@@ -1,4 +1,6 @@
 class Student < User
+  include Redis::Objects
+  hash_key :schedule
   include Rails.application.routes.url_helpers
   has_many :playlist_activities, foreign_key: :user_id
   has_many :events, foreign_key: :user_id
@@ -54,5 +56,10 @@ class Student < User
   def scanned_in?
     return false unless current_event
     current_event.scanned_in?
+  end
+
+  def last_activity
+    event = events.where.not(activity_id: nil).order('start_time DESC').first
+    Activity.find(event.activity_id)
   end
 end
