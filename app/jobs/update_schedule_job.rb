@@ -9,20 +9,8 @@ class UpdateScheduleJob < ActiveJob::Base
     schedule = CalendarZipper.new(master_calendar, scheduled_events, playlist).schedule
     student.events.destroy_all
     schedule.each do |sched|
-      sched.delete("id")
-      sched.delete("grove_id")
-      sched.delete("image")
-      student.events.create(sched)
+      student.events.create(NormalizeSchedule.new(sched).hash)
     end
   end
 
-  # class ActivityPresenter
-  #   def initialize(playlist_activity)
-  #     @activity = playlist_activity.activity
-  #   end
-  #
-  #   def attributes
-  #     { id: @activity.id, name: @activity.name }
-  #   end
-  # end
 end
