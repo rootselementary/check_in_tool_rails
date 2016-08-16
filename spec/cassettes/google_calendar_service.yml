@@ -65,7 +65,7 @@ http_interactions:
   recorded_at: Fri, 05 Aug 2016 16:58:24 GMT
 - request:
     method: get
-    uri: https://www.googleapis.com/calendar/v3/calendars/student@example.org/events?maxResults=25&orderBy=startTime&singleEvents=true&timeMax=2016-08-06T05:59:59Z&timeMin=2016-08-05T06:00:00Z
+    uri: https://www.googleapis.com/calendar/v3/calendars/student@example.org/events?maxResults=25&orderBy=startTime&singleEvents=true&timeMax=2016-08-05T20:45:00Z&timeMin=2016-08-05T14:00:00Z
     body:
       encoding: UTF-8
       string: ''

@@ -9,8 +9,9 @@ class GoogleService
                                redirect_url: "urn:ietf:wg:oauth:2.0:oob",
                                refresh_token: student.refresh_token)
 
-    start_day = Time.zone.today.beginning_of_day
-    end_day   = Time.zone.today.end_of_day
+    calendar  = student.grove.master_calendar
+    start_day = to_time(calendar.first)
+    end_day   = to_time(calendar.last)
 
     cal.find_events_in_range(start_day, end_day)
   end
@@ -33,4 +34,9 @@ class GoogleService
     channel = Google::Apis::CalendarV3::Channel.new(address: 'https://31ea66ce.ngrok.io/notifications', id: student.id, type: "web_hook")
     client.watch_event(student.email, channel, single_events: true)
   end
+
+  def self.to_time(tuple)
+    Time.zone.now.change(hour: tuple[0], min: tuple[1])
+  end
+
 end
