@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :locations
     resources :teachers
     resources :students do
+      get '/rebuild_schedule', action: 'rebuild_schedule'
       get '/playlist', controller: 'playlist_activities', action: 'index'
       resources :playlist_activities, except: [:show]
     end
@@ -28,6 +29,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  post '/notifications', controller: 'callbacks/google', action: 'watch'
 
   get '/compass', controller: 'compass', action: 'show', as: :compass
   get '/logout', controller: 'compass', action: 'logout', as: :logout

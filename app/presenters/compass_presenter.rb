@@ -4,11 +4,11 @@ class CompassPresenter
   end
 
   def activity_image
-    event.activity.image_url
+    event.activity.try(:image_url)
   end
 
   def activity_name
-    event.activity.name
+    event.activity.try(:title)
   end
 
   def location_image
@@ -24,11 +24,11 @@ class CompassPresenter
   end
 
   def creator_image
-    event.creator.google_image
+    event.creator.try(:google_image)
   end
 
   def creator_name
-    event.creator.name
+    event.creator.try(:name)
   end
 
   def scanned_in?

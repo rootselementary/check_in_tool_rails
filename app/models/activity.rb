@@ -10,6 +10,6 @@ class Activity < ActiveRecord::Base
     select('activities.*, locations.name as location_name')
       .joins(:location)
       .where(grove_id: user.grove_id)
-      .order(name: :asc)
+      .order(title: :asc)
   end
 end

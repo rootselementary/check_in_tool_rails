@@ -1,5 +1,9 @@
 class Student < User
   include Rails.application.routes.url_helpers
+  include Redis::Objects
+
+  value :last_activity_id
+
   has_many :playlist_activities, foreign_key: :user_id
   has_many :events, foreign_key: :user_id
   has_many :scans, foreign_key: :user_id
@@ -54,5 +58,19 @@ class Student < User
   def scanned_in?
     return false unless current_event
     current_event.scanned_in?
+  end
+
+  def last_activity
+    scan = scans.includes(:activity)
+                .where.not(activity_id: nil)
+                .order(created_at: :desc)
+                .first
+    scan.activity if scan.present?
+  end
+
+  def rotated_playlist
+    @playlist_activities = playlist_activities.joins(:activity).order('position ASC')
+    offset = @playlist_activities.index { |x| x.activity.id == last_activity_id.value.to_i } || 0
+    @playlist_activities.to_a.rotate!(offset)
   end
 end

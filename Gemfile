@@ -27,6 +27,11 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'google_calendar'
 gem 'rqrcode'
 gem 'rails_12factor', group: :production
+gem 'sidekiq'
+gem 'sidekiq-cron', '~> 0.4.0'
+gem 'whenever', require: false
+gem 'redis-objects'
+gem 'google-api-client', '~> 0.9'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

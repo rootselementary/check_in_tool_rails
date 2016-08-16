@@ -23,7 +23,7 @@ module Pages
     end
 
     def edit_activity(name, location, filename = nil)
-      fill_in "Name", with: name
+      fill_in "Title", with: name
       select location.name, from: "Location"
       attach_file "Image", filename if filename
       click_on "Save"
@@ -31,7 +31,7 @@ module Pages
     end
 
     def create_new_activity(name, location, filename = "#{Rails.root}/spec/support/images/activity.png")
-      fill_in "Name", with: name
+      fill_in "Title", with: name
       select location.name, from: "Location"
       attach_file "Image", filename
       click_on "Save"

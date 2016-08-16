@@ -7,6 +7,13 @@ module Admin
       end
     end
 
+    def rebuild_schedule
+      @resource = Student.find(params[:student_id])
+      authorize(@resource)
+      UpdateScheduleJob.perform_later(@resource.id)
+      redirect_to after_save_path_for(@resource)
+    end
+
     protected
 
     def after_save_path_for(resource)

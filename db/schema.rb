@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811164508) do
+ActiveRecord::Schema.define(version: 20160815234315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
     t.integer  "grove_id"
     t.integer  "location_id"
     t.datetime "created_at",  null: false
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20160811164508) do
     t.integer  "activity_id"
     t.integer  "creator_id"
     t.integer  "duration",    default: 0
+    t.string   "title"
+    t.json     "metadata"
   end
 
   add_index "events", ["activity_id"], name: "index_events_on_activity_id", using: :btree
@@ -56,9 +58,10 @@ ActiveRecord::Schema.define(version: 20160811164508) do
   create_table "groves", force: :cascade do |t|
     t.integer  "school_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "image"
+    t.json     "master_calendar"
   end
 
   add_index "groves", ["school_id"], name: "index_groves_on_school_id", using: :btree
@@ -99,6 +102,7 @@ ActiveRecord::Schema.define(version: 20160811164508) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
+    t.integer  "activity_id"
   end
 
   add_index "scans", ["location_id"], name: "index_scans_on_location_id", using: :btree
