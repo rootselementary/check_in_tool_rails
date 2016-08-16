@@ -1,6 +1,6 @@
 class Admin::ActivitiesController < Admin::ResourceController
   def new
-    @locations = Location.where(grove_id: current_user.grove_id)
+    @locations = Location.where(grove_id: current_grove.id)
     super
   end
 
@@ -11,7 +11,7 @@ class Admin::ActivitiesController < Admin::ResourceController
   end
 
   def edit
-    @locations = Location.where(grove_id: current_user.grove_id)
+    @locations = Location.where(grove_id: current_grove.id)
     super
   end
 
