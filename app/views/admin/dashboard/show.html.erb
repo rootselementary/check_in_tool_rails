@@ -1,15 +1,10 @@
 <h2>Welcome</h2>
 
-<div class="grove-picker">
-  <h3>Select Grove</h3>
-  <form class="form-inline">
-    <label for="groves">Grove</label>
-    <select class="form-control">
-      <option selected="selected"><%= current_user.grove.name %></option>
-      <% @groves.each do |grove| %>
-        <option><%= grove.name %></option>
-      <% end %>
-    </select>
-    <button type="submit" class="btn hollow-btn">Change Grove</button>
-  </form>
-</div>
+
+<%= simple_form_for([:admin, current_user], html: { class: 'inline' }) do |form| %>
+  <%= form.input :grove_id,
+                 selected: [current_grove.id],
+                 include_blank: false,
+                 collection: @groves.map{|x| [x.name, x.id]} %>
+  <%= form.submit 'Change Grove', class: "btn btn-default" %>
+<% end %>
