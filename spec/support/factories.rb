@@ -123,7 +123,7 @@ FactoryGirl.define do
 
   factory :event do
     student nil
-    location nil
+    assocation :event
     start_time Time.now
     end_time Time.now + 60*60
   end
