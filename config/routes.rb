@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :locations
     resources :teachers
     resources :students do
+      get '/rebuild_schedule', action: 'rebuild_schedule'
       get '/playlist', controller: 'playlist_activities', action: 'index'
       resources :playlist_activities, except: [:show]
     end
