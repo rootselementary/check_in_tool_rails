@@ -3,12 +3,11 @@ class CalendarZipper
 
   TRANSITION = 120 # 2 min transition period
   FLEX_INTERVAL = 900 # 15 min
-  PERIOD_LENGTH = 2700 # 45 min
 
   def initialize(master_calendar, events, playlist)
     @master_calendar  = master_calendar
     @beginning_of_day = to_time(@master_calendar.first)
-    @end_of_day       = to_time(@master_calendar.last) + PERIOD_LENGTH
+    @end_of_day       = to_time(@master_calendar.last)
     @events           = events.sort{|a,b| a[:start_time] <=> b[:start_time] }
     @playlist         = playlist
   end

@@ -20,7 +20,7 @@ RSpec.describe CalendarZipper do
 
     describe 'when things line up nicely' do
       let(:master_schedule) {
-        [[8, 0], [8, 45], [9, 30], [10, 15]]
+        [[8, 0], [11, 0]]
       }
       let(:english) {
         { name: 'english 101', start_time: Time.zone.now.change(hour: 8, min: 00), end_time: Time.zone.now.change(hour: 8, min: 45) }
