@@ -9,6 +9,9 @@ class UpdateScheduleJob < ActiveJob::Base
     schedule = CalendarZipper.new(master_calendar, scheduled_events, playlist).schedule
     student.events.destroy_all
     schedule.each do |sched|
+      sched.delete("id")
+      sched.delete("grove_id")
+      sched.delete("image")
       student.events.create(sched)
     end
   end

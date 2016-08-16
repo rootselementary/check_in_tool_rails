@@ -18,8 +18,8 @@ feature 'Google Calendar Request' do
       response = GoogleService.fetch_events(student)
       expect(response.count).to eq(2)
       expect(response.first.class).to eq(Google::Event)
-      expect(response.first.start_time).to eq("2016-08-05T19:30:00Z")
-      expect(response.first.end_time).to eq("2016-08-05T22:00:00Z")
+      expect(response.first.start_time).to eq("2016-08-05T15:30:00Z")
+      expect(response.first.end_time).to eq("2016-08-05T16:00:00Z")
       expect(response.first.location).to eq("Breakfast Nook")
       expect(response.first.title).to eq("morning stuff")
     end

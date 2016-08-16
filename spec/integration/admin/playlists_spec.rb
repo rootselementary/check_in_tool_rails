@@ -18,7 +18,7 @@ RSpec.feature 'Managing Playlist Activities' do
     it "can view a student playlist with activities" do
       grove_playlist_page.visit_page.view_playlist(student.name)
       expect(grove_playlist_page).to have_content "#{student.name}'s Grove Playlist"
-      expect(grove_playlist_page).to have_content activity.name
+      expect(grove_playlist_page).to have_content activity.title
       expect(grove_playlist_page).to have_content location.name
       expect(grove_playlist_page).to have_content focus_area.name
     end
@@ -28,7 +28,7 @@ RSpec.feature 'Managing Playlist Activities' do
                          .view_playlist(student2.name)
                          .add_new_activity(activity, focus_area)
 
-      expect(grove_playlist_page).to have_content activity.name
+      expect(grove_playlist_page).to have_content activity.title
       expect(grove_playlist_page).to have_content location.name
       expect(grove_playlist_page).to have_content focus_area.name
     end
@@ -38,7 +38,7 @@ RSpec.feature 'Managing Playlist Activities' do
                          .view_playlist(student2.name)
                          .add_new_activity(activity)
 
-      expect(grove_playlist_page).to have_content activity.name
+      expect(grove_playlist_page).to have_content activity.title
       expect(grove_playlist_page).to have_content location.name
     end
 
@@ -47,8 +47,8 @@ RSpec.feature 'Managing Playlist Activities' do
                          .view_playlist(student.name)
                          .edit_activity(student.playlist_activities.first, activity2)
 
-      expect(grove_playlist_page).to have_content activity2.name
-      expect(grove_playlist_page).not_to have_content activity.name
+      expect(grove_playlist_page).to have_content activity2.title
+      expect(grove_playlist_page).not_to have_content activity.title
       expect(grove_playlist_page).not_to have_content focus_area.name
     end
 
@@ -58,7 +58,7 @@ RSpec.feature 'Managing Playlist Activities' do
                          .add_new_activity(activity2)
                          .delete_activity(student.playlist_activities.first)
 
-      expect(grove_playlist_page).not_to have_content activity.name
+      expect(grove_playlist_page).not_to have_content activity.title
     end
   end
 

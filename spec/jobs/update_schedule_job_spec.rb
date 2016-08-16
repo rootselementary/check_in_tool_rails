@@ -14,11 +14,11 @@ RSpec.describe 'Update Schedule Job' do
       grove = create(:grove)
       location = create(:location, name: "breakfast nook",
                                    grove: grove)
-      activity = create(:activity, name: "computer activity",
+      activity = create(:activity, title: "computer activity",
                                    location: location)
       location2 = create(:location, name: "cafeteria",
                                     grove: grove)
-      activity2 = create(:activity, name: "writing activity",
+      activity2 = create(:activity, title: "writing activity",
                                     location: location2)
       student = create(:student, email: "student@example.org",
                                  refresh_token: "xxxxxxxxxxxxxxyyyyyyyyyyyy",
@@ -32,7 +32,7 @@ RSpec.describe 'Update Schedule Job' do
       first_event = events.first
       expect(first_event.start_time).to eq("2016-08-05T08:00:00.000-06:00")
       expect(first_event.end_time).to eq("2016-08-05T08:15:00.000-06:00")
-      expect(first_event.title).to eq("morning stuff")
+      expect(first_event.title).to eq("computer activity")
     end
   end
 end

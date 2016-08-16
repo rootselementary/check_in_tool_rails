@@ -32,15 +32,15 @@ RSpec.describe Student, type: :model do
     end
     describe '#rotated_playlist' do
       before { student.last_activity_id = nil }
-      let(:activity1) { create(:activity, name: "new activity") }
-      let(:activity2) { create(:activity, name: "newer activity") }
+      let(:activity1) { create(:activity, title: "new activity") }
+      let(:activity2) { create(:activity, title: "newer activity") }
       let(:student) { create(:student, playlist_activities: [build(:playlist_activity, position: 1,
                                                                                       activity: activity1),
                                                             build(:playlist_activity, position: 2,
                                                                                       activity: activity2)]) }
       it 'rotates playlist activities based on last activity from previous day' do
         expect(student.rotated_playlist.map(&:position)).to eq([1, 2])
-        activity = student.playlist_activities.joins(:activity).where('activities.name = ?', "newer activity").first
+        activity = student.playlist_activities.joins(:activity).where('activities.title = ?', "newer activity").first
         student.last_activity_id = activity.activity.id
         expect(student.rotated_playlist.map(&:position)).to eq([2, 1])
       end

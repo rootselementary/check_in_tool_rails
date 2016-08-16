@@ -8,7 +8,7 @@ class CompassPresenter
   end
 
   def activity_name
-    event.activity.name
+    event.activity.title
   end
 
   def location_image

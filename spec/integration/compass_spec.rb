@@ -34,7 +34,7 @@ RSpec.feature 'Student Compass' do
     it "shows details of current event" do
       compass_page.visit_page
       expect(compass_page).to have_content event.location.name
-      expect(compass_page).to have_content event.activity.name
+      expect(compass_page).to have_content event.activity.title
       expect(compass_page).to have_content event.creator.name
       expect(compass_page).to have_image event.location.image_url
       expect(compass_page).to have_image event.activity.image_url
@@ -86,12 +86,12 @@ RSpec.feature 'Student Compass' do
     it "automatically transitions to the next event" do
       compass_page.visit_page
       expect(compass_page).to have_content event.location.name
-      expect(compass_page).to have_content event.activity.name
+      expect(compass_page).to have_content event.activity.title
       expect(compass_page).to have_content event.creator.name
 
       sleep(11)
       expect(compass_page).to have_content event2.location.name
-      expect(compass_page).to have_content event2.activity.name
+      expect(compass_page).to have_content event2.activity.title
       expect(compass_page).to have_content event2.creator.name
     end
   end

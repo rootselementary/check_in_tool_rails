@@ -14,11 +14,11 @@ RSpec.describe CalendarEventParser, type: :model do
       grove = create(:grove)
       location = create(:location, name: "breakfast nook",
                                    grove: grove)
-      activity = create(:activity, name: "morning stuff",
+      activity = create(:activity, title: "morning stuff",
                                    location: location)
       location2 = create(:location, name: "cafeteria",
                                     grove: grove)
-      activity2 = create(:activity, name: "lunch",
+      activity2 = create(:activity, title: "lunch",
                                     location: location2)
 
       student = create(:student, email: "student@example.org",
@@ -29,8 +29,8 @@ RSpec.describe CalendarEventParser, type: :model do
       expect(scheduled_events.count).to eq(2)
       first_event = scheduled_events.first
       expect(first_event.class).to eq(Hash)
-      expect(first_event[:start_time]).to eq("2016-08-05T19:30:00Z")
-      expect(first_event[:end_time]).to eq("2016-08-05T22:00:00Z")
+      expect(first_event[:start_time]).to eq("2016-08-05 09:30:00.000000000 -0600")
+      expect(first_event[:end_time]).to eq("2016-08-05 10:00:00.000000000 -0600")
       expect(first_event[:title]).to eq("morning stuff")
     end
   end
