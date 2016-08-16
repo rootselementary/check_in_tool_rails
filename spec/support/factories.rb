@@ -129,7 +129,8 @@ FactoryGirl.define do
   end
 
   factory :scan do
-    location nil
+    association :activity
+    association :location
     timestamp Time.now + 10*60
     correct false
   end

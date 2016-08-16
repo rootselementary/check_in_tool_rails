@@ -1,7 +1,9 @@
 class Student < User
-  include Redis::Objects
-  value :last_activity_id
   include Rails.application.routes.url_helpers
+  include Redis::Objects
+
+  value :last_activity_id
+
   has_many :playlist_activities, foreign_key: :user_id
   has_many :events, foreign_key: :user_id
   has_many :scans, foreign_key: :user_id
@@ -59,8 +61,11 @@ class Student < User
   end
 
   def last_activity
-    event = events.where.not(activity_id: nil).order('start_time DESC').first
-    Activity.find(event.activity_id)
+    scan = scans.includes(:activity)
+                .where.not(activity_id: nil)
+                .order(created_at: :desc)
+                .first
+    scan.activity if scan.present?
   end
 
   def rotated_playlist
