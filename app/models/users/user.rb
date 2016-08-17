@@ -4,8 +4,7 @@ class User < ActiveRecord::Base
   belongs_to :school
   belongs_to :grove
 
-  def self.from_omniauth(access_token)
-    package = OmniauthPackage.new(access_token)
+  def self.from_omniauth(package)
     user = User.where(email: package.email).first
     if user.present?
       user.set_token(package) unless user.refresh_token

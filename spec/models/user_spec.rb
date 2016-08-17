@@ -24,4 +24,19 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '.from_omniauth' do
+    let(:package) { double(:package, email: 'student@example.com',
+                                     image: 'foo.jpg',
+                                     token: 'abc123',
+                                     refresh_token: '123abc',
+                                     expires_at: 1.year.from_now)}
+
+    it 'sets the refresh token on the user' do
+      user = create(:user, email: 'student@example.com')
+      expect { User.from_omniauth(package) }.to change {
+        User.find(user.id).refresh_token
+      }.from(nil).to("123abc")
+    end
+  end
 end
