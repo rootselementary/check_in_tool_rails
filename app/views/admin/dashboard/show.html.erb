@@ -1,10 +1,11 @@
 <h2>Welcome</h2>
 
-
-<%= simple_form_for([:admin, current_user], html: { class: 'inline' }) do |form| %>
-  <%= form.input :grove_id,
-                 selected: [current_grove.id],
-                 include_blank: false,
-                 collection: @groves.map{|x| [x.name, x.id]} %>
-  <%= form.submit 'Change Grove', class: "btn btn-default" %>
+<% if current_user.admin? %>
+  <%= simple_form_for([:admin, current_user], html: { class: 'inline' }) do |form| %>
+    <%= form.input :grove_id,
+                   selected: [current_grove.id],
+                   include_blank: false,
+                   collection: @groves.map{|x| [x.name, x.id]} %>
+    <%= form.submit 'Change Grove', class: "btn btn-default" %>
+  <% end %>
 <% end %>
