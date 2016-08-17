@@ -11,6 +11,7 @@ module Admin
       @resource = Student.find(params[:student_id])
       authorize(@resource)
       UpdateScheduleJob.perform_later(@resource.id)
+      flash[:notice] = "Student schedule is being rebuilt, it should be ready in a few minutes."
       redirect_to after_save_path_for(@resource)
     end
 
