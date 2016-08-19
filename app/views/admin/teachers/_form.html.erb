@@ -3,6 +3,6 @@
   <%= form.input :name %>
   <%= form.input :email %>
   <%= form.input :grove_id, include_blank: false, collection: current_user.groves.map{|x| [x.name, x.id]} %>
-  <%= form.association :roles, as: :check_boxes %>
+  <%= form.association :roles, as: :check_boxes, :collection => Role.all.map { |o| [o.name.titleize, o.id] } %>
   <%= form.submit 'Save' %>
 <% end %>
