@@ -14,12 +14,12 @@ RSpec.describe CalendarEventParser, type: :model do
       grove = create(:grove)
       location = create(:location, name: "breakfast nook",
                                    grove: grove)
-      activity = create(:activity, title: "morning stuff",
-                                   location: location)
+      # activity = create(:activity, title: "morning stuff",
+      #                              location: location)
       location2 = create(:location, name: "cafeteria",
                                     grove: grove)
-      activity2 = create(:activity, title: "lunch",
-                                    location: location2)
+      # activity2 = create(:activity, title: "lunch",
+      #                               location: location2)
 
       student = create(:student, email: "student@example.org",
                                  refresh_token: "xxxxxxxxxxxxxxyyyyyyyyyyyy",
