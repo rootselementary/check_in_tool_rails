@@ -15,7 +15,7 @@ RSpec.feature 'Managing Locations' do
     before { login(administrator) }
 
     it 'provides a link to manage locations' do
-      expect(dashboard_page).to have_content("Manage Locations")
+      expect(dashboard_page).to have_content("Locations")
     end
 
     it 'shows the locations' do
@@ -68,16 +68,6 @@ RSpec.feature 'Managing Locations' do
       end
     end
 
-  end
-
-  describe 'as a teacher without an administrative role' do
-    let(:teacher) { create(:teacher, school: school) }
-
-    before { login(teacher) }
-
-    it 'does not allow access' do
-      expect { dashboard_page.visit('/admin/locations') }.to raise_error(Pundit::NotAuthorizedError)
-    end
   end
 
 end

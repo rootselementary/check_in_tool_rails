@@ -16,7 +16,7 @@ RSpec.feature 'Managing Activities' do
     end
 
     it 'provides a link to manage the groves' do
-      expect(dashboard_page).to have_content("Manage Activities")
+      expect(dashboard_page).to have_content("Activities")
     end
 
     it "shows only activities in the teacher's grove" do

@@ -16,22 +16,22 @@ RSpec.feature 'Managing Teachers' do
     before { login(administrator) }
 
     it 'provides a link to manage the groves' do
-      expect(dashboard_page).to have_content("Manage Teachers")
+      expect(dashboard_page).to have_content("Teachers")
     end
 
     it 'shows the teachers in the school' do
-      dashboard_page.click_on("Manage Teachers")
+      dashboard_page.click_on("Teachers")
       expect(teacher_admin_page).to have_content("Homer Simpson")
     end
 
     it 'does not show teachers in other schools' do
       other_teacher = create(:teacher, name: "Marge Simpson", school: create(:school))
-      dashboard_page.click_on("Manage Teachers")
+      dashboard_page.click_on("Teachers")
       expect(teacher_admin_page).to_not have_content("Marge Simpson")
     end
 
     it 'allows user to delete a teacher' do
-      dashboard_page.click_on "Manage Teachers"
+      dashboard_page.click_on "Teachers"
       expect(teacher_admin_page).to have_content(teacher.name)
       teacher_admin_page.view_teacher(teacher.name).delete_teacher(teacher.id)
       expect(teacher_admin_page.visit_page).to_not have_content(teacher.name)
@@ -41,19 +41,19 @@ RSpec.feature 'Managing Teachers' do
 
       it 'allows creation of a new teacher' do
         expect {
-          dashboard_page.click_on "Manage Teachers"
+          dashboard_page.click_on "Teachers"
           teacher_admin_page.create_teacher(grove.name)
         }.to change { Grove.find(grove.id).teachers.count }.by(1)
       end
 
       it 'allows creation of a new admin teacher' do
-        expect { dashboard_page.click_on "Manage Teachers"
+        expect { dashboard_page.click_on "Teachers"
           teacher_admin_page.create_teacher(grove.name, :admin)
         }.to change { Role.find_by_name("admin").users.count }.by(1)
       end
 
       it 'ensures teacher is not admin by default' do
-        expect { dashboard_page.click_on "Manage Teachers"
+        expect { dashboard_page.click_on "Teachers"
           teacher_admin_page.create_teacher(grove.name)
         }.not_to change { Role.find_by_name("admin").users.count }
       end
@@ -62,7 +62,7 @@ RSpec.feature 'Managing Teachers' do
 
     describe 'updating a teacher' do
       it 'updates the teacher attributes' do
-        dashboard_page.click_on("Manage Teachers")
+        dashboard_page.click_on("Teachers")
         expect {
           teacher_admin_page.update_teacher_name(teacher.name, "Lisa Simpson")
         }.to change {
@@ -80,7 +80,7 @@ RSpec.feature 'Managing Teachers' do
     before { login(teacher) }
 
     it 'does not show the link' do
-      expect(dashboard_page).to_not have_content("Manage Teachers")
+      expect(dashboard_page).to_not have_content("Teachers")
     end
 
     it 'does not allow access' do

@@ -10,10 +10,10 @@ describe LocationPolicy do
       expect(policy.index?).to be true
     end
 
-    it 'does not permit teachers' do
+    it 'permits teachers' do
       teacher = create(:teacher)
       policy = described_class.new(teacher, nil)
-      expect(policy.index?).to be false
+      expect(policy.index?).to be true
     end
   end
 

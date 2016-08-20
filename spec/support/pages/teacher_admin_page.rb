@@ -13,7 +13,7 @@ module Pages
       fill_in "Email", with: "teacher@example.com"
       select grove_name, from: "teacher[grove_id]"
       roles.each do |role|
-        check role.to_s.titleizeg
+        check role.to_s.titleize
       end
       click_on "Save"
       page.has_content? "Teacher Saved"

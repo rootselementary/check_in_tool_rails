@@ -10,7 +10,6 @@ RSpec.feature 'User can login' do
       login(teacher)
       expect(current_path).to eq(admin_dashboard_path)
       expect(page).to have_content("Hello, #{teacher.first_name}")
-      expect(page).to have_content("Grove Configuration")
       expect(page).to have_content("Signed in successfully.")
     end
   end
