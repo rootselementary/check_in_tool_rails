@@ -1,4 +1,4 @@
-<%= link_to "New #{resource_class}", send("new_admin_#{resource_as_sym}_path"), class: "new-btn btn btn-success" %>
+<%= link_to("New #{resource_class}", send("new_admin_#{resource_as_sym}_path"), class: "new-btn btn btn-success") if policy(resource_as_sym).new? %>
 <br><br>
 <table class="table">
   <tr>
@@ -13,9 +13,9 @@
         <td><%= resource.send(attribute) %></td>
       <% end %>
       <td id="<%= resource_as_sym %>-<%= resource.id %>">
-        <%= link_to "View", send("admin_#{resource_as_sym}_path", resource), class: "btn btn-default" %>
-        <%= link_to "Edit", send("edit_admin_#{resource_as_sym}_path", resource), class: "btn btn-default" %>
-        <%= link_to "Delete", send("admin_#{resource_as_sym}_path", resource), method: :delete, class: "btn btn-danger" %>
+        <%= link_to("View", send("admin_#{resource_as_sym}_path", resource), class: "btn btn-default") if policy(resource).show? %>
+        <%= link_to("Edit", send("edit_admin_#{resource_as_sym}_path", resource), class: "btn btn-default") if policy(resource).edit?%>
+        <%= link_to("Delete", send("admin_#{resource_as_sym}_path", resource), method: :delete, class: "btn btn-danger") if policy(resource).destroy? %>
       </td>
     </tr>
   <% end %>

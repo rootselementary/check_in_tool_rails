@@ -7,6 +7,14 @@ module Admin
 
     protected
 
+    def collection
+      if current_user.admin?
+        Location.all
+      else
+        Location.where(grove: current_grove)
+      end
+    end
+
     def after_save_path_for(resource)
       admin_locations_path
     end
