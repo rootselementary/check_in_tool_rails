@@ -1,5 +1,5 @@
 desc "Update Schedule Daily Worker"
 
 task :update_schedules => :environment do
-  UpdateScheduleWorker.perform_now
+  UpdateStudentsScheduleJob.perform_now
 end

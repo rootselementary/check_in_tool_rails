@@ -35,4 +35,10 @@ Rails.application.routes.draw do
   get '/compass', controller: 'compass', action: 'show', as: :compass
   get '/logout', controller: 'compass', action: 'logout', as: :logout
   get '/checkin', to: 'compass#checkin'
+
+  # sidekiq monitoring
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

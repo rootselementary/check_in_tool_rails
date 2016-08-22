@@ -421,6 +421,7 @@ DEPENDENCIES
   sidekiq-cron (~> 0.4.0)
   simple_form
   simplecov
+  sinatra
   spring
   sprockets (>= 3.0.0)
   sprockets-es6
