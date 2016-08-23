@@ -26,6 +26,7 @@ RSpec.describe 'Update Schedule Job' do
       expect(first_event.start_time).to eq("2016-08-05T08:00:00.000-06:00")
       expect(first_event.end_time).to eq("2016-08-05T08:15:00.000-06:00")
       expect(first_event.title).to eq("computer activity")
+      expect(first_event.activity).to eq(activity)
     end
   end
 end
