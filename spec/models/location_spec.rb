@@ -13,6 +13,19 @@ RSpec.describe Location, type: :model do
     end
   end
 
+  describe 'dependent destroys' do
+    let(:location) { create(:location) }
+    it 'can be deleted if there are dependent events' do
+      create(:event, location: location)
+      expect { location.destroy }.to change { Event.count }.by(-1)
+    end
+
+    it 'can be deleted with dependent activities' do
+      location.activities.create(build(:activity).attributes)
+      expect { location.destroy }.to change { Activity.count }.by(-1)
+    end
+  end
+
   describe '.find_by_location' do
 
     it 'should look up as upper case or lower case' do
