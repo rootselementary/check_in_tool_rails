@@ -65,7 +65,7 @@ RSpec.feature 'Managing Activities' do
       it 'displays the activity properties' do
         activity_admin_page.visit_activity_page(activity.id)
         expect(activity_admin_page).to have_content activity.title
-        expect(activity_admin_page).to have_content location.name
+        expect(activity_admin_page).to have_content location.titleized_name
         expect(activity_admin_page).to have_image "activity-default.png"
       end
     end

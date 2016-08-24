@@ -1,0 +1,21 @@
+<%= link_to("New #{resource_class}", send("new_admin_#{resource_as_sym}_path"), class: "new-btn btn btn-success") if policy(resource_as_sym).new? %>
+<br><br>
+<table class="table">
+  <tr>
+    <% collection_attributes.each do |header| %>
+      <th><%= header.to_s.titleize %></th>
+    <% end %>
+    <th>Actions</th>
+  </tr>
+  <% collection.each do |resource| %>
+    <tr>
+      <td><%= resource.title %></td>
+      <td><%= resource.location_name.titlecase %></td>
+      <td id="<%= resource_as_sym %>-<%= resource.id %>">
+        <%= link_to("View", send("admin_#{resource_as_sym}_path", resource), class: "btn btn-default") if policy(resource).show? %>
+        <%= link_to("Edit", send("edit_admin_#{resource_as_sym}_path", resource), class: "btn btn-default") if policy(resource).edit?%>
+        <%= link_to("Delete", send("admin_#{resource_as_sym}_path", resource), method: :delete, class: "btn btn-danger") if policy(resource).destroy? %>
+      </td>
+    </tr>
+  <% end %>
+</table>

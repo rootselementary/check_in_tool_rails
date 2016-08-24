@@ -5,7 +5,7 @@ class Location < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  # before_save :normalize_name
+  before_save :normalize_name
 
   def self.find_by_location(location)
     where("name LIKE '%#{location.downcase}%'").first
@@ -13,6 +13,10 @@ class Location < ActiveRecord::Base
 
   def grove_name
     grove.name
+  end
+
+  def titleized_name
+    name.titlecase
   end
 
   private

@@ -38,7 +38,7 @@ RSpec.feature 'Managing Locations' do
         expect {
           location_admin_page.update_location_name(location, "Springfield")
         }.to change {
-          Location.where(name: "Springfield").count
+          Location.where(name: "springfield").count
         }.from(0).to(1)
       end
 
@@ -62,8 +62,8 @@ RSpec.feature 'Managing Locations' do
     describe 'deleting a location' do
       it 'allows user to delete a location' do
         location_admin_page.visit_page
-        expect(location_admin_page).to have_content(location.name)
-        location_admin_page.view_location(location.name).delete_location(location.id)
+        expect(location_admin_page).to have_content(location.titleized_name)
+        location_admin_page.view_location(location.titleized_name).delete_location(location.id)
         expect(location_admin_page.visit_page).to_not have_content(location.name)
       end
     end
