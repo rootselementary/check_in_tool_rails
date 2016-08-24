@@ -1,0 +1,2 @@
+class FocusAreaPolicy < AdminResourcePolicy
+end

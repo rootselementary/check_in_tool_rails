@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
     resources :locations
+    resources :focus_areas
     resources :teachers
     resources :students do
       get '/rebuild_schedule', action: 'rebuild_schedule'

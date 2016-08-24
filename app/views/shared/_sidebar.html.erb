@@ -4,6 +4,8 @@
   <li><%=link_to("Locations", admin_locations_path, class: "btn hollow-btn btn-block") if policy(:location).index? %></li>
   <li><%=link_to("Teachers", admin_teachers_path, class: "btn hollow-btn btn-block") if policy(:teacher).index? %></li>
   <li><%=link_to("Students", admin_students_path, class: "btn hollow-btn btn-block") if policy(:student).index? %></li>
+  <li><%=link_to("Focus Areas", admin_focus_areas_path, class: "btn hollow-btn btn-block") if policy(:focus_area).index? %></li>
+
   <hr>
   <h4>Grove Management</h4>
   <li><%=link_to "Grove Monitor", admin_grove_monitor_all_path,class: "btn hollow-btn btn-block" %></li>
