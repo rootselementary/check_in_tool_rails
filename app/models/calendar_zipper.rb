@@ -1,9 +1,6 @@
 class CalendarZipper
   attr_reader :playlist
 
-  TRANSITION = 120 # 2 min transition period
-  FLEX_INTERVAL = 900 # 15 min
-
   def initialize(master_calendar, events, playlist)
     @master_calendar  = master_calendar
     @beginning_of_day = to_time(@master_calendar.first)
@@ -29,8 +26,9 @@ class CalendarZipper
     cycles = @playlist.length > 0 ? (n / @playlist.length.to_f).ceil : 0
     cycles = cycles.zero? ? 1 : cycles
     items = @playlist.cycle(cycles).take(n).inject([]) do |acc, i|
-      acc.push i.merge({start_time: _start_time, end_time: _start_time + FLEX_INTERVAL})
-      _start_time += FLEX_INTERVAL
+      t = _start_time + Grove::FLEX_INTERVAL
+      acc.push i.merge({start_time: _start_time, end_time: t, duration: t.to_i - _start_time.to_i })
+      _start_time += Grove::FLEX_INTERVAL
       acc
     end
     @playlist.rotate!(n)
@@ -63,7 +61,7 @@ class CalendarZipper
   end
 
   def number_of_playlist_items(start_time, end_time)
-    (end_time - start_time).to_i / FLEX_INTERVAL
+    (end_time - start_time).to_i / Grove::FLEX_INTERVAL
   end
 
   def to_time(tuple)

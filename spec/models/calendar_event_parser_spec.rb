@@ -31,6 +31,8 @@ RSpec.describe CalendarEventParser, type: :model do
       expect(first_event.class).to eq(Hash)
       expect(first_event[:start_time]).to eq("2016-08-05 09:30:00.000000000 -0600")
       expect(first_event[:end_time]).to eq("2016-08-05 10:00:00.000000000 -0600")
+      expect(first_event[:duration]).to eq(30.minutes.to_i)
+
       expect(first_event[:title]).to eq("morning stuff")
     end
   end
