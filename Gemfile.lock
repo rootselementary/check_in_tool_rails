@@ -273,6 +273,8 @@ GEM
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     retriable (2.1.0)
+    rollbar (2.12.0)
+      multi_json
     rqrcode (0.10.1)
       chunky_png (~> 1.0)
     rspec-core (3.5.2)
@@ -411,6 +413,7 @@ DEPENDENCIES
   rails (= 4.2.5.1)
   rails_12factor
   redis-objects
+  rollbar
   rqrcode
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
