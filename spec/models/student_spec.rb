@@ -33,6 +33,42 @@ RSpec.describe Student, type: :model do
       end
     end
 
+    describe '#compass_events' do
+
+      # before { Timecop.freeze(Time.parse('2016-08-05 08:45:00 -0600')) }
+      after { Timecop.return }
+
+      it 'at the start of the next event' do
+        Timecop.freeze(Time.parse('2016-08-05 08:45:01 -0600'))
+        before = create(:event, start_time: Time.parse('2016-08-05 08:00:00 -0600'), end_time: Time.parse('2016-08-05 08:45:00 -0600'), student: student)
+        event1 = create(:event, start_time: Time.parse('2016-08-05 08:45:00 -0600'), end_time: Time.parse('2016-08-05 09:00:00 -0600'), student: student)
+        event2 = create(:event, start_time: Time.parse('2016-08-05 09:00:00 -0600'), end_time: Time.parse('2016-08-05 09:15:00 -0600'), student: student)
+        after = create(:event, start_time: Time.parse('2016-08-05 09:15:00 -0600'), end_time: Time.parse('2016-08-05 09:30:00 -0600') , student: student)
+
+        expect(student.compass_events).to eq([event1, event2])
+      end
+
+      it 'can capture partway through an event' do
+        Timecop.freeze(Time.parse('2016-08-05 08:45:00 -0600'))
+        before = create(:event, start_time: Time.parse('2016-08-05 08:00:00 -0600'), end_time: Time.parse('2016-08-05 08:30:00 -0600'), student: student)
+        event1 = create(:event, start_time: Time.parse('2016-08-05 08:30:00 -0600'), end_time: Time.parse('2016-08-05 09:00:00 -0600'), student: student)
+        event2 = create(:event, start_time: Time.parse('2016-08-05 09:00:00 -0600'), end_time: Time.parse('2016-08-05 09:15:00 -0600'), student: student)
+        after = create(:event, start_time: Time.parse('2016-08-05 09:15:00 -0600'), end_time: Time.parse('2016-08-05 09:30:00 -0600') , student: student)
+
+        expect(student.compass_events).to eq([event1, event2])
+      end
+
+      it 'shows the next event first during grove transition' do
+        Timecop.freeze(Time.parse('2016-08-05 08:28:30 -0600'))
+        before = create(:event, start_time: Time.parse('2016-08-05 08:00:00 -0600'), end_time: Time.parse('2016-08-05 08:30:00 -0600'), student: student)
+        event1 = create(:event, start_time: Time.parse('2016-08-05 08:30:00 -0600'), end_time: Time.parse('2016-08-05 09:00:00 -0600'), student: student)
+        event2 = create(:event, start_time: Time.parse('2016-08-05 09:00:00 -0600'), end_time: Time.parse('2016-08-05 09:15:00 -0600'), student: student)
+        after = create(:event, start_time: Time.parse('2016-08-05 09:15:00 -0600'), end_time: Time.parse('2016-08-05 09:30:00 -0600') , student: student)
+
+        expect(student.compass_events).to eq([event1, event2])
+      end
+    end
+
     describe '#last_activity' do
 
       it 'finds the last activity based on the last activity scan' do
