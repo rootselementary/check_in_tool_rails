@@ -9,6 +9,7 @@ class Student < User
   has_many :scans, foreign_key: :user_id
 
   scope :absent, -> { where(at_school: false) }
+  scope :with_access_token, -> { where.not(refresh_token: nil) }
 
   def admin?
     false
