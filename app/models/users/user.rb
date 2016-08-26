@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   belongs_to :school
   belongs_to :grove
 
+  has_many :playlist_activities, dependent: :destroy
+
   def self.from_omniauth(package)
     user = User.where(email: package.email).first
     if user.present?
