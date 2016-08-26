@@ -8,6 +8,7 @@ class Location < ActiveRecord::Base
   before_save :normalize_name
 
   def self.find_by_location(location)
+    return nil if location.nil?
     where("name LIKE '%#{location.downcase}%'").first
   end
 
