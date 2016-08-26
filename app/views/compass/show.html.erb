@@ -1,35 +1,8 @@
 <h2 class="text-center"><%= current_user.name %>'s Next Step</h2>
 <% if current_user.current_event %>
-  <div class="<%= "container compass-details #{@compass.status_class}" %>" data-endtime="<%= @compass.end_time %>" >
-    <div class="event-images row">
-      <div class="col-md-4 compass-image">
-        <%= image_tag @compass.activity_image, class: "img-responsive center-block" %>
-        <br>
-        <h3><%= @compass.activity_name %></h3>
-      </div>
-      <div class="col-md-4 compass-image">
-        <%= image_tag @compass.location_image, class: "img-responsive center-block" %>
-        <br>
-        <h3><%= @compass.location_name %></h3>
-      </div>
-      <div class="col-md-4 compass-image">
-        <%= image_tag @compass.creator_image, class: "img-responsive center-block" %>
-        <br>
-        <h3><%= @compass.creator_name %></h3>
-      </div>
-    </div>
-    <br>
-    <% if !@compass.scanned_in? %>
-    <div class="col-md-12 text-center" id="scan-location-button">
-      <%= link_to fa_icon("qrcode", text: "Scan"), "scan://scan?callback=#{checkin_url}?location_id=#{@compass.location_id}", class: "btn btn-success" %>
-    </div>
-    <% end %>
-  </div>
+  <% @compass.events.each do |event| %>
+    <%= render 'event', event: event %>
+  <% end %>
 <% else %>
-  <div class="container no-event col-md-4 col-md-offset-4">
-    <h1 class="text-center"%>No Event Scheduled</h1>
-    <h1 class="text-center text-danger">
-      <%= fa_icon "times-circle-o 5x" %>
-    </h1>
-  </div>
+  <%= render 'no_events' %>
 <% end %>

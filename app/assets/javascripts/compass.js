@@ -1,14 +1,17 @@
 var checkId;
+var timeRemaining = 0;
+
 $(function(){
-  if ($(".compass-details").length > 0) {
+  if ($(".event-details").length > 0) {
+    timeRemaining = parseInt($('.event-details.ongoing').data('duration'));
     checkId = setInterval(checkForNewEvent, 500);
   }
 });
 
 function checkForNewEvent() {
-  var time = new Date().getTime();
-  if ($('.compass-details').data('endtime') < time ) {
+  timeRemaining -= 500;
+  if (timeRemaining <= 0) {
     clearInterval(checkId);
-    location.reload(true);
+    $('.event-details').toggleClass('hidden');
   }
 }
