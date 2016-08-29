@@ -1,20 +1,17 @@
-let checkId,
-    timeRemaining = 0;
-
-const timeoutDuration = 500;
-
-function checkForNewEvent() {
-  timeRemaining -= timeoutDuration;
-  if (timeRemaining <= 0) {
-    clearInterval(checkId);
-    $('.event-details').toggleClass('hidden');
-  }
-}
+let endTime;
 
 $(function(){
     if ($(".event-details").length > 0) {
-    timeRemaining = parseInt($('.event-details.ongoing').data('duration'));
-    checkId = setInterval(checkForNewEvent, timeoutDuration);
-  }
+      timeRemaining = parseInt($('.event-details.ongoing').data('duration'));
+      endTime = Date.now() + timeRemaining;
+      checkTime();
+    }
 });
 
+function checkTime() {
+  if (Date.now() <= endTime) {
+    requestAnimationFrame(checkTime);
+  } else {
+    $('.event-details').toggleClass('hidden');
+  }
+}
