@@ -1,10 +1,11 @@
 ruby '2.3.1'
 
 source "https://rubygems.org"
-gem 'rails', '4.2.5.1'
+gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'devise'
 gem 'pundit'
 gem 'pg'
+gem 'puma', '~> 3.0'
 gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
@@ -28,9 +29,9 @@ gem 'google_calendar'
 gem 'rqrcode'
 gem 'rails_12factor', group: :production
 
-group :doc do
-  gem 'sdoc', '~> 0.4.0'
-end
+# group :doc do
+#   gem 'sdoc', '~> 0.4.0'
+# end
 
 group :development, :test do
   gem 'pry-rails'
@@ -46,7 +47,7 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
 end
 
 group :test do
