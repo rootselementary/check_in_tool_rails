@@ -78,7 +78,8 @@ class Student < User
 
   def rotated_playlist
     @playlist_activities = playlist_activities.joins(:activity).order('position ASC')
-    offset = @playlist_activities.index { |x| x.activity.id == last_activity_id.value.to_i } || 0
-    @playlist_activities.to_a.rotate!(offset)
+    arr = @playlist_activities.to_a
+    offset = arr.index { |x| x.activity.id == last_activity_id.value.to_i } || 0
+    arr.rotate!(offset)
   end
 end
