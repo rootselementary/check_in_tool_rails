@@ -2,6 +2,8 @@ class Activity < ActiveRecord::Base
   belongs_to :grove
   belongs_to :location
   has_many :playlist_activities, dependent: :destroy
+  has_many :events, dependent: :destroy
+
   validates :location, presence: true
 
   mount_uploader :image, ImageUploader
@@ -10,6 +12,6 @@ class Activity < ActiveRecord::Base
     select('activities.*, locations.name as location_name')
       .joins(:location)
       .where(grove_id: user.grove_id)
-      .order(name: :asc)
+      .order(title: :asc)
   end
 end

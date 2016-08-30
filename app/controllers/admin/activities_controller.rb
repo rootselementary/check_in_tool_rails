@@ -1,6 +1,6 @@
 class Admin::ActivitiesController < Admin::ResourceController
   def new
-    @locations = Location.where(grove_id: current_user.grove_id)
+    @locations = Location.where(grove_id: current_grove.id)
     super
   end
 
@@ -11,7 +11,7 @@ class Admin::ActivitiesController < Admin::ResourceController
   end
 
   def edit
-    @locations = Location.where(grove_id: current_user.grove_id)
+    @locations = Location.where(grove_id: current_grove.id)
     super
   end
 
@@ -22,15 +22,15 @@ class Admin::ActivitiesController < Admin::ResourceController
     end
 
     def collection_attributes
-      [:name, :location_name]
+      [:title, :location_name]
     end
 
     def form_attributes
-      [:name, :image]
+      [:title, :image]
     end
 
     def whitelist
-      [:name, :image, :location_id]
+      [:title, :image, :location_id]
     end
 
     def after_save_path_for(resource)

@@ -4,8 +4,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 
   def google_oauth2
-    @user = User.from_omniauth(request.env["omniauth.auth"])
-    
+    package = User::OmniauthPackage.new(request.env["omniauth.auth"])
+    @user = User.from_omniauth(package)
+
     if @user
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Google", first_name: @user.first_name
       sign_in_and_redirect @user, event: :authentication

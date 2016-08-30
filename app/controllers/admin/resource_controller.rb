@@ -145,7 +145,7 @@ module Admin
     end
 
     def resource_as_sym
-      resource_class.to_s.downcase.to_sym
+      resource_class.to_s.underscore.to_sym
     end
 
     def build_resource

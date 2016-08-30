@@ -1,7 +1,9 @@
 ruby '2.3.1'
 
 source "https://rubygems.org"
+
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'sinatra', github: 'sinatra'
 gem 'devise'
 gem 'pundit'
 gem 'pg'
@@ -28,6 +30,11 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'google_calendar'
 gem 'rqrcode'
 gem 'rails_12factor', group: :production
+gem 'sidekiq-cron', '~> 0.4.0'
+gem 'whenever', require: false
+gem 'redis-objects'
+gem 'google-api-client', '~> 0.9'
+gem 'rollbar'
 
 group :development, :test do
   gem 'pry-rails'

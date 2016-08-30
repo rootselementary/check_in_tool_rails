@@ -19,7 +19,7 @@ module Pages
 
     def add_new_activity(activity, focus_area = nil)
       click_on "New Activity"
-      select activity.name, from: "Activity"
+      select activity.title, from: "Activity"
       select focus_area.name, from: "Focus area" if focus_area
       click_on "Create Playlist activity"
       self
@@ -35,7 +35,7 @@ module Pages
       within("#playlist-activity-#{playlist_activity.id}") do
         click_on("edit-#{playlist_activity.id}")
       end
-      select activity.name, from: "Activity"
+      select activity.title, from: "Activity"
       if focus_area
         select focus_area.name, from: "Focus area"
       else

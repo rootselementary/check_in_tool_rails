@@ -4,7 +4,7 @@
 <br>
 <br>
 <div id="<%="#{resource_as_sym}-#{resource.id}" %>" class=" location-info col-sm-4">
-  <h1 class="text-center"><%= resource.name%></h1>
+  <h1 class="text-center"><%= resource.name.titleize %></h1>
   <h2><%= "Grove: #{resource.grove.name}" %> </h2>
   <%= image_tag resource.image_url %>
   <% if policy(resource).destroy? %>

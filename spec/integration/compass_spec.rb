@@ -2,6 +2,8 @@ require 'rails_helper'
 include Pages::Authentication
 
 RSpec.feature 'Student Compass' do
+  before { Timecop.freeze(Time.parse('2016-08-05 08:15:00 -0600')) }
+  after { Timecop.return }
   let(:grove) { create(:grove_with_resources) }
   let(:teacher) { grove.teachers.first }
   let(:student) { grove.students.first }
@@ -11,14 +13,14 @@ RSpec.feature 'Student Compass' do
                                location: location,
                                creator_id: teacher.id,
                                activity: activity,
-                               start_time: Time.now-10,
-                               end_time: Time.now+10) }
+                               start_time: Time.parse('2016-08-05 08:00:00 -0600'),
+                               end_time: Time.parse('2016-08-05 08:17:01 -0600')) }
   let(:event2) { create(:event, student: student,
                                location: grove.locations.last,
                                creator_id: grove.teachers.last.id,
                                activity: create(:activity, grove: grove, location: grove.locations.last),
-                               start_time: Time.now+10,
-                               end_time: Time.now+100 ) }
+                               start_time: Time.parse('2016-08-05 08:30:00 -0600'),
+                               end_time: Time.parse('2016-08-05 08:45:00 -0600') ) }
 
   let(:compass_page) { Pages::CompassPage.new }
 
@@ -33,8 +35,8 @@ RSpec.feature 'Student Compass' do
 
     it "shows details of current event" do
       compass_page.visit_page
-      expect(compass_page).to have_content event.location.name
-      expect(compass_page).to have_content event.activity.name
+      expect(compass_page).to have_content event.location.titleized_name
+      expect(compass_page).to have_content event.activity.title
       expect(compass_page).to have_content event.creator.name
       expect(compass_page).to have_image event.location.image_url
       expect(compass_page).to have_image event.activity.image_url
@@ -85,13 +87,12 @@ RSpec.feature 'Student Compass' do
 
     it "automatically transitions to the next event" do
       compass_page.visit_page
-      expect(compass_page).to have_content event.location.name
-      expect(compass_page).to have_content event.activity.name
+      expect(compass_page).to have_content event.location.titleized_name
+      expect(compass_page).to have_content event.activity.title
       expect(compass_page).to have_content event.creator.name
 
-      sleep(11)
-      expect(compass_page).to have_content event2.location.name
-      expect(compass_page).to have_content event2.activity.name
+      expect(compass_page).to have_content event2.location.titleized_name
+      expect(compass_page).to have_content event2.activity.title
       expect(compass_page).to have_content event2.creator.name
     end
   end

@@ -11,7 +11,6 @@ RSpec.feature 'Navigation options' do
 
       expect(page).to have_content("Hello, #{teacher.first_name}")
       expect(page).to have_content("Signed in successfully.")
-      expect(page).to have_content("Grove Configuration")
       expect(page).to have_content("Grove Monitor")
       expect(page).to have_content("Grove Playlist Manager")
     end

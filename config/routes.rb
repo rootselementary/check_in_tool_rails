@@ -11,8 +11,10 @@ Rails.application.routes.draw do
     get '/grove-playlist-manager', controller: 'playlists', action: 'index', as: :grove_playlist_manager
     resources :groves
     resources :locations
+    resources :focus_areas
     resources :teachers
     resources :students do
+      get '/rebuild_schedule', action: 'rebuild_schedule'
       get '/playlist', controller: 'playlist_activities', action: 'index'
       resources :playlist_activities, except: [:show]
     end
@@ -29,7 +31,15 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/notifications', controller: 'callbacks/google', action: 'watch'
+
   get '/compass', controller: 'compass', action: 'show', as: :compass
   get '/logout', controller: 'compass', action: 'logout', as: :logout
   get '/checkin', to: 'compass#checkin'
+
+  # sidekiq monitoring
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
