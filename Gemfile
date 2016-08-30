@@ -29,10 +29,6 @@ gem 'google_calendar'
 gem 'rqrcode'
 gem 'rails_12factor', group: :production
 
-# group :doc do
-#   gem 'sdoc', '~> 0.4.0'
-# end
-
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.0'
@@ -47,7 +43,6 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  # gem 'quiet_assets'
 end
 
 group :test do
