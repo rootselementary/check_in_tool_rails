@@ -34,7 +34,7 @@ module Admin
     end
 
     def collection_attributes
-      [:titleized_name, :grove_name, :image]
+      [:name, :grove_name, :image]
     end
 
   end
