@@ -2,8 +2,7 @@ require_relative '../pages/page'
 module Pages
   class LogoutPage < Page
     def visit_page
-      visit '/logout'
-      self
+      tap { visit '/logout' }
     end
 
     def logout

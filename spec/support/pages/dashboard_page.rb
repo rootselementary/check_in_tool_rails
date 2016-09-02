@@ -3,8 +3,7 @@ module Pages
   class DashboardPage < Page
 
     def visit_page
-      visit '/admin/dashboard'
-      self
+      tap { visit '/admin/dashboard' }
     end
   end
 end

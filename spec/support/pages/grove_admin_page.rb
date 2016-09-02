@@ -3,8 +3,7 @@ module Pages
   class GroveAdminPage < Page
 
     def visit_page
-      visit '/admin/groves'
-      self
+      tap { visit '/admin/groves' }
     end
 
     def view_grove(name)
@@ -12,8 +11,7 @@ module Pages
     end
 
     def go_to_show_page(id)
-      visit "/admin/groves/#{id}"
-      self
+      tap { visit "/admin/groves/#{id}" }
     end
 
     def delete_grove(id)
