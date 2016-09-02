@@ -1,7 +1,7 @@
 module CalendarEventParser
   def self.parse_events(events)
     # [Google::Event]
-    events.map do |event|
+    _events = events.map do |event|
       s = Time.zone.parse(event.start_time)
       e = Time.zone.parse(event.end_time)
       {
@@ -13,6 +13,20 @@ module CalendarEventParser
        creator_id: self.creator(event.raw).try(:id),
        metadata: event.to_json
       }
+    end
+    _events2 = []
+    _events.each_with_index do |e, idx|
+      next_event = _events[idx + 1]
+      if next_event
+        _events2 << e.merge({next_start_time: next_event[:start_time]})
+      else
+        _events2 << e.merge({next_start_time: e[:end_time]})
+      end
+    end
+    _events2.reject{|e| e[:next_start_time] < e[:end_time]}.inject([]) do |acc, e|
+      e.delete(:next_start_time)
+      acc << e
+      acc
     end
   end
 

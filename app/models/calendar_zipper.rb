@@ -36,17 +36,17 @@ class CalendarZipper
   end
 
   def construct_schedule(schedule, events, start_time, end_time)
-    first, *middle, last = events
+    first, *rest = events
     schedule = wrap_with_playlist(schedule, first, start_time, first[:end_time])
-    middle.each_with_index do |activity, i|
-      next_activity = middle[i + 1]
+    rest.each_with_index do |activity, i|
+      next_activity = rest[i + 1]
       if next_activity
-        schedule = wrap_with_playlist(schedule, activity, schedule.last[:end_time], middle[i + 1][:start_time])
+        schedule = wrap_with_playlist(schedule, activity, schedule.last[:end_time], next_activity[:start_time])
       else
-        schedule = wrap_with_playlist(schedule, activity, schedule.last[:end_time], activity[:end_time])
+        schedule = wrap_with_playlist(schedule, activity, schedule.last[:end_time], end_time)
       end
     end
-    schedule = wrap_with_playlist(schedule, last, schedule.last[:end_time], end_time)
+    schedule
   end
 
   def wrap_with_playlist(schedule, activity, start_time, end_time)

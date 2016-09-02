@@ -9,17 +9,23 @@ RSpec.describe CalendarEventParser, type: :model do
     Timecop.return
   end
 
+  it "filters overlapping events" do
+    events = [
+      double(:first,  start_time: '2016-08-05 06:00:00 -0600', end_time: '2016-08-05 06:30:00 -0600', to_json: "", title: 'foo', raw: {}, location: ""),
+      double(:second, start_time: '2016-08-05 06:30:00 -0600', end_time: '2016-08-05 07:00:00 -0600', to_json: "", title: 'foo', raw: {}, location: ""),
+      double(:third,  start_time: '2016-08-05 06:45:00 -0600', end_time: '2016-08-05 07:15:00 -0600', to_json: "", title: 'foo', raw: {}, location: "")
+    ]
+    schedule = CalendarEventParser.parse_events(events)
+    expect(schedule.length).to eq(2)
+  end
+
   it "will parse google calendar events into a hash" do
     VCR.use_cassette 'google_calendar_service' do
       grove = create(:grove)
       location = create(:location, name: "breakfast nook",
                                    grove: grove)
-      # activity = create(:activity, title: "morning stuff",
-      #                              location: location)
       location2 = create(:location, name: "cafeteria",
                                     grove: grove)
-      # activity2 = create(:activity, title: "lunch",
-      #                               location: location2)
 
       student = create(:student, email: "student@example.org",
                                  refresh_token: "xxxxxxxxxxxxxxyyyyyyyyyyyy",
