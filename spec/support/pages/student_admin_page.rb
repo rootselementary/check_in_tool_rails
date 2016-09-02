@@ -3,8 +3,7 @@ module Pages
   class StudentAdminPage < Page
 
     def visit_page
-      visit '/admin/students'
-      self
+      tap { visit '/admin/students' }
     end
 
     def create_student(grove_name, *roles)

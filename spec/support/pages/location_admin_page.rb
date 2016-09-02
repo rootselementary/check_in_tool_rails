@@ -3,23 +3,19 @@ module Pages
   class LocationAdminPage < Page
 
     def visit_page
-      visit '/admin/locations'
-      self
+      tap { visit '/admin/locations' }
     end
 
     def visit_new_location_page
-      visit '/admin/locations/new'
-      self
+      tap { visit '/admin/locations/new' }
     end
 
     def visit_location_page(id)
-      visit "/admin/locations/#{id}"
-      self
+      tap { visit "/admin/locations/#{id}" }
     end
 
     def visit_edit_location_page(id)
-      visit "/admin/locations/#{id}/edit"
-      self
+      tap { visit "/admin/locations/#{id}/edit" }
     end
 
     def create_location(grove_name)

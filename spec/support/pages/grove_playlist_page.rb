@@ -3,14 +3,14 @@ module Pages
   class GrovePlaylistPage < Page
 
     def visit_page
-      visit '/admin/grove-playlist-manager'
-      self
+      tap { visit '/admin/grove-playlist-manager' }
     end
 
     def search_for(name)
-      fill_in "Search", with: name
-      click_on "Search"
-      self
+      tap do |page| 
+        fill_in "Search", with: name
+        click_on "Search"
+      end 
     end
 
     def view_playlist(name)
@@ -18,11 +18,12 @@ module Pages
     end
 
     def add_new_activity(activity, focus_area = nil)
-      click_on "New Activity"
-      select activity.title, from: "Activity"
-      select focus_area.name, from: "Focus area" if focus_area
-      click_on "Create Playlist activity"
-      self
+      tap do |page|
+        click_on "New Activity"
+        select activity.title, from: "Activity"
+        select focus_area.name, from: "Focus area" if focus_area
+        click_on "Create Playlist activity"
+      end
     end
 
     def delete_activity(playlist_activity)

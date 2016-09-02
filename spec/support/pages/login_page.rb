@@ -3,9 +3,10 @@ module Pages
   class LoginPage < Page
 
     def visit_page
-      visit "/"
-      click_on 'Login'
-      self
+      tap do |page|
+        visit "/"
+        click_on 'Login'
+      end 
     end
 
     def login(user, password)
@@ -15,9 +16,10 @@ module Pages
     end
 
     def visit_google_login
-      visit '/'
-      click_on 'Sign in with Google'
-      self
+      tap do |page| 
+        visit '/'
+        click_on 'Sign in with Google'
+      end
     end
   end
 end

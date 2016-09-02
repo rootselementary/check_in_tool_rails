@@ -3,8 +3,7 @@ module Pages
   class TeacherAdminPage < Page
 
     def visit_page
-      visit '/admin/teachers'
-      self
+      tap { visit '/admin/teachers' }
     end
 
     def create_teacher(grove_name, *roles)

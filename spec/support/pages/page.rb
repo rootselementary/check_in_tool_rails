@@ -3,10 +3,11 @@ module Pages
     include Capybara::DSL
 
     def view_resource(name)
-      within("tr", text: name) do
-        click_on "View"
-      end
-      self
+      tap do |page|
+        within("tr", text: name) do
+          click_on "View"
+        end
+      end 
     end
 
     def delete(resource, id)
