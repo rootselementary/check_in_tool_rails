@@ -4,9 +4,9 @@ class Student < User
 
   value :last_activity_id
 
-  has_many :playlist_activities, foreign_key: :user_id
-  has_many :events, foreign_key: :user_id
-  has_many :scans, foreign_key: :user_id
+  has_many :playlist_activities, foreign_key: :user_id, dependent: :destroy
+  has_many :events, foreign_key: :user_id, dependent: :destroy
+  has_many :scans, foreign_key: :user_id, dependent: :destroy
 
   scope :absent, -> { where(at_school: false) }
   scope :with_access_token, -> { where.not(refresh_token: nil) }
