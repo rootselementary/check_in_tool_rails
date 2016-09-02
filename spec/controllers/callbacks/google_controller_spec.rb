@@ -13,7 +13,10 @@ RSpec.describe 'Push Notifications', type: :request do
         "HTTP_X_GOOG_CHANNEL_ID" => "student-#{student.id}"
       }
 
-      post '/notifications', { :test => {:name => "Test Data"} }, headers
+      post '/notifications', 
+        params: { test: { name: "Test Data" } }, 
+        headers: headers
+        
       expect(response.status).to eq(201)
   end
   end

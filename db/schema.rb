@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -23,10 +22,9 @@ ActiveRecord::Schema.define(version: 20160815234315) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "image"
+    t.index ["grove_id"], name: "index_activities_on_grove_id", using: :btree
+    t.index ["location_id"], name: "index_activities_on_location_id", using: :btree
   end
-
-  add_index "activities", ["grove_id"], name: "index_activities_on_grove_id", using: :btree
-  add_index "activities", ["location_id"], name: "index_activities_on_location_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.integer  "location_id"
@@ -40,20 +38,18 @@ ActiveRecord::Schema.define(version: 20160815234315) do
     t.integer  "duration",    default: 0
     t.string   "title"
     t.json     "metadata"
+    t.index ["activity_id"], name: "index_events_on_activity_id", using: :btree
+    t.index ["location_id"], name: "index_events_on_location_id", using: :btree
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
-
-  add_index "events", ["activity_id"], name: "index_events_on_activity_id", using: :btree
-  add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "focus_areas", force: :cascade do |t|
     t.string   "name"
     t.integer  "grove_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["grove_id"], name: "index_focus_areas_on_grove_id", using: :btree
   end
-
-  add_index "focus_areas", ["grove_id"], name: "index_focus_areas_on_grove_id", using: :btree
 
   create_table "groves", force: :cascade do |t|
     t.integer  "school_id"
@@ -62,9 +58,8 @@ ActiveRecord::Schema.define(version: 20160815234315) do
     t.datetime "updated_at",      null: false
     t.string   "image"
     t.json     "master_calendar"
+    t.index ["school_id"], name: "index_groves_on_school_id", using: :btree
   end
-
-  add_index "groves", ["school_id"], name: "index_groves_on_school_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
@@ -72,9 +67,8 @@ ActiveRecord::Schema.define(version: 20160815234315) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "image"
+    t.index ["grove_id"], name: "index_locations_on_grove_id", using: :btree
   end
-
-  add_index "locations", ["grove_id"], name: "index_locations_on_grove_id", using: :btree
 
   create_table "playlist_activities", force: :cascade do |t|
     t.integer  "activity_id"
@@ -83,11 +77,10 @@ ActiveRecord::Schema.define(version: 20160815234315) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "user_id"
+    t.index ["activity_id"], name: "index_playlist_activities_on_activity_id", using: :btree
+    t.index ["focus_area_id"], name: "index_playlist_activities_on_focus_area_id", using: :btree
+    t.index ["user_id"], name: "index_playlist_activities_on_user_id", using: :btree
   end
-
-  add_index "playlist_activities", ["activity_id"], name: "index_playlist_activities_on_activity_id", using: :btree
-  add_index "playlist_activities", ["focus_area_id"], name: "index_playlist_activities_on_focus_area_id", using: :btree
-  add_index "playlist_activities", ["user_id"], name: "index_playlist_activities_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -103,10 +96,9 @@ ActiveRecord::Schema.define(version: 20160815234315) do
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.integer  "activity_id"
+    t.index ["location_id"], name: "index_scans_on_location_id", using: :btree
+    t.index ["user_id"], name: "index_scans_on_user_id", using: :btree
   end
-
-  add_index "scans", ["location_id"], name: "index_scans_on_location_id", using: :btree
-  add_index "scans", ["user_id"], name: "index_scans_on_user_id", using: :btree
 
   create_table "schools", force: :cascade do |t|
     t.string   "name"
@@ -120,10 +112,9 @@ ActiveRecord::Schema.define(version: 20160815234315) do
     t.integer  "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_user_roles_on_role_id", using: :btree
+    t.index ["user_id"], name: "index_user_roles_on_user_id", using: :btree
   end
-
-  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
-  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.integer  "school_id"
@@ -147,12 +138,11 @@ ActiveRecord::Schema.define(version: 20160815234315) do
     t.integer  "expires_at"
     t.boolean  "at_school",              default: false
     t.string   "google_image"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["grove_id"], name: "index_users_on_grove_id", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["school_id"], name: "index_users_on_school_id", using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["grove_id"], name: "index_users_on_grove_id", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["school_id"], name: "index_users_on_school_id", using: :btree
 
   add_foreign_key "activities", "groves"
   add_foreign_key "activities", "locations"

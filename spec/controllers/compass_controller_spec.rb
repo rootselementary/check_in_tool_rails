@@ -12,8 +12,8 @@ RSpec.describe CompassController, type: :controller do
         location2 = create(:location)
         allow(request.env['warden']).to receive(:authenticate!).and_return(student)
         allow(controller).to receive(:current_user).and_return(student)
-        expect {
-          get :checkin, location_id: location1.id, scanned_data: location2.id
+        expect {    
+          get :checkin, params: { location_id: location1.id, scanned_data: location2.id }
         }.to change {
           student.scans.where(correct: false).count
         }.by 1
@@ -29,7 +29,7 @@ RSpec.describe CompassController, type: :controller do
           allow(request.env['warden']).to receive(:authenticate!).and_return(student)
           allow(controller).to receive(:current_user).and_return(student)
           expect {
-            get :checkin, location_id: location1.id, scanned_data: location1.id
+            get :checkin, params: { location_id: location1.id, scanned_data: location1.id }
           }.to change {
             student.scans.where(correct: true).count
           }.by 1

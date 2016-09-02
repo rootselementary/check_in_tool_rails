@@ -13,7 +13,7 @@ describe "PATCH api/v1/admin/students/:student_id/playlist_activities" do
 
     expect(playlist_activity.position).to eq 0
 
-    patch "/api/v1/admin/students/#{student.id}/playlist_activities", { data: data }
+    patch "/api/v1/admin/students/#{student.id}/playlist_activities", params: { data: data }
 
     expect(response.status).to eq 204
 
