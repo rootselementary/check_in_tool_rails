@@ -9,7 +9,7 @@ class GoogleService
                                redirect_url: "urn:ietf:wg:oauth:2.0:oob",
                                refresh_token: student.refresh_token)
 
-    calendar  = JSON.parse student.grove.master_calendar
+    calendar  = student.grove.master_calendar
 
     start_day = to_time(calendar.first)
     end_day   = to_time(calendar.last)

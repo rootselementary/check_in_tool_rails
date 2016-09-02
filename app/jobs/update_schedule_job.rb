@@ -5,7 +5,7 @@ class UpdateScheduleJob < ActiveJob::Base
     student = Student.find(student_id)
     scheduled_events = CalendarEventParser.parse_events(GoogleService.fetch_events(student))
     playlist = normalize_playlist(student.rotated_playlist)
-    master_calendar = JSON.parse student.grove.master_calendar
+    master_calendar = student.grove.master_calendar
     schedule = CalendarZipper.new(master_calendar, scheduled_events, playlist).schedule
     student.events.destroy_all
     schedule.each do |sched|
