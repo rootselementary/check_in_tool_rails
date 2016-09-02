@@ -10,7 +10,8 @@
   <% collection.each do |resource| %>
     <tr>
       <% collection_attributes.each do |attribute| %>
-        <td><%= resource.send(attribute) %></td>
+        <td><%= resource.send(attribute) unless attribute == :image %></td>
+        <td><%= image_tag resource.image_url if resource.image_url.present? %></td>
       <% end %>
       <td id="<%= resource_as_sym %>-<%= resource.id %>">
         <%= link_to("View", send("admin_#{resource_as_sym}_path", resource), class: "btn btn-default") if policy(resource).show? %>
