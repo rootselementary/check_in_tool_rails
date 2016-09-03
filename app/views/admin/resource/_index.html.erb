@@ -12,7 +12,7 @@
       <% collection_attributes.each do |attribute| %>
         <td>
           <%= resource.send(attribute) unless attribute == :image %>
-          <%= image_tag resource.image_url if attribute == :image %>
+          <%= image_tag(resource.image_url, size: 64) if attribute == :image %>
         </td>
       <% end %>
       <td id="<%= resource_as_sym %>-<%= resource.id %>">
