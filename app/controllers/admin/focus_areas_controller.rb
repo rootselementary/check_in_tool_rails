@@ -2,7 +2,7 @@ module Admin
   class FocusAreasController < ResourceController
 
     def collection_attributes
-      [:name, :grove_name]
+      [:name, :grove_name, :image]
     end
 
     def collection
@@ -14,7 +14,7 @@ module Admin
     end
 
     def whitelist
-      [:name, :grove_id]
+      [:name, :grove_id, :image]
     end
 
     def after_save_path_for(resource)
