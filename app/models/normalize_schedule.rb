@@ -5,6 +5,7 @@ class NormalizeSchedule
     schedule = sched.symbolize_keys
     @hash = {
       title:        schedule[:title],
+      creator_id:   schedule[:creator_id],
       location_id:  schedule[:location_id],
       start_time:   schedule[:start_time],
       end_time:     schedule[:end_time],

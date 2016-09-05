@@ -26,7 +26,7 @@ class CompassPresenter
     end
 
     def activity_image
-      @event.activity.try(:image)
+      @event.activity.try(:image_url) || "activity-default.png"
     end
 
     def activity_name
@@ -34,7 +34,7 @@ class CompassPresenter
     end
 
     def location_image
-      @event.location.image_url
+      @event.location.image_url || "location-default.png"
     end
 
     def location_name
@@ -46,7 +46,7 @@ class CompassPresenter
     end
 
     def creator_image
-      @event.creator.try(:google_image)
+      @event.creator.try(:google_image) || "grove-default.png"
     end
 
     def creator_name
