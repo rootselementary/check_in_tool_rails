@@ -30,7 +30,7 @@ class CompassPresenter
     end
 
     def activity_name
-      @event.activity.try(:title)
+      @event.title
     end
 
     def location_image
