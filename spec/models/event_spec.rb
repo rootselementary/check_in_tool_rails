@@ -25,5 +25,12 @@ RSpec.describe Event, type: :model do
       expect(event.scanned_in?).to eq(false)
     end
 
+    it 'finds the scan for the upcoming event' do
+      event = create(:event, location: location, student: student, start_time: 1.minute.from_now, end_time: 30.minutes.from_now)
+      scan = create(:scan, location: location, student: student, timestamp: Time.now, correct: true)
+      expect(event.scans).to include(scan)
+      expect(event.scanned_in?).to eq(true)
+    end
+
   end
 end
