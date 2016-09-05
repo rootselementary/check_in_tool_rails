@@ -1,7 +1,15 @@
 //= require cable
 //= require_self
 //= require_tree .
+ 
+App.messages = App.cable.subscriptions.create('MonitorChannel', {  
+  received: function(data) {
+    $(".test").removeClass('hidden')
+    return $('.test').append(this.renderMessage(data));
+  },
 
-this.App = {};
-
-App.cable = ActionCable.createConsumer(); 
+  renderMessage: function(data) {
+    console.log(data)
+    return "<p>" + data.data + "</p>";
+  }
+});
