@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     self.expires_at = package.expires_at
   end
 
+  def has_refresh_token?
+    self.refresh_token.present?
+  end
+
   def first_name
     return email unless name
     name.split(' ').first

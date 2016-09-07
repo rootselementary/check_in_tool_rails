@@ -30,7 +30,7 @@ module Admin
     end
 
     def collection_attributes
-      [:name, :email, :grove_name]
+      [:name, :email, :grove_name, :has_refresh_token?]
     end
 
   end
