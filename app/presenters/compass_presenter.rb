@@ -34,7 +34,7 @@ class CompassPresenter
     end
 
     def location_image
-      @event.location.image_url || "location-default.png"
+      @event.location.try(:image_url) || "location-default.png"
     end
 
     def location_name
