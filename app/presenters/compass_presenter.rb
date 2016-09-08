@@ -38,11 +38,11 @@ class CompassPresenter
     end
 
     def location_name
-      @event.location.titleized_name
+      @event.location.try(:titleized_name) || "Unknown"
     end
 
     def location_id
-      @event.location.id
+      @event.location.try(:id)
     end
 
     def creator_image
