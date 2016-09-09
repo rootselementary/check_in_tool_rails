@@ -9,10 +9,12 @@ class ScanCreator
       broadcast(scan)
     end
   end 
-   
-  def self.broadcast(scan)
-    ActionCable.server.broadcast 'monitor',
-      data: scan
-  end 
+  
+
+  private 
+    def self.broadcast(scan)
+      ActionCable.server.broadcast 'monitor',
+        data: scan
+    end 
 end
 
