@@ -4,8 +4,7 @@
  
 App.messages = App.cable.subscriptions.create('MonitorChannel', {  
   received: function(scan) {
-    $(".").removeClass('hidden')
-    return $('.test').append(this.renderMessage(data));
+    return $(`.students-${scan.location_id}`).append(this.renderMessage(data));
   },
 
   renderMessage: function(data) {
