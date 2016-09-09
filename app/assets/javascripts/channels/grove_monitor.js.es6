@@ -3,8 +3,8 @@
 //= require_tree .
  
 App.messages = App.cable.subscriptions.create('MonitorChannel', {  
-  received: function(data) {
-    $(".test").removeClass('hidden')
+  received: function(scan) {
+    $(".").removeClass('hidden')
     return $('.test').append(this.renderMessage(data));
   },
 
