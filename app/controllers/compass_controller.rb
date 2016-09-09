@@ -9,8 +9,12 @@ class CompassController < ApplicationController
 
   def checkin
     authorize(:compass, :show?)
-    scan = ScanCreator.create(current_user, scan_params)
-    redirect_to compass_path
+    scan = ScanCreator.new(current_user, scan_params)
+    if scan.save
+      ActionCable.server.broadcast 'monitor',
+        data: scan
+      head :ok
+    end  
   end
 
   def logout

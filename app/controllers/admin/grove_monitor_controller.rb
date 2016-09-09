@@ -9,8 +9,7 @@ class Admin::GroveMonitorController < ApplicationController
     authorize(:grove_monitor, :show?)
     if params[:name]
       @students = current_user.grove.students.send(filter_params, params[:name])
-      @location = Lo
-      cation.find_by_location(params[:name])
+      @location = Location.find_by_location(params[:name])
     else
       @students = current_user.grove.students.send(filter_params)
       @category = filter_params

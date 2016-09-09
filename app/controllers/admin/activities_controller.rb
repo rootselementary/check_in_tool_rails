@@ -8,9 +8,6 @@ class Admin::ActivitiesController < Admin::ResourceController
     super do |activity|
       activity.grove = current_user.grove
     end
-    ActionCable.server.broadcast 'monitor',
-        data: @resource.title
-      head :ok
   end
 
   def edit
