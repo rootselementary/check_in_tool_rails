@@ -13,7 +13,8 @@ class ScanCreator
   private 
     def self.broadcast(scan)
       ActionCable.server.broadcast 'monitor',
-        scan: scan
+        scan: scan,
+        student: scan.student,
     end 
 end
 
