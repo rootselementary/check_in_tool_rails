@@ -28,7 +28,7 @@ const studentTemplate = (student, location, status) => {
                 ${studentImage(student)}
                 ${markAsStatusButton(student, location)}
               </div>
-           </div>`
+            </div>`
 }
 
 const createNameH3 = (studentName) => {
@@ -42,12 +42,16 @@ const studentImage = (student) => {
 
 const markAsStatusButton = (student, location) => {
   if (student.at_school) {
-      return `<a class='btn btn-default' rel='nofollow' data-method='patch' 
-      href='/admin/grove-monitor-all?filter=location&amp;id=${student.id}&amp;name=${location}&amp;student%5Bat_school%5D=false'>
-      Mark as Absent </a>`
+     return createStatusButton(student, location, "Absent")
   } else {
-      return `<a class='btn btn-default' rel='nofollow' data-method='patch' 
-      href='/admin/grove-monitor-all?filter=location&amp;id=${student.id}&amp;name=${location}&amp;student%5Bat_school%5D=true'>
-      Mark as Present </a>`
+     return createStatusButton(student, location, "Present")
   }
 }
+
+const createStatusButton = (student, location, status)  => {
+  let statuses = { "Absent": false, "Present": true}
+  return `<a class='btn btn-default' rel='nofollow' data-method='patch' 
+          href='/admin/grove-monitor-all?filter=location&amp;id=${student.id}&amp;name=${location}&amp;student%5Bat_school%5D=${statuses[status]}'>
+           Mark as ${status} </a>`
+  }
+
