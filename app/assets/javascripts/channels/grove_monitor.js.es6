@@ -24,14 +24,14 @@ const addStudent = (monitorPayload, divClass) => {
 const studentTemplate = (student, location, status) => { 
     return  `<div class='col-md-3 col-sm-6 student'> 
               <div id='studentGM-${student.id}' class=${status}>
-                ${createNameH3(student.name)}
+                ${nameH3(student.name)}
                 ${studentImage(student)}
                 ${markAsStatusButton(student, location)}
               </div>
             </div>`
 }
 
-const createNameH3 = (studentName) => {
+const nameH3 = (studentName) => {
   return `<h3>${studentName}</h3>`
 }
 
