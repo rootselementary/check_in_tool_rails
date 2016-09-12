@@ -46,7 +46,7 @@ class CompassPresenter
     end
 
     def creator_image
-      @event.creator.try(:google_image) || "grove-default.png"
+      @event.creator.try(:google_image)
     end
 
     def creator_name
