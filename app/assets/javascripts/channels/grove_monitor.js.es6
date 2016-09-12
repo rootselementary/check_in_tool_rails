@@ -3,21 +3,35 @@
 //= require_tree .
  
 App.messages = App.cable.subscriptions.create('MonitorChannel', {  
-  received: function(monitorPayload) {
+  received: (monitorPayload) => {
+    console.log(monitorPayload)
     let scan = monitorPayload.scan
     let student = monitorPayload.student
     let divClass = `.students-${scan.location_id}` 
-      studentName(student.name, divClass)
+      addStudent(student.name, divClass, scan.correct)
       if (student.google_image) {
         studentImage(student.google_image, divClass)
-      }
+      }      
   }
 });
 
-const studentName = function(studentName, divClass) {
-  return $(`${divClass}`).append(`<h3>${studentName}</h3>`)
+const addStudent = (studentName, divClass, status) => {
+  let appendable = $(`${divClass}`).children(".student")
+  if (status) {
+    appendable.append(`
+    <div class="scanned-in">
+      <h3>${studentName}</h3>
+    </div>`)
+  } else {
+    appendable.append(`
+    <div class="enroute">
+      <h3>${studentName}</h3>
+    </div>`)
+  }
+
 }
-const studentImage = function(studentImage, divClass) {
+
+const studentImage = (studentImage, divClass) => {
   let img = ('<img>', {
     src: studentImage,
   });
