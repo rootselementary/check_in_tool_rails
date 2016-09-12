@@ -4,9 +4,9 @@ module Pages
 
     def visit_page
       tap do |page|
-        visit "/"
+        visit "/?email_login=true"
         click_on 'Login'
-      end 
+      end
     end
 
     def login(user, password)
@@ -16,7 +16,7 @@ module Pages
     end
 
     def visit_google_login
-      tap do |page| 
+      tap do |page|
         visit '/'
         click_on 'Sign in with Google'
       end

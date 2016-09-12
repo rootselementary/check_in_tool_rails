@@ -1,8 +1,11 @@
 <div class="sign-form login text-center">
   <br><br>
-  <h2>Login to Roots Tracker</h2>
-  <br><br>
-  <%= link_to "Login", new_user_session_path, class: "btn btn-default" %>
-  <br><br><p>OR</p><br>
-  <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path(prompt: 'consent'), class: "btn btn-default" %>
+  <h2>Login to Roots Compass</h2>
+  <% if params[:email_login] %>
+    <br><br>
+    <%= link_to "Login", new_user_session_path, class: "btn btn-default" %>
+    <br><br><p>OR</p><br>
+  <% end %>
+
+  <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-default" %>
 </div>
