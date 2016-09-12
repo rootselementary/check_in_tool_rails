@@ -1,5 +1,5 @@
 <div class="col-md-3 col-sm-6 student">
-  <div class="<%= student.scanned_in? ? "scanned-in": "enroute" %>">
+  <div id="studentGM-<%= student.id %>" class="<%= student.scanned_in? ? "scanned-in": "enroute" %>">
     <h3><%= student.name %></h3>
     <%= image_tag student.google_image, class: "student-image" if student.google_image %>
     <% if student.at_school %>

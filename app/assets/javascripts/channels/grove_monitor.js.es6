@@ -4,51 +4,50 @@
  
 App.messages = App.cable.subscriptions.create('MonitorChannel', {  
   received: (monitorPayload) => {
-    console.log(monitorPayload)
-    let scan = monitorPayload.scan
-    let student = monitorPayload.student
-    let divClass = `.students-${scan.location_id}` 
-      addStudent(student.name, divClass, scan.correct)
-      if (student.google_image) {
-        studentImage(student.google_image, divClass)
-      }      
+    let divClass = `.students-${monitorPayload.scan.location_id}` 
+      addStudent(monitorPayload, divClass)      
   }
 });
 
-const addStudent = (studentName, divClass, status) => {
-  let appendable = $(`${divClass}`).children(".student")
+const addStudent = (monitorPayload, divClass) => {
+  let studentCollection = $(`${divClass}`)
+  let student = monitorPayload.student
+  let status = monitorPayload.scan.correct
+  let location = monitorPayload.location
   if (status) {
-    appendable.append(`
-    <div class="scanned-in">
-      <h3>${studentName}</h3>
-    </div>`)
+    studentCollection.append(studentTemplate(student, location, "scanned-in"))
   } else {
-    appendable.append(`
-    <div class="enroute">
-      <h3>${studentName}</h3>
-    </div>`)
+    studentCollection.append(studentTemplate(student, location, "enroute"))
   }
-
 }
 
-const studentImage = (studentImage, divClass) => {
-  let img = ('<img>', {
-    src: studentImage,
-  });
-  img.appendTo($(`${divClass}`));
+const studentTemplate = (student, location, status) => { 
+    return  `<div class='col-md-3 col-sm-6 student'> 
+              <div id='studentGM-${student.id}' class=${status}>
+                ${createNameH3(student.name)}
+                ${studentImage(student)}
+                ${markAsStatusButton(student, location)}
+              </div>
+           </div>`
 }
 
+const createNameH3 = (studentName) => {
+  return `<h3>${studentName}</h3>`
+}
 
+const studentImage = (student) => {
+   if (student.google_image) return ('<img>', {src: student.google_image});
+   return ''
+ }
 
-// `<div class="col-md-3 col-sm-6 student"
-//       <div class="<%= student.scanned_in? ? "scanned-in": "enroute" %>">
-//         <h3><%= student.name %></h3>
-//         <%= image_tag student.google_image, class: "student-image" if student.google_image %>
-//         <% if student.at_school %>
-//           <%= link_to "Mark as Absent", admin_update_grove_monitor_all_path(id: student.id, student: { at_school: false }, filter: params[:filter], name: params[:name]), method: :patch, class: "btn btn-default" %>
-//         <% else %>
-//         <%= link_to "Mark as Present", admin_update_grove_monitor_all_path(id: student.id, student: { at_school: true }, filter: params[:filter], name: params[:name]), method: :patch, class: "btn btn-default" %>
-//     <% end %>
-//   </div>
-// </div>`
-
+const markAsStatusButton = (student, location) => {
+  if (student.at_school) {
+      return `<a class='btn btn-default' rel='nofollow' data-method='patch' 
+      href='/admin/grove-monitor-all?filter=location&amp;id=${student.id}&amp;name=${location}&amp;student%5Bat_school%5D=false'>
+      Mark as Absent </a>`
+  } else {
+      return `<a class='btn btn-default' rel='nofollow' data-method='patch' 
+      href='/admin/grove-monitor-all?filter=location&amp;id=${student.id}&amp;name=${location}&amp;student%5Bat_school%5D=true'>
+      Mark as Present </a>`
+  }
+}
