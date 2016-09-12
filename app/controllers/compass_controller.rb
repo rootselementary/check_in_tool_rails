@@ -1,4 +1,5 @@
 class CompassController < ApplicationController
+  before_action :authenticate_user!
   after_action :verify_authorized, except: [:logout]
   layout "compass_application"
 
