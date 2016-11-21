@@ -20,6 +20,7 @@ class CompassController < ApplicationController
   private
 
     def scan_params
+      
       params.permit(:location_id, :scanned_data)
     end
 end

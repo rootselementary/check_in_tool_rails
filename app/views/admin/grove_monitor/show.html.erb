@@ -9,6 +9,6 @@
   <h2><%= "#{@category.titleize} Students" if @category %></h2>
 </div>
 
-<div class="row collection">
+<div class="row collection students-<%= @location.id  if @location %>">
   <%= render partial: "student", collection: @students %>
 </div>

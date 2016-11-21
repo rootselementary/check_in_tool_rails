@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require_tree ./channels
 //= require bootstrap-sprockets
 //= require jquery-ui/sortable
+
