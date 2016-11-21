@@ -8,7 +8,7 @@ class Student < User
   has_many :events, foreign_key: :user_id, dependent: :destroy
   has_many :scans, foreign_key: :user_id, dependent: :destroy
 
-  scope :absent, -> { where(at_school: false) }
+  scope :absent, -> { where(at_school: false).order(name: :desc) }
   scope :with_access_token, -> { where.not(refresh_token: nil) }
 
   def admin?
@@ -26,6 +26,7 @@ class Student < User
   def self.lost
     self.where(at_school: true)
         .where.not(id: has_event_ids)
+        .order(name: :desc)
   end
 
   def self.location(name)
@@ -34,6 +35,7 @@ class Student < User
         .where(at_school: true)
         .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
         .where(events: {location_id: location.id})
+        .order(name: :desc)
   end
 
   def self.has_event_ids

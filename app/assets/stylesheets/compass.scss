@@ -13,11 +13,13 @@
 }
 
 .compass-image {
-  height: 250px;
+  img {
+    height: 250px;
+  }
 }
 
 .img-responsive {
-  height: 90%
+  height: 250px;
 }
 
 .compass-details {
