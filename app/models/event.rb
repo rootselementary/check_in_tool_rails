@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
 
   def scanned_in?
-    scans.where('timestamp > ? AND timestamp < ?', start_time - Grove::TRANSITION, end_time).present?
+    scans.where('scanned_in_at > ? AND scanned_in_at < ?', start_time - Grove::TRANSITION, end_time).present?
   end
 
   def scans

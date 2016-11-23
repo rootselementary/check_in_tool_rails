@@ -74,7 +74,7 @@ RSpec.feature 'Grove Monitor' do
 
     it 'shows students that are scanned in' do
       student1.events.create(location: location, start_time: Time.now-100, end_time: Time.now+3600)
-      Scan.create(location: location, timestamp: Time.now, correct:true, user_id: student1.id)
+      Scan.create(location: location, scanned_in_at: Time.now, correct:true, user_id: student1.id)
       grove_monitor_page.visit_page.click_on(location.titleized_name)
 
       expect(grove_monitor_page).to have_css('.scanned-in')

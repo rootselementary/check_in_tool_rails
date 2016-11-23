@@ -55,7 +55,7 @@ RSpec.feature 'Student Compass' do
       it "does not show the scan button" do
         create(:scan, location: location,
                       correct: true,
-                      timestamp: Time.now,
+                      scanned_in_at: Time.now,
                       student: student)
         compass_page.visit_page
         expect(compass_page).not_to have_content "Scan"

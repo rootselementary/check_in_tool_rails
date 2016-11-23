@@ -1,9 +1,11 @@
 class ScanCreator
   def self.create(student, scan_params)
+    @event = student.current_event
     Scan.create!(student: student,
                  location_id: scan_params[:scanned_data],
-                 timestamp: Time.now,
+                 scanned_in_at: Time.now,
+                 expires_at: @event.end_time,
                  correct: scan_params[:location_id] == scan_params[:scanned_data],
-                 activity_id: student.current_event.activity_id)
+                 activity_id: @event.activity_id)
   end
 end
