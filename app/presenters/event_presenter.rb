@@ -9,6 +9,10 @@ class EventPresenter
     @ongoing = ongoing
   end
 
+  def id
+    @event.id
+  end
+
   def empty?
     @event.nil?
   end

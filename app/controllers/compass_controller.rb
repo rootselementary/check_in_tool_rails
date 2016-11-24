@@ -10,7 +10,7 @@ class CompassController < ApplicationController
 
   def checkin
     authorize(:compass, :show?)
-    scan = ScanCreator.create(current_user, scan_params)
+    ScanCreator.new(current_user, scan_params).create
     redirect_to compass_path
   end
 
@@ -20,6 +20,6 @@ class CompassController < ApplicationController
   private
 
     def scan_params
-      params.permit(:location_id, :scanned_data)
+      params.permit(:event_id, :scanned_data)
     end
 end

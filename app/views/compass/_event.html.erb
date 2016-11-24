@@ -8,11 +8,7 @@
   <br>
   <% if !event.scanned_in? %>
     <div class="col-md-12 text-center" id="scan-location-button">
-      <% if event.location_id %>
-        <%= link_to(fa_icon("qrcode", text: "Scan"), "scan://scan?callback=#{checkin_url}?location_id=#{event.location_id}", class: "btn btn-success") %>
-      <% else %>
-        Unable to determine next scan in location. Please ask your teacher.
-      <% end %>
+      <%= scan_in_link(event) %>
     </div>
   <% end %>
 </div>
