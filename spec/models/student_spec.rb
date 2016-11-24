@@ -22,14 +22,23 @@ RSpec.describe Student, type: :model do
     end
 
     describe '#lost' do
-      it 'returns all students without a scheduled event' do
-        grove
-        Scan.delete_all
-        Event.delete_all
+      before { @grove = create(:grove_with_scanned_in_students) }
+      let(:query) { -> { Student.lost } }
+      let(:student) { @grove.students.first }
 
-        lost_students = Student.lost
+      it 'has no lost students' do
+        expect(query.call.count).to eq(0)
+      end
 
-        expect(lost_students.count).to eq(2)
+      it 'returns all students without a scan' do
+        student.scans.destroy_all
+        expect(query.call).to eq([student])
+      end
+
+      it 'returns all students where a scan is in the past' do
+        student.scans.destroy_all
+        student.scans.create(:expires_at => 1.minute.ago)
+        expect(query.call).to eq([student])
       end
     end
 

@@ -44,16 +44,31 @@ RSpec.feature 'Grove Monitor' do
       expect(grove_monitor_page).not_to have_content(present_student.name)
     end
 
-    it 'can mark student absent from lost page' do
-      grove_monitor_page.visit_page.click_on("Lost")
-      expect {
-        within first('.student') do
-          click_on("Mark as Absent")
-        end
-      }.to change {
-        Student.where(at_school: true).count
-      }.by -1
+    describe 'lost students' do
+      before { visit_lost }
+      let(:query) { -> { Student.where(at_school: true).count } }
+
+      it 'shows both students' do
+        expect(page).to have_text(student1.name)
+        expect(page).to have_text(student2.name)
+      end
+
+      it 'shows students that are currently not scanned in' do
+        query = -> { page.has_text?(student1.name) }
+        command = -> {
+          student1.scans.create(scanned_in_at: Time.now, expires_at: 15.minutes.from_now)
+          visit_lost
+        }
+        expect { command.call }.to change { query.call }.from(true).to(false)
+      end
+
+      it 'can mark student absent from lost page' do
+        command = -> { within(first('.student')) { click_on("Mark as Absent") } }
+        expect { command.call }.to change { query.call }.by(-1)
+      end
+
     end
+
 
     it 'can mark student present from absent page' do
       student1.update(at_school: false)
@@ -80,4 +95,8 @@ RSpec.feature 'Grove Monitor' do
       expect(grove_monitor_page).to have_css('.scanned-in')
     end
   end
+end
+
+def visit_lost
+  grove_monitor_page.visit_page.click_on("Lost")
 end

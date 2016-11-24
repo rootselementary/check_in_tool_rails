@@ -10,6 +10,7 @@ class Student < User
 
   scope :absent, -> { where(at_school: false).order(name: :desc) }
   scope :with_access_token, -> { where.not(refresh_token: nil) }
+  scope :at_school, -> { where(at_school: true) }
 
   def admin?
     false
@@ -24,23 +25,29 @@ class Student < User
   end
 
   def self.lost
-    self.where(at_school: true)
-        .where.not(id: has_event_ids)
+    self.where.not(id: has_scan_ids)
         .order(name: :desc)
   end
 
+  # this is the list of students that _should_ be at a location currently
   def self.location(name)
     location = Location.find_by(name: name)
     self.joins(:events)
-        .where(at_school: true)
+        .at_school
         .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
         .where(events: {location_id: location.id})
         .order(name: :desc)
   end
 
+  def self.has_scan_ids
+    self.joins(:scans)
+        .at_school
+        .where("scans.scanned_in_at <= ? AND scans.expires_at >= ?", Time.now, Time.now )
+  end
+
   def self.has_event_ids
     self.joins(:events)
-        .where(at_school: true)
+        .at_school
         .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
         .pluck(:id)
   end

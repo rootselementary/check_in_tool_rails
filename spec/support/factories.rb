@@ -88,8 +88,8 @@ FactoryGirl.define do
         create(:playlist_activity, activity: activity, student: student1, focus_area: focus_area)
         event = create(:event, student: student1, location: location)
         event2 = create(:event, student: student2, location: location)
-        scan = create(:scan, location: location, correct: true)
-        scan2 = create(:scan, location: location, correct: true)
+        scan = create(:scan, location: location, student: student1, scanned_in_at: 1.minute.ago, expires_at: event.end_time, correct: true)
+        scan2 = create(:scan, location: location, student: student2, scanned_in_at: 1.minute.ago, expires_at: event2.end_time, correct: true)
       end
     end
   end
@@ -131,7 +131,9 @@ FactoryGirl.define do
   factory :scan do
     association :activity
     association :location
-    scanned_in_at Time.now + 10*60
+    association :student
+    scanned_in_at Time.now
+    expires_at Time.now
     correct false
   end
 end
