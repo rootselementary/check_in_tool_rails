@@ -1,9 +1,9 @@
 <div class="<%= "container event-details #{event.status_class}" %>" data-endtime="<%= event.end_time %>" data-duration="<%= event.duration %>">
 
   <div class="event-images row">
-      <%= panel(event.location_image, event.location_name) %>
-      <%= panel(event.activity_image, event.activity_name) %>
-      <%= panel(event.creator_image, event.creator_name) %>
+      <%= panel(event.left_panel) %>
+      <%= panel(event.middle_panel) %>
+      <%= panel(event.right_panel) %>
   </div>
   <br>
   <% if !event.scanned_in? %>

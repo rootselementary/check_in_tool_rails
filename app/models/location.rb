@@ -3,6 +3,8 @@ class Location < ActiveRecord::Base
   has_many :activities, dependent: :destroy
   has_many :events, dependent: :destroy
 
+  validates :name, presence: true
+
   mount_uploader :image, ImageUploader
 
   before_save :normalize_name

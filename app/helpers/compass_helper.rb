@@ -1,8 +1,11 @@
 module CompassHelper
 
-  def panel(image, title)
+  # @param panel [Panel] Panel object defined in EventPresenter
+  def panel(panel)
+    image = panel.image
+    title = panel.content
     inner_html = ''
-    if image.nil?
+    if image.empty?
       inner_html << title_h3(title)
     else
       inner_html << image_tag(image, class: 'img-responsive center-block')

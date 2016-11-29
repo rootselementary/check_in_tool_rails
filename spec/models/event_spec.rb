@@ -33,4 +33,15 @@ RSpec.describe Event, type: :model do
     end
 
   end
+
+  describe '.focus_area' do
+    let(:focus_area) { create(:focus_area) }
+    let(:activity) { create(:activity) }
+    subject { create(:event, activity: activity) }
+
+    it 'grabs its associated focus area from the activity/playlist_activity relationship' do
+      create(:playlist_activity, activity: activity, focus_area: focus_area)
+      expect(subject.focus_area).to eq(focus_area)
+    end
+  end
 end

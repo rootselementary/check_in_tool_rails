@@ -66,7 +66,7 @@ RSpec.feature 'Managing Activities' do
         activity_admin_page.visit_activity_page(activity.id)
         expect(activity_admin_page).to have_content activity.title
         expect(activity_admin_page).to have_content location.titleized_name
-        expect(activity_admin_page).to have_image "activity-default.png"
+        expect(activity_admin_page).to have_image "activity.png"
       end
     end
   end
