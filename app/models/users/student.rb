@@ -40,10 +40,10 @@ class Student < User
   # @param [Integer] location_id
   def self.expected_at_location(location_id)
     self.joins(:events)
-      .at_school
-      .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
-      .where(events: {location_id: location_id})
-      .order(name: :desc)
+        .where(at_school: true)
+        .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
+        .where(events: {location_id: location_id})
+        .order(name: :desc)
   end
 
   def self.at_location(location_id)
@@ -52,13 +52,13 @@ class Student < User
 
   def self.has_scan_ids
     self.joins(:scans)
-        .at_school
+        .where(at_school: true)
         .where("scans.scanned_in_at <= ? AND scans.expires_at >= ?", Time.now, Time.now )
   end
 
   def self.has_event_ids
-    self.joins(:events)
-        .at_school
+    self.where(at_school: true)
+        .joins(:events)
         .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
         .pluck(:id)
   end
@@ -73,8 +73,7 @@ class Student < User
   end
 
   def compass_events
-    events
-          .where("end_time >= ?", Time.zone.now + Grove::TRANSITION)
+    events.where("end_time >= ?", Time.zone.now + Grove::TRANSITION)
           .order(start_time: :asc)
           .limit(2)
   end
