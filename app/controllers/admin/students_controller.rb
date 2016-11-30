@@ -29,6 +29,10 @@ module Admin
       collection_attributes
     end
 
+    def collection
+      policy_scope(Student).order(name: :asc)
+    end
+
     def collection_attributes
       [:name, :email, :grove_name, :has_refresh_token?]
     end

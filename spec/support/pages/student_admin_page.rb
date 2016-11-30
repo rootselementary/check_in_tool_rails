@@ -31,5 +31,9 @@ module Pages
       page.click_on "Save"
       page.has_content? "Student Saved"
     end
+
+    def students
+      page.find_all('td.name').map(&:text)
+    end
   end
 end

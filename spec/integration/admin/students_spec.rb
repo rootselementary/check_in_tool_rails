@@ -23,6 +23,13 @@ RSpec.feature 'Managing Students' do
       expect(student_admin_page).to have_content("Lisa Simpson")
     end
 
+    it 'orders the students in alphabetical order' do
+      create(:student, name: "Bart Simpson", school: school, grove: grove)
+
+      dashboard_page.click_on("Students")
+      expect(student_admin_page.students).to eq(["Bart Simpson", "Lisa Simpson"])
+    end
+
     describe 'creating a new student' do
       it 'allows creation of a new student' do
         expect {

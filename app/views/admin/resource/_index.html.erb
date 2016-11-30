@@ -8,9 +8,9 @@
     <th>Actions</th>
   </tr>
   <% collection.each do |resource| %>
-    <tr>
+    <tr class="<%= resource_as_sym %>">
       <% collection_attributes.each do |attribute| %>
-        <td>
+        <td class="<%= attribute%>">
           <%= resource.send(attribute) unless attribute == :image %>
           <%= image_tag(resource.image_url, size: 64) if attribute == :image %>
         </td>
