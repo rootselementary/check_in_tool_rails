@@ -5,10 +5,10 @@ module CompassHelper
     image = panel.image
     title = panel.content
     inner_html = ''
-    if image.empty?
+    if image.present?
+      inner_html << image_tag(image, class: 'img-responsive center-block')
       inner_html << title_h3(title)
     else
-      inner_html << image_tag(image, class: 'img-responsive center-block')
       inner_html << title_h3(title)
     end
     content_tag(:div, inner_html.html_safe, class: 'col-md-4 compass-image')
