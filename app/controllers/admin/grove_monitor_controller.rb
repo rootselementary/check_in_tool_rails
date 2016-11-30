@@ -7,10 +7,16 @@ class Admin::GroveMonitorController < ApplicationController
 
   def show
     authorize(:grove_monitor, :show?)
+    # suggests a location
     if params[:name]
-      @students = current_user.grove.students.send(filter_params, params[:name])
-      @location = Location.find_by_location(params[:name])
+      @display_type = :location
+      @grove_monitor_location = GroveMonitorLocation.new(params[:name])
+      @students = @grove_monitor_location.expected
+      @unexpected = @grove_monitor_location.unexpected
+      @location = @grove_monitor_location.location
     else
+      # suggests a status, eg; lost, absent
+      @display_type = :status
       @students = current_user.grove.students.send(filter_params)
       @category = filter_params
     end

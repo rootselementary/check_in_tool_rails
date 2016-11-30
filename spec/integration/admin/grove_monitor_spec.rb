@@ -87,6 +87,13 @@ RSpec.feature 'Grove Monitor' do
       expect(grove_monitor_page).to have_content student1.name
     end
 
+    it 'shows students that are scanned in at a location, but not supposed to be there' do
+      student1.scans.create(location: location, expires_at: Time.now + 360, scanned_in_at: Time.now - 60, correct: false)
+      grove_monitor_page.visit_page.click_on(location.titleized_name)
+
+      expect(grove_monitor_page.unexpected_students).to eq([student1.name])
+    end
+
     it 'shows students that are scanned in' do
       student1.events.create(location: location, start_time: Time.now-100, end_time: Time.now+3600)
       Scan.create(location: location, scanned_in_at: Time.now, correct:true, user_id: student1.id)

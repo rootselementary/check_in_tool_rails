@@ -29,14 +29,25 @@ class Student < User
         .order(name: :desc)
   end
 
-  # this is the list of students that _should_ be at a location currently
+  # @deprecated
+  # @param [String] name
   def self.location(name)
-    location = Location.find_by(name: name)
+  location = Location.find_by(name: name)
+  expected_at_location(location.id)
+  end
+
+  # this is the list of students that _should_ be at a location currently
+  # @param [Integer] location_id
+  def self.expected_at_location(location_id)
     self.joins(:events)
-        .at_school
-        .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
-        .where(events: {location_id: location.id})
-        .order(name: :desc)
+      .at_school
+      .where("start_time <= ? AND end_time >= ?", Time.now, Time.now )
+      .where(events: {location_id: location_id})
+      .order(name: :desc)
+  end
+
+  def self.at_location(location_id)
+    has_scan_ids.where('scans.location_id = ?', location_id)
   end
 
   def self.has_scan_ids

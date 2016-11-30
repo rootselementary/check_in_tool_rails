@@ -133,7 +133,7 @@ FactoryGirl.define do
     association :location
     association :student
     scanned_in_at Time.now
-    expires_at Time.now
+    expires_at Time.now + 3600
     correct false
   end
 end

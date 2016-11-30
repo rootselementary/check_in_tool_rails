@@ -1,14 +1,31 @@
 <ul class="nav nav-pills pull-right">
-  <li role="presentation" class="active"><%= link_to "Back to Grove Monitor", admin_grove_monitor_all_path %></li>
-  <% if @location %>
-    <li role="presentation" class="active"><%= link_to "Reprint QR code", admin_location_path(@location) %></li>
+
+  <li role="presentation" class="active">
+    <%= link_to "Back to Grove Monitor", admin_grove_monitor_all_path %>
+  </li>
+
+  <% if @display_type == :location %>
+    <li role="presentation" class="active">
+      <%= link_to "Reprint QR code", admin_location_path(@location) %>
+    </li>
   <% end %>
+
 </ul>
+
 <div class="grove-monitor text-center">
-  <h2><%= @location.name.titleize if @location %></h2>
-  <h2><%= "#{@category.titleize} Students" if @category %></h2>
+  <%= category_header %>
 </div>
 
 <div class="row collection">
   <%= render partial: "student", collection: @students %>
 </div>
+
+<%- if showing_location? && !@unexpected.empty? %>
+  <div class="grove-monitor text-center">
+    <h2>Unexpected</h2>
+  </div>
+
+  <div class="row collection unexpected">
+    <%= render partial: "student", collection: @unexpected %>
+  </div>
+<% end %>
