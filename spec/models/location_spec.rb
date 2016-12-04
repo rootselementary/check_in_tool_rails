@@ -40,5 +40,10 @@ RSpec.describe Location, type: :model do
       expect(Location.find_by_location('Reading Room')).to eq(location2)
       expect(Location.find_by_location('Reading')).to eq(location2)
     end
+
+    it 'handles weird characters' do
+      location = create(:location, name: "someone's house")
+      expect(Location.find_by_location("someone's house")).to eq(location)
+    end
   end
 end

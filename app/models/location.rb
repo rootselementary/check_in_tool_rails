@@ -11,7 +11,7 @@ class Location < ActiveRecord::Base
 
   def self.find_by_location(location)
     return nil if location.nil?
-    where("name LIKE '%#{location.downcase}%'").first
+    where("name LIKE ?", "%#{location.downcase}%").first
   end
 
   def grove_name
