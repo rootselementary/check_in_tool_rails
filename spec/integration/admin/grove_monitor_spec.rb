@@ -53,6 +53,10 @@ RSpec.feature 'Grove Monitor' do
         expect(page).to have_text(student2.name)
       end
 
+      it 'orders them alphabetically' do
+        expect(grove_monitor_page.students).to eq([student1.name, student2.name].sort)
+      end
+
       it 'shows students that are currently not scanned in' do
         query = -> { page.has_text?(student1.name) }
         command = -> {
