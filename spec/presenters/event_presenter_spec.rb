@@ -89,7 +89,7 @@ describe EventPresenter do
         before { create(:playlist_activity, activity: activity, focus_area: focus_area) }
 
         it 'uses the image' do
-          expect(subject.right_panel.image.path).to eq(focus_area.image.path)
+          expect(subject.right_panel.image).to eq(focus_area.image_url)
         end
 
         it 'uses the focus area name' do

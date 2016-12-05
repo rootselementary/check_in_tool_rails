@@ -42,7 +42,7 @@ class RightPanel < Panel
     else
       if event.focus_area.present?
         @content = event.focus_area.name
-        @image = event.focus_area.image
+        @image = event.focus_area.image_url
       end
     end
 
