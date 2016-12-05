@@ -30,7 +30,7 @@ module Admin
     end
 
     def collection
-      policy_scope(Student).order(name: :asc)
+      current_grove.students.order(name: :asc)
     end
 
     def collection_attributes
